@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import AppLayout from "../components/AppLayout";
+import AppLayout from "components/AppLayout";
 import { createTheme, ThemeProvider } from "@mui/material";
 
 const themeOptions = createTheme({
@@ -10,6 +10,11 @@ const themeOptions = createTheme({
     },
   },
 });
+
+(async () => {
+  const { worker } = await import('mocks/browser');
+  worker.start();
+})();
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
