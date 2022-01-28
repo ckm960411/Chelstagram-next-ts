@@ -1,22 +1,32 @@
 import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import {
+  Box,
+  Drawer,
+  AppBar as MuiAppBar,
+  Toolbar,
+  List,
+  CssBaseline,
+  Typography,
+  Divider,
+  IconButton,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
+import {
+  Menu as MenuIcon,
+  ChevronLeft as ChevronLeftIcon,
+  ChevronRight as ChevronRightIcon,
+  Home as HomeIcon,
+  Person as PersonIcon,
+  AccountCircle as AccountCircleIcon,
+  Bookmark as BookmarkIcon,
+  MarkChatUnread as MarkChatUnreadIcon,
+  Search as SearchIcon,
+} from "@mui/icons-material";
+import Link from 'next/link';
 
 const drawerWidth = 240;
 
@@ -73,6 +83,57 @@ type AppLayoutProps = {
   children: React.ReactNode
 }
 
+const StyledBanner = styled(Typography)`
+  color: #fff;
+  font-weight: 600;
+  font-size: 20px;
+`;
+const MainTypo: React.FC = () => (
+  <Typography variant="h5" noWrap component="div" sx={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
+    <StyledBanner>
+      <Link href="/">
+        <a>Chelstagram</a>
+      </Link>
+    </StyledBanner>
+  </Typography>
+);
+
+type IconListItem = {
+  icon: () => React.ReactNode
+  primary: string
+  route: string
+}
+
+const DrawerMainIcons: IconListItem[] = [
+  {
+    icon: () => <HomeIcon />,
+    primary: "Home",
+    route: "/",
+  },
+  {
+    icon: () => <PersonIcon />,
+    primary: "Players",
+    route: "/players",
+  },
+  {
+    icon: () => <MarkChatUnreadIcon />,
+    primary: "Talk",
+    route: "/talk",
+  },
+];
+const DrawerPersonalIcons: IconListItem[] = [
+  {
+    icon: () => <AccountCircleIcon />,
+    primary: "Profile",
+    route: "/profile",
+  },
+  {
+    icon: () => <BookmarkIcon />,
+    primary: "Bookmark",
+    route: "/bookmark",
+  },
+];
+
 const AppLayout = ({ children }: AppLayoutProps) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -99,11 +160,11 @@ const AppLayout = ({ children }: AppLayoutProps) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Persistent drawer
-          </Typography>
+          {open && <div></div>}
+          <MainTypo />
         </Toolbar>
       </AppBar>
+
       <Drawer
         sx={{
           width: drawerWidth,
@@ -124,27 +185,38 @@ const AppLayout = ({ children }: AppLayoutProps) => {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
+          {DrawerMainIcons.map((item) => (
+            <Link
+              href={item.route}
+              key={item.primary}
+            >
+              <a>
+                <ListItem button>
+                  <ListItemIcon>{item.icon()}</ListItemIcon>
+                  <ListItemText primary={item.primary} />
+                </ListItem>
+              </a>
+            </Link>
           ))}
         </List>
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
+          {DrawerPersonalIcons.map((item) => (
+            <Link
+              href={item.route}
+              key={item.primary}
+            >
+              <a>
+                <ListItem button>
+                  <ListItemIcon>{item.icon()}</ListItemIcon>
+                  <ListItemText primary={item.primary} />
+                </ListItem>
+              </a>
+            </Link>
           ))}
         </List>
       </Drawer>
+      
       <Main open={open}>
         <DrawerHeader />
         {children}
