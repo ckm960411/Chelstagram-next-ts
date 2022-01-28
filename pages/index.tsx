@@ -12,7 +12,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 const Home: NextPage<{ result: string }> = ({ result }) => {
   if (!result) return (<div>loading...</div>)
-  console.log(result)
   return (
     <div>
       <Head>
