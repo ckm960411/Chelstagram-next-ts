@@ -1,32 +1,32 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios'
-import { FormValue } from 'components/login/LoginForm'
+import { LoginFormValue } from 'components/login/LoginForm'
+import { SignUpFormValue } from 'components/login/SignUpForm'
 import type { RootState } from 'store/configureStore'
-
-export const loadMyInfo = createAsyncThunk(
-  "GET/LOAD_MY_INFO_REQUEST",
-  async () => {
-    const response = await axios.get('/user/myInfo')
-    return response.data
-  }
-)
 
 export const loginRequest = createAsyncThunk(
   "POST/LOGIN_REQUEST",
-  async (data: FormValue) => {
+  async (data: LoginFormValue) => {
     const response = await axios.post('http://localhost:3000/user/login', data)
+    return response.data
+  }
+)
+export const signUpRequest = createAsyncThunk(
+  "POST/SIGNUP_REQUEST",
+  async (data: SignUpFormValue) => {
+    const response = await axios.post('http://localhost:3000/user/signup', data)
     return response.data
   }
 )
 
 interface UserState {
-  value: any //
+  value: any | null //
   loading: boolean
   error: object | null
 }
 
 const initialState: UserState = {
-  value: [],
+  value: null,
   loading: false,
   error: null
 }
@@ -40,29 +40,29 @@ export const userSlice = createSlice({
     }
   },
   extraReducers: {
-    [loadMyInfo.pending.type]: (state, action) => {
-      state.loading = true
-      state.value = []
-    },
-    [loadMyInfo.fulfilled.type]: (state, action) => {
-      state.loading = false
-      state.value = action.payload
-    },
-    [loadMyInfo.rejected.type]: (state, action) => {
-      state.loading = false
-      state.error = action.error.message
-    },
     [loginRequest.pending.type]: (state, action) => {
       state.loading = true
-      state.value = []
+      state.value = null
     },
     [loginRequest.fulfilled.type]: (state, action) => {
       state.loading = false
-      state.value.push(action.payload)
+      if (action.payload.errorMessage) {
+        state.error = action.payload
+      } else {
+        state.value = action.payload
+      }
     },
-    [loginRequest.rejected.type]: (state, action) => {
+    [signUpRequest.pending.type]: (state, action) => {
+      state.loading = true
+      state.value = null
+    },
+    [signUpRequest.fulfilled.type]: (state, action) => {
       state.loading = false
-      state.error = { errorMessage: "Faield to login. Check your email and password."}
+      if (action.payload.errorMessage) {
+        state.error = action.payload
+      } else {
+        state.value = action.payload
+      }
     },
   }
 })

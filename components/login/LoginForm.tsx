@@ -20,7 +20,7 @@ const ErrorParagraph = styled.span`
   color: ${red[500]};
 `;
 
-export type FormValue = {
+export type LoginFormValue = {
   email: string
   password: string
 }
@@ -31,11 +31,11 @@ type ErrorMessage = {
 const LoginForm: FC = () => {
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.user);
-  const { register, formState: { errors }, handleSubmit } = useForm<FormValue>();
+  const { register, formState: { errors }, handleSubmit } = useForm<LoginFormValue>();
   const theme = useTheme();
   const downSm = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const onSubmit: SubmitHandler<FormValue> = (data: FormValue) => {
+  const onSubmit: SubmitHandler<LoginFormValue> = (data) => {
     dispatch(loginRequest(data))
   }
 

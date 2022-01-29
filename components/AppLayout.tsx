@@ -176,7 +176,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
             <IconButton color="inherit" edge="end">
               <SearchIcon />
             </IconButton>
-            {myInfo[0] ? (
+            {myInfo ? (
               <IconButton color="inherit" edge="end" sx={{ marginLeft: 2 }}>
                 <Link href="/profile">
                   <a><AccountCircleIcon sx={{ position: "relative", top: "4px" }} /></a>

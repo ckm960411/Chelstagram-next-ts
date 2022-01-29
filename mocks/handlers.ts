@@ -1,11 +1,11 @@
 import { rest } from "msw";
 import { players } from "dummyData/players"
 import { users } from "dummyData/users";
+import { SignUpFormValue } from "components/login/SignUpForm";
+import { LoginFormValue } from "components/login/LoginForm";
 
-interface PostLoginReqBody {
-  email: string
-  password: string
-}
+interface PostLoginReqBody extends LoginFormValue {}
+interface PostSignUpReqBody extends SignUpFormValue {}
 
 export const handlers = [
   // GET / Home
@@ -24,17 +24,15 @@ export const handlers = [
     const finded = users.find(v => v.email === email)
     if (!finded) {
       return res(
-        ctx.status(403),
         ctx.json({
-          errorMessage: "해당 이메일을 찾을 수가 없습니다.",
+          errorMessage: "No matching email was found.",
         })
       )
     }
     if (finded.password !== password) {
       return res(
-        ctx.status(403),
         ctx.json({
-          errorMessage: "비밀번호가 일치하지 않습니다.",
+          errorMessage: "The password doesn't match.",
         })
       )
     }
@@ -46,7 +44,33 @@ export const handlers = [
         userName: 'asdf',
         nickname: 'asdf',
       })
-      // ctx.status(403)
+    )
+  }),
+  // post / Sign Up
+  rest.post<PostSignUpReqBody>('http://localhost:3000/user/signup', async(req, res, ctx) => {
+    const { name, nickname, email } = req.body
+
+    const findedEmail = users.find(v => v.email === email)
+    if (findedEmail) {
+      return res(
+        ctx.json({
+          errorMessage: "It's a duplicate account."
+        })
+      )
+    }
+    const findedNickname = users.find(v => v.nickname === nickname)
+    if (findedNickname) {
+      return res(
+        ctx.json({
+          errorMessage: "It's a duplicate nickname."
+        })
+      )
+    }
+    return res(
+      ctx.delay(2000),
+      ctx.json({
+        name, nickname, email
+      })
     )
   })
 ]
