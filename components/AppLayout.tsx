@@ -29,6 +29,7 @@ import {
 } from "@mui/icons-material";
 import Link from "next/link";
 import { useAppSelector, useAppDispatch } from 'store/hooks'
+import LoginDrawer from "components/login/LoginDrawer";
 
 const drawerWidth = 240;
 
@@ -158,7 +159,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open} sx={{ zIndex: 1000 }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <IconButton
             color="inherit"
@@ -175,17 +176,15 @@ const AppLayout = ({ children }: AppLayoutProps) => {
             <IconButton color="inherit" edge="end">
               <SearchIcon />
             </IconButton>
-            {/* {myInfo ? (
+            {myInfo[0] ? (
               <IconButton color="inherit" edge="end" sx={{ marginLeft: 2 }}>
-                <Link to="/profile" style={{ color: "inherit" }}>
-                  <AccountCircleIcon
-                    sx={{ position: "relative", top: "4px" }}
-                  />
+                <Link href="/profile">
+                  <a><AccountCircleIcon sx={{ position: "relative", top: "4px" }} /></a>
                 </Link>
               </IconButton>
             ) : (
               <LoginDrawer />
-            )} */}
+            )}
           </div>
         </Toolbar>
       </AppBar>
