@@ -1,6 +1,7 @@
-import * as React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
-import { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import * as React from "react";
+import { useState } from "react"
+import { styled, useTheme } from "@mui/material/styles";
+import { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import {
   Box,
   Drawer,
@@ -26,22 +27,23 @@ import {
   MarkChatUnread as MarkChatUnreadIcon,
   Search as SearchIcon,
 } from "@mui/icons-material";
-import Link from 'next/link';
+import Link from "next/link";
+import { useAppSelector, useAppDispatch } from 'store/hooks'
 
 const drawerWidth = 240;
 
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
+const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open?: boolean;
 }>(({ theme, open }) => ({
   flexGrow: 1,
   padding: theme.spacing(3),
-  transition: theme.transitions.create('margin', {
+  transition: theme.transitions.create("margin", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   marginLeft: `-${drawerWidth}px`,
   ...(open && {
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
@@ -54,34 +56,34 @@ interface AppBarProps extends MuiAppBarProps {
 }
 
 const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
+  shouldForwardProp: (prop) => prop !== "open",
 })<AppBarProps>(({ theme, open }) => ({
-  transition: theme.transitions.create(['margin', 'width'], {
+  transition: theme.transitions.create(["margin", "width"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: `${drawerWidth}px`,
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
   }),
 }));
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
-  justifyContent: 'flex-end',
+  justifyContent: "flex-end",
 }));
 
 type AppLayoutProps = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 const StyledBanner = styled(Typography)`
   color: #fff;
@@ -89,7 +91,12 @@ const StyledBanner = styled(Typography)`
   font-size: 20px;
 `;
 const MainTypo: React.FC = () => (
-  <Typography variant="h5" noWrap component="div" sx={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
+  <Typography
+    variant="h5"
+    noWrap
+    component="div"
+    sx={{ position: "absolute", left: "50%", transform: "translateX(-50%)" }}
+  >
     <StyledBanner>
       <Link href="/">
         <a>Chelstagram</a>
@@ -99,10 +106,10 @@ const MainTypo: React.FC = () => (
 );
 
 type IconListItem = {
-  icon: () => React.ReactNode
-  primary: string
-  route: string
-}
+  icon: () => React.ReactNode;
+  primary: string;
+  route: string;
+};
 
 const DrawerMainIcons: IconListItem[] = [
   {
@@ -136,7 +143,9 @@ const DrawerPersonalIcons: IconListItem[] = [
 
 const AppLayout = ({ children }: AppLayoutProps) => {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const dispatch = useAppDispatch()
+  const myInfo = useAppSelector(state => state.user.value)
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -147,21 +156,37 @@ const AppLayout = ({ children }: AppLayoutProps) => {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar>
+        <Toolbar sx={{ justifyContent: "space-between" }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
+            sx={{ mr: 2, ...(open && { display: "none" }) }}
           >
             <MenuIcon />
           </IconButton>
           {open && <div></div>}
           <MainTypo />
+          <div>
+            <IconButton color="inherit" edge="end">
+              <SearchIcon />
+            </IconButton>
+            {/* {myInfo ? (
+              <IconButton color="inherit" edge="end" sx={{ marginLeft: 2 }}>
+                <Link to="/profile" style={{ color: "inherit" }}>
+                  <AccountCircleIcon
+                    sx={{ position: "relative", top: "4px" }}
+                  />
+                </Link>
+              </IconButton>
+            ) : (
+              <LoginDrawer />
+            )} */}
+          </div>
         </Toolbar>
       </AppBar>
 
@@ -169,9 +194,9 @@ const AppLayout = ({ children }: AppLayoutProps) => {
         sx={{
           width: drawerWidth,
           flexShrink: 0,
-          '& .MuiDrawer-paper': {
+          "& .MuiDrawer-paper": {
             width: drawerWidth,
-            boxSizing: 'border-box',
+            boxSizing: "border-box",
           },
         }}
         variant="persistent"
@@ -180,16 +205,17 @@ const AppLayout = ({ children }: AppLayoutProps) => {
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            {theme.direction === "ltr" ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronRightIcon />
+            )}
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
           {DrawerMainIcons.map((item) => (
-            <Link
-              href={item.route}
-              key={item.primary}
-            >
+            <Link href={item.route} key={item.primary}>
               <a>
                 <ListItem button>
                   <ListItemIcon>{item.icon()}</ListItemIcon>
@@ -202,10 +228,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
         <Divider />
         <List>
           {DrawerPersonalIcons.map((item) => (
-            <Link
-              href={item.route}
-              key={item.primary}
-            >
+            <Link href={item.route} key={item.primary}>
               <a>
                 <ListItem button>
                   <ListItemIcon>{item.icon()}</ListItemIcon>
@@ -216,13 +239,13 @@ const AppLayout = ({ children }: AppLayoutProps) => {
           ))}
         </List>
       </Drawer>
-      
+
       <Main open={open}>
         <DrawerHeader />
         {children}
       </Main>
     </Box>
   );
-}
+};
 
-export default AppLayout
+export default AppLayout;

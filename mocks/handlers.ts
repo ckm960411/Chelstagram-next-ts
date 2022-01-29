@@ -1,6 +1,7 @@
 import { rest } from "msw";
 
 export const handlers = [
+  // GET / Home
   rest.get('http://localhost:3000/', async (req, res, ctx) => {
     return res(
       ctx.status(200),
@@ -8,5 +9,5 @@ export const handlers = [
         message: "Welcome to Chelstagram!"
       })
     )
-  })
+  }),
 ]
