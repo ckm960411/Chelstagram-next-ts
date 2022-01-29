@@ -145,8 +145,7 @@ const DrawerPersonalIcons: IconListItem[] = [
 const AppLayout = ({ children }: AppLayoutProps) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const dispatch = useAppDispatch()
-  const myInfo = useAppSelector(state => state.user.value)
+  const myInfo = useAppSelector(state => state.users.myInfo)
 
   const handleDrawerOpen = () => {
     setOpen(true);

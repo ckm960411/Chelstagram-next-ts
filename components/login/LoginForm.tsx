@@ -14,7 +14,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import SendIcon from "@mui/icons-material/Send";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { closeError, loginRequest } from "store/userSlice";
+import { closeError, loginRequest } from "store/usersSlice";
 
 const ErrorParagraph = styled.span`
   color: ${red[500]};
@@ -30,7 +30,7 @@ type ErrorMessage = {
 
 const LoginForm: FC = () => {
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.user);
+  const { loading, error } = useAppSelector((state) => state.users);
   const { register, formState: { errors }, handleSubmit } = useForm<LoginFormValue>();
   const theme = useTheme();
   const downSm = useMediaQuery(theme.breakpoints.down("sm"));

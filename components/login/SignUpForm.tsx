@@ -3,11 +3,11 @@ import { Alert, CircularProgress, FormControl, FormHelperText, TextField, useMed
 import { red } from "@mui/material/colors";
 import { useRef } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { signUpRequest } from "store/userSlice";
+import { signUpRequest } from "store/usersSlice";
 import LoadingButton from '@mui/lab/LoadingButton';
 import SendIcon from '@mui/icons-material/Send';
 import styled from "styled-components";
-import { closeError } from "store/userSlice";
+import { closeError } from "store/usersSlice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
 const ErrorParagraph = styled.span`
@@ -30,7 +30,7 @@ const SignUpForm: FC = () => {
   const { register, formState: { errors }, watch, handleSubmit } = useForm<SignUpFormValue>();
   const dispatch = useAppDispatch()
   const downSm = useMediaQuery(theme.breakpoints.down("sm"))
-  const { loading, error } = useAppSelector(state => state.user)
+  const { loading, error } = useAppSelector(state => state.users)
 
   const passwordRef = useRef<string | null>(null);
   passwordRef.current = watch("password");

@@ -1,7 +1,7 @@
 export interface PlayerProfile {
   playerId: string
   backNumber: number
-  userName: string
+  playerName: string
   position: 'GoalKeeper' | 'Defender' | 'Midfielder' | 'Forward'
   profileImg: string
   backgroundImg: string

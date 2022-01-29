@@ -39,10 +39,10 @@ export const handlers = [
     return res(
       ctx.status(201),
       ctx.json({
-        id: 'asdf',
-        email: 'asdf',
-        userName: 'asdf',
-        nickname: 'asdf',
+        id: finded.userId,
+        email: finded.email,
+        userName: finded.userName,
+        nickname: finded.nickname,
       })
     )
   }),
@@ -72,5 +72,10 @@ export const handlers = [
         name, nickname, email
       })
     )
-  })
+  }),
+  rest.get('http://localhost:3000/players', async(req, res, ctx) => {
+    return res(
+      ctx.json(players)
+    )
+  }),
 ]

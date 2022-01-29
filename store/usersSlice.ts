@@ -21,18 +21,20 @@ export const signUpRequest = createAsyncThunk(
 
 interface UserState {
   value: any | null //
+  myInfo: any | null //
   loading: boolean
   error: object | null
 }
 
 const initialState: UserState = {
   value: null,
+  myInfo: null,
   loading: false,
   error: null
 }
 
-export const userSlice = createSlice({
-  name: 'user',
+export const usersSlice = createSlice({
+  name: 'users',
   initialState,
   reducers: {
     closeError: state => {
@@ -49,7 +51,7 @@ export const userSlice = createSlice({
       if (action.payload.errorMessage) {
         state.error = action.payload
       } else {
-        state.value = action.payload
+        state.myInfo = action.payload
       }
     },
     [signUpRequest.pending.type]: (state, action) => {
@@ -61,14 +63,14 @@ export const userSlice = createSlice({
       if (action.payload.errorMessage) {
         state.error = action.payload
       } else {
-        state.value = action.payload
+        state.myInfo = action.payload
       }
     },
   }
 })
 
-export const { closeError } = userSlice.actions
+export const { closeError } = usersSlice.actions
 
-export const selectUser = (state: RootState) => state.user.value
+export const selectUser = (state: RootState) => state.users.value
 
-export default userSlice.reducer
+export default usersSlice.reducer
