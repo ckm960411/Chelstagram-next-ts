@@ -240,7 +240,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
 
       <Main open={open}>
         <DrawerHeader />
-        {children}
+        <div style={{ maxWidth: "1280px", margin: "auto" }}>{children}</div>
       </Main>
     </Box>
   );

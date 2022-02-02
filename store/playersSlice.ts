@@ -18,14 +18,19 @@ export const playersSlice = createSlice({
   name: 'players',
   initialState,
   reducers: {
-    loadPlayersData: (state, action) => {
+    addPlayersData: (state, action) => {
+      state.player = null
       state.value = action.payload
+    },
+    addPlayerData: (state, action) => {
+      state.value = null
+      state.player = action.payload
     }
   },
   extraReducers: {}
 })
 
-export const {loadPlayersData} = playersSlice.actions
+export const { addPlayersData, addPlayerData } = playersSlice.actions
 
 export const selectPlayers = (state: RootState) => state.players.value
 

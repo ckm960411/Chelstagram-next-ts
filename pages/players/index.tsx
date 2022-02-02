@@ -1,18 +1,18 @@
-import { GetStaticProps, NextPage } from "next";
+import { NextPage } from "next";
 import Head from "next/head";
 import { useEffect } from "react";
 import { useAppDispatch } from "store/hooks";
-import { loadPlayersData } from "store/playersSlice";
+import { addPlayersData } from "store/playersSlice";
 import { PlayerProfile } from 'types/playerTypes'
 import PlayerCard from "components/playerInfo/PlayerCard";
 import { Grid } from "@mui/material";
 import { getAllPlayersData } from "lib/players/get-all-players-data";
 
-const Players: NextPage<{ playersData: PlayerProfile[]}> = ({ playersData }) => {
+const Players: NextPage<{ playersData: Array<PlayerProfile>}> = ({ playersData }) => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(loadPlayersData(playersData))
+    dispatch(addPlayersData(playersData))
   }, [playersData, dispatch])
   
   return (
@@ -31,7 +31,7 @@ const Players: NextPage<{ playersData: PlayerProfile[]}> = ({ playersData }) => 
   );
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps = async () => {
   const playersData = await getAllPlayersData()
   return {
     props: { playersData }
