@@ -42,7 +42,6 @@ const LoginDrawer: React.FC = () => {
 
   return (
     <>
-    <span>
       <Button onClick={toggleDrawer(true)} sx={{ color: '#fff', marginLeft: '6px' }}>log in</Button>
       <Drawer
         anchor={'right'}
@@ -91,7 +90,6 @@ const LoginDrawer: React.FC = () => {
           </div>
         </Box>
       </Drawer>
-    </span>
     </>
   )
 };

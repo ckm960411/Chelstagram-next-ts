@@ -7,8 +7,6 @@ import { useAppDispatch } from "store/hooks";
 import { addPlayerData } from "store/playersSlice";
 import DetailTabs from "components/DetailTabs";
 import { Grid } from "@mui/material";
-import Image from "next/image";
-import styled from "styled-components";
 import PlayerBgImg from "components/playerInfo/PlayerBgImg";
 import PlayerInfo from "components/playerInfo/PlayerInfo";
 
