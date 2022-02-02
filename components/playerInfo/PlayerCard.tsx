@@ -11,19 +11,12 @@ import {
   FavoriteBorder as LikeIcon,
   Favorite as LikedIcon,
 } from "@mui/icons-material";
-import { useCallback, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
-const PlayerCard = ({ player }: { player: PlayerProfile }) => {
-  const {
-    backNumber,
-    playerName,
-    position,
-    profileImg,
-    birthDate,
-    birthPlace,
-  } = player;
+const PlayerCard: FC<{player: PlayerProfile}> = ({ player }) => {
+  const { backNumber, playerName, position, profileImg, birthDate, birthPlace } = player;
   const [like, setLike] = useState(false);
   const router = useRouter();
 

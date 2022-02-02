@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 
 const Profile: NextPage = () => {
   const router = useRouter()
-  const myInfo = useAppSelector(state => state.users.value)
+  const myInfo = useAppSelector(state => state.users.myInfo)
 
   useEffect(() => {
     if (!myInfo) {

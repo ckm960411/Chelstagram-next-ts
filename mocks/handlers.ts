@@ -38,6 +38,7 @@ export const handlers = [
     }
     return res(
       ctx.status(201),
+      ctx.delay(2000),
       ctx.json({
         id: finded.userId,
         email: finded.email,
@@ -73,9 +74,21 @@ export const handlers = [
       })
     )
   }),
+  // GET / players
   rest.get('http://localhost:3000/players', async(req, res, ctx) => {
     return res(
       ctx.json(players)
+    )
+  }),
+  // GET / player
+  rest.get('http://localhost:3000/players/:playerId', async(req, res, ctx) => {
+    const { playerId } = req.params
+    const finded = players.find(v => v.playerId === playerId)
+    return res(
+      ctx.status(200),
+      ctx.json({
+        ...finded
+      })
     )
   }),
 ]

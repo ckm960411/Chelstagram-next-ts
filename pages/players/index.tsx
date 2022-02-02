@@ -1,4 +1,3 @@
-import axios from "axios";
 import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useEffect } from "react";
@@ -7,14 +6,15 @@ import { loadPlayersData } from "store/playersSlice";
 import { PlayerProfile } from 'types/playerTypes'
 import PlayerCard from "components/playerInfo/PlayerCard";
 import { Grid } from "@mui/material";
+import { getAllPlayersData } from "lib/players/get-all-players-data";
 
-const fetcher = (url: string) => axios.get(url).then(res => res.data)
-
-const Players = ({ playersData }: { playersData: PlayerProfile[]}) => {
+const Players: NextPage<{ playersData: PlayerProfile[]}> = ({ playersData }) => {
   const dispatch = useAppDispatch()
+
   useEffect(() => {
     dispatch(loadPlayersData(playersData))
   }, [playersData, dispatch])
+  
   return (
     <>
       <Head>
@@ -32,7 +32,7 @@ const Players = ({ playersData }: { playersData: PlayerProfile[]}) => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const playersData = await fetcher('http://localhost:3000/players')
+  const playersData = await getAllPlayersData()
   return {
     props: { playersData }
   }
