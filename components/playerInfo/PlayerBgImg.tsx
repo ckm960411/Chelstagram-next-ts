@@ -13,11 +13,6 @@ const ImageWrapper = styled.div`
   }
 `
 
-type PropTypes = {
-  img: string
-  name: string
-}
-
 const PlayerBgImg: FC = () => {
   const player: any | null = useAppSelector(state => state.players.player)
   if (player === null) {
@@ -27,7 +22,11 @@ const PlayerBgImg: FC = () => {
   }
   return (
     <ImageWrapper>
-      <Image src={player.backgroundImg} alt={player.playerName} width="100%" height="100%" layout="responsive" />
+      <Image 
+        src={player.backgroundImg} 
+        alt={player.playerName} 
+        width="100%" height="100%" layout="responsive"
+      />
     </ImageWrapper>
   )
 }

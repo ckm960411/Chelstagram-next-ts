@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 import { Box, Tab, Tabs, Typography } from "@mui/material";
+import Stats from "components/playerInfo/stats/Stats"
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -20,7 +21,7 @@ export function TabPanel(props: TabPanelProps) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography component="div">{children}</Typography>
         </Box>
       )}
     </div>
@@ -48,7 +49,7 @@ const DetailTabs: FC = () => {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        Item One
+        <Stats />
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two

@@ -1,12 +1,12 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import Head from "next/head";
 import { getAllPlayersId } from "lib/players/get-all-players-id";
 import { getPlayerData } from "lib/players/get-player-data";
 import { PlayerProfile } from "types/playerTypes";
 import { useAppDispatch } from "store/hooks";
 import { addPlayerData } from "store/playersSlice";
-import DetailTabs from "components/DetailTabs";
-import { Grid } from "@mui/material";
+import DetailTabs from "components/playerInfo/DetailTabs";
+import { GlobalStyles, Grid } from "@mui/material";
 import PlayerBgImg from "components/playerInfo/PlayerBgImg";
 import PlayerInfo from "components/playerInfo/PlayerInfo";
 
@@ -28,6 +28,11 @@ const PlayerDetail: FC<{player: PlayerProfile}> = ({ player }) => {
         <title>{playerName} | Chelstagram</title>
       </Head>
       <Grid container spacing={2}>
+        <GlobalStyles styles={{
+          '.css-19kzrtu': {
+            padding: '10px 0 !important'
+          }
+        }} />
         <Grid item xs={12} order={{ sm: 1 }}>
           <PlayerBgImg />
         </Grid>
