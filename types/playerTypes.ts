@@ -8,7 +8,7 @@ export interface PlayerProfile {
   birthDate: string
   birthPlace: string
   stats: Stats
-  comments: Comment[]
+  comments: IComment[]
 }
 
 export interface Stats {
@@ -44,7 +44,7 @@ export interface Stats {
   savesPerGame?: number
 }
 
-export interface Comment {
+export interface IComment {
   playerId: string
   commentId: string
   userId: string

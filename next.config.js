@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['w.namu.la', 'res.cloudinary.com', 'resources.premierleague.com'],
+    domains: ['res.cloudinary.com', 'resources.premierleague.com'],
   }
 }
 
