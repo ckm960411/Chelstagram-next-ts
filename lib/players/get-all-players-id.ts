@@ -6,7 +6,7 @@ export const getAllPlayersId = async () => {
   return players.map(player => {
     return {
       params: {
-        id: player.playerId
+        id: player.backNumber.toString()
       }
     }
   })

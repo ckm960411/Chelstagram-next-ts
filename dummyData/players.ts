@@ -2,7 +2,7 @@ import { PlayerProfile } from "types/playerTypes";
 
 export const players: PlayerProfile[] = [
   {
-    playerId: "1",
+    playerId: "741fa162-7bc9-48a4-95dd-3c0aca7e2fcd",
     backNumber: 1,
     playerName: "Kepa Arrizabalaga",
     position: "GoalKeeper",
@@ -27,7 +27,7 @@ export const players: PlayerProfile[] = [
     comments: [],
   },
   {
-    playerId: "2",
+    playerId: "8ed1199e-bd7b-4aa3-916c-4a8f563e2348",
     backNumber: 2,
     playerName: "Antonio Rudiger",
     position: "Defender",
@@ -52,7 +52,7 @@ export const players: PlayerProfile[] = [
     comments: [],
   },
   {
-    playerId: "3",
+    playerId: "bd96a439-159f-4931-8775-365084914535",
     backNumber: 3,
     playerName: "Marcos Alonso",
     position: "Defender",
@@ -77,7 +77,7 @@ export const players: PlayerProfile[] = [
     comments: [],
   },
   {
-    playerId: "4",
+    playerId: "bc512a98-3a2b-45f7-bc90-674899b8e9fd",
     backNumber: 4,
     playerName: "Andreas Christensen",
     position: "Defender",
@@ -102,7 +102,7 @@ export const players: PlayerProfile[] = [
     comments: [],
   },
   {
-    playerId: "5",
+    playerId: "3af197ab-c399-46e2-81e9-0a9646047c50",
     backNumber: 5,
     playerName: "Jorginho",
     position: "Midfielder",
@@ -127,7 +127,7 @@ export const players: PlayerProfile[] = [
     comments: [],
   },
   {
-    playerId: "6",
+    playerId: "56f84230-7c26-480a-9d9f-93bb075dcaa6",
     backNumber: 6,
     playerName: "Thiago Silva",
     position: "Defender",
@@ -152,7 +152,7 @@ export const players: PlayerProfile[] = [
     comments: [],
   },
   {
-    playerId: "7",
+    playerId: "e7aff493-bfcb-424f-8516-979c62f13c50",
     backNumber: 7,
     playerName: `N'Golo Kante`,
     position: "Midfielder",
@@ -177,7 +177,7 @@ export const players: PlayerProfile[] = [
     comments: [],
   },
   {
-    playerId: "8",
+    playerId: "2b2e74fc-476a-4159-ab1b-ab87ae87e4c5",
     backNumber: 8,
     playerName: `Mateo Kovacic`,
     position: "Midfielder",
@@ -202,7 +202,7 @@ export const players: PlayerProfile[] = [
     comments: [],
   },
   {
-    playerId: "9",
+    playerId: "84a910a6-34ad-46e6-b28b-f8e9d1106cbf",
     backNumber: 9,
     playerName: `Romelu Lukaku`,
     position: "Forward",
@@ -229,7 +229,7 @@ export const players: PlayerProfile[] = [
     comments: [],
   },
   {
-    playerId: "10",
+    playerId: "54d5def4-4822-41b5-bd89-019e0b920e0b",
     backNumber: 10,
     playerName: `Christian Pulisic`,
     position: "Forward",
@@ -254,7 +254,7 @@ export const players: PlayerProfile[] = [
     comments: [],
   },
   {
-    playerId: "11",
+    playerId: "f12adc05-c9a9-40e9-980c-fed869ee6c67",
     backNumber: 11,
     playerName: `Timo Werner`,
     position: "Forward",
@@ -281,7 +281,7 @@ export const players: PlayerProfile[] = [
     comments: [],
   },
   {
-    playerId: "12",
+    playerId: "e104ba09-fc2d-43bc-a03c-a18ab43bb417",
     backNumber: 12,
     playerName: `Ruben Loftus-Cheek`,
     position: "Midfielder",
@@ -306,7 +306,7 @@ export const players: PlayerProfile[] = [
     comments: [],
   },
   {
-    playerId: "13",
+    playerId: "de34ba03-3346-49e3-aaba-a2e414b6bb76",
     backNumber: 13,
     playerName: `Marcus Bettineli`,
     position: "GoalKeeper",
@@ -331,7 +331,7 @@ export const players: PlayerProfile[] = [
     comments: [],
   },
   {
-    playerId: "14",
+    playerId: "942ae45f-c71c-4942-be7d-73df4351035b",
     backNumber: 14,
     playerName: `Trevoh Chalobah`,
     position: "Defender",
@@ -356,7 +356,7 @@ export const players: PlayerProfile[] = [
     comments: [],
   },
   {
-    playerId: "16",
+    playerId: "4a29fdef-59cb-49ed-ba19-08ef4734ee88",
     backNumber: 16,
     playerName: `Edouard Mendy`,
     position: "GoalKeeper",
@@ -381,7 +381,7 @@ export const players: PlayerProfile[] = [
     comments: [],
   },
   {
-    playerId: "17",
+    playerId: "94ea733c-50c8-4271-b938-0df69a97870e",
     backNumber: 17,
     playerName: `Saul Niguez`,
     position: "Midfielder",
@@ -406,7 +406,7 @@ export const players: PlayerProfile[] = [
     comments: [],
   },
   {
-    playerId: "18",
+    playerId: "f4de1c4e-bac9-4585-b48d-b7a1312d7a0e",
     backNumber: 18,
     playerName: `Ross Barkley`,
     position: "Midfielder",
@@ -431,7 +431,7 @@ export const players: PlayerProfile[] = [
     comments: [],
   },
   {
-    playerId: "19",
+    playerId: "6446c8df-6ad0-4b40-b670-4e1dc87f0401",
     backNumber: 19,
     playerName: `Mason Mount`,
     position: "Midfielder",
@@ -455,9 +455,11 @@ export const players: PlayerProfile[] = [
     },
     comments: [
       {
+        playerId: "6446c8df-6ad0-4b40-b670-4e1dc87f0401",
         commentId: "0a689b17-add8-4ad9-8108-18b12f68f009",
         userId: "cead7ff6-bcbf-4f1a-87ad-42756c40932d",
-        userName: "조진호",
+        userName: "Jorginho",
+        nickname: "조진호",
         profileImg: null,
         text: "댓글 작성 완료",
         date: 1642814456680,
@@ -465,7 +467,7 @@ export const players: PlayerProfile[] = [
     ],
   },
   {
-    playerId: "20",
+    playerId: "791fa34b-c1a8-481a-ae27-715f1a239f07",
     backNumber: 20,
     playerName: `Callum Hudson-Odoi`,
     position: "Forward",
@@ -492,7 +494,7 @@ export const players: PlayerProfile[] = [
     comments: [],
   },
   {
-    playerId: "21",
+    playerId: "6d1aeef1-ae66-43ff-a3ef-fad0787af8a0",
     backNumber: 21,
     playerName: `Ben Chilwell`,
     position: "Defender",
@@ -517,7 +519,7 @@ export const players: PlayerProfile[] = [
     comments: [],
   },
   {
-    playerId: "22",
+    playerId: "ad4d77de-aa4c-403a-88e0-b33b37e7e6d5",
     backNumber: 22,
     playerName: `Hakim Ziyech`,
     position: "Forward",
@@ -542,7 +544,7 @@ export const players: PlayerProfile[] = [
     comments: [],
   },
   {
-    playerId: "24",
+    playerId: "2e8e9d64-6110-4fa5-8b01-4c2e180f5542",
     backNumber: 24,
     playerName: `Reece James`,
     position: "Defender",
@@ -567,7 +569,7 @@ export const players: PlayerProfile[] = [
     comments: [],
   },
   {
-    playerId: "28",
+    playerId: "13c6b7a3-871d-454e-a497-f9b64879fc8a",
     backNumber: 28,
     playerName: `Cesar Azpilicueta`,
     position: "Defender",
@@ -592,7 +594,7 @@ export const players: PlayerProfile[] = [
     comments: [],
   },
   {
-    playerId: "29",
+    playerId: "f37bfab8-7cf9-4963-8425-9c507f9879cf",
     backNumber: 29,
     playerName: `Kai Havertz`,
     position: "Forward",
@@ -617,7 +619,7 @@ export const players: PlayerProfile[] = [
     comments: [],
   },
   {
-    playerId: "31",
+    playerId: "a0a9061a-1a0b-44c8-98bb-460a39717c88",
     backNumber: 31,
     playerName: `Malang Sarr`,
     position: "Defender",

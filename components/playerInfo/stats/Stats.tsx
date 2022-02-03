@@ -33,7 +33,6 @@ const Stats = () => {
   if (player === null) {
     return <div>Loading...</div>
   }
-  console.log(player)
 
   return (
     <>

@@ -17,6 +17,7 @@
     "@reduxjs/toolkit": "^1.7.1",
     "@types/react-redux": "^7.1.22",
     "@types/styled-components": "^5.1.21",
+    "@types/uuid": "^8.3.4",
     "axios": "^0.25.0",
     "msw": "^0.36.7",
     "next": "12.0.9",
@@ -25,7 +26,8 @@
     "react-hook-form": "^7.25.3",
     "react-redux": "^7.2.6",
     "styled-components": "^5.3.3",
-    "swr": "^1.2.0"
+    "swr": "^1.2.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/node": "17.0.13",

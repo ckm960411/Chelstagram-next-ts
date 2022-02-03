@@ -3,6 +3,7 @@ import axios from 'axios'
 import { LoginFormValue } from 'components/login/LoginForm'
 import { SignUpFormValue } from 'components/login/SignUpForm'
 import type { RootState } from 'store/configureStore'
+import { UserType } from 'types/userType'
 
 export const loginRequest = createAsyncThunk(
   "POST/LOGIN_REQUEST",
@@ -21,7 +22,7 @@ export const signUpRequest = createAsyncThunk(
 
 interface UserState {
   value: any | null //
-  myInfo: any | null //
+  myInfo: UserType | null
   loading: boolean
   error: object | null
 }

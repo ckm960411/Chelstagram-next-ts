@@ -1,9 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit"
-import { RootState } from "./configureStore"
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { CommentData } from "components/playerInfo/comments/CommentForm"
+import { PlayerProfile } from "types/playerTypes"
+import { RootState } from "store/configureStore"
+import axios from "axios"
+
+export const addPlayerComment = createAsyncThunk(
+  "POST/ADD_PLAYER_COMMENT_REQUEST",
+  async (data: CommentData) => {
+    const response = await axios.post(`http://localhost:3000/players/${data.backNumber}/comment`, data)
+    return response.data
+  }
+)
 
 interface PlayersState {
-  value: any | null
-  player: any | null
+  value: Array<PlayerProfile> | null
+  player: PlayerProfile | null
   loading: boolean
   error: object | null
 }
@@ -27,7 +38,19 @@ export const playersSlice = createSlice({
       state.player = action.payload
     }
   },
-  extraReducers: {}
+  extraReducers: {
+    [addPlayerComment.pending.type]: (state, action) => {
+      state.loading = true
+    },
+    [addPlayerComment.fulfilled.type]: (state, action) => {
+      state.loading = false
+      if (action.payload.errorMessage) {
+        state.error = action.payload
+      } else {
+        state.player?.comments.unshift(action.payload)
+      }
+    },
+  }
 })
 
 export const { addPlayersData, addPlayerData } = playersSlice.actions

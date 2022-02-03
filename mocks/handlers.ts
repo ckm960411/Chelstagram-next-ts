@@ -3,9 +3,11 @@ import { players } from "dummyData/players"
 import { users } from "dummyData/users";
 import { SignUpFormValue } from "components/login/SignUpForm";
 import { LoginFormValue } from "components/login/LoginForm";
+import { CommentData } from "components/playerInfo/comments/CommentForm";
 
 interface PostLoginReqBody extends LoginFormValue {}
 interface PostSignUpReqBody extends SignUpFormValue {}
+interface PostCommentReqBody extends CommentData {}
 
 export const handlers = [
   // GET / Home
@@ -40,7 +42,7 @@ export const handlers = [
       ctx.status(201),
       ctx.delay(2000),
       ctx.json({
-        id: finded.userId,
+        userId: finded.userId,
         email: finded.email,
         userName: finded.userName,
         nickname: finded.nickname,
@@ -83,11 +85,33 @@ export const handlers = [
   // GET / player
   rest.get('http://localhost:3000/players/:playerId', async(req, res, ctx) => {
     const { playerId } = req.params
-    const finded = players.find(v => v.playerId === playerId)
+    const finded = players.find(v => v.backNumber.toString() === playerId)
     return res(
       ctx.status(200),
       ctx.json({
         ...finded
+      })
+    )
+  }),
+  // POST / 댓글 달기
+  rest.post<PostCommentReqBody>('http://localhost:3000/players/:playerNum/comment', async(req, res, ctx) => {
+    const { playerNum } = req.params
+    const { playerId, userId, userName, nickname, commentId, text, date, profileImg } = req.body
+    const finded = players.find(player => player.backNumber === Number(playerNum))
+
+    if (!finded) {
+      return res(
+        ctx.json({
+          errorMessage: "There is no player who is trying to comment right now."
+        })
+      )
+    }
+
+    return res(
+      ctx.status(201),
+      ctx.json({
+        playerId, commentId, userId, userName, nickname, text, date, 
+        profileImg: profileImg ? profileImg : null
       })
     )
   }),

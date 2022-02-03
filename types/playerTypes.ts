@@ -45,11 +45,12 @@ export interface Stats {
 }
 
 export interface Comment {
-  commentId?: string
-  userId?: string
-  userName?: string
-  nickname?: string
-  profileImg?: string | null
-  text?: string
-  date?: number
+  playerId: string
+  commentId: string
+  userId: string
+  userName: string
+  nickname: string
+  profileImg: string | null
+  text: string
+  date: number
 }
