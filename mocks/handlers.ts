@@ -5,9 +5,11 @@ import { SignUpFormValue } from "components/login/SignUpForm";
 import { LoginFormValue } from "components/login/LoginForm";
 import { CommentData } from "components/playerInfo/comments/CommentForm";
 import { DeleteCommentType, EditCommentType } from "components/playerInfo/comments/Comment";
+import { LikeUnlikePlayerType } from "components/playerInfo/PlayerCard";
 
 interface PostLoginReqBody extends LoginFormValue {}
 interface PostSignUpReqBody extends SignUpFormValue {}
+interface PostLikeReqBody extends LikeUnlikePlayerType {}
 interface PostCommentReqBody extends CommentData {}
 interface PatchCommentReqBody extends EditCommentType {}
 
@@ -92,6 +94,28 @@ export const handlers = [
       ctx.status(200),
       ctx.json({
         ...finded
+      })
+    )
+  }),
+  // Post / 선수 좋아요
+  rest.post<PostLikeReqBody>('http://localhost:3000/players/:playerNum/like', async (req, res, ctx) => {
+    const { playerNum } = req.params
+    const { userId } = req.body
+    const finded = players.find(v => v.backNumber.toString() === playerNum)
+
+    if (!finded) {
+      return res(
+        ctx.json({
+          errorMessage: `You can't like a player who doesn't exist.`
+        })
+      )
+    }
+
+    return res(
+      ctx.status(200),
+      ctx.json({
+        playerId: finded.playerId,
+        userId,
       })
     )
   }),

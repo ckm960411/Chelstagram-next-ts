@@ -12,6 +12,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,h_402,q_auto,w_748,z_1.0/v1/editorial/news/2021/07/29/Kepa_GettyImages-1330966814",
     birthDate: "October 3, 1994",
     birthPlace: "Spain",
+    likes: [],
     stats: {
       appearances: 3,
       minutesPlayed: 270,
@@ -37,6 +38,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_north_west,h_560,q_auto,w_1170,z_1.0/v1/editorial/people/first-team/2021-22/hero/Rudiger_GettyImages-1331794166",
     birthDate: "March 3, 1993",
     birthPlace: "Germany",
+    likes: ['8e3f6c54-bb9e-4af4-a50d-4f3d4b83072f'],
     stats: {
       appearances: 22,
       minutesPlayed: 1980,
@@ -62,6 +64,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,h_560,q_auto,w_1170,z_1.0/v1/editorial/news/2021/07/30/marcos_alonso_july_2021",
     birthDate: "December 28, 1990",
     birthPlace: "Spain",
+    likes: [],
     stats: {
       appearances: 17,
       minutesPlayed: 1432,
@@ -87,6 +90,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,h_560,q_auto,w_1170,z_1.0/v1/editorial/people/first-team/2021-22/hero/Christensen_DAZ_5208",
     birthDate: "April 10, 1996",
     birthPlace: "Denmark",
+    likes: [],
     stats: {
       appearances: 13,
       minutesPlayed: 999,
@@ -112,6 +116,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,h_560,q_auto,w_1170,z_1.0/v1/editorial/people/first-team/2021-22/hero/Jorginho-DAZ_5738",
     birthDate: "December 20, 1991",
     birthPlace: "Brazil",
+    likes: [],
     stats: {
       appearances: 19,
       minutesPlayed: 1456,
@@ -137,6 +142,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,h_560,q_auto,w_1170,z_1.0/v1/editorial/people/first-team/2021-22/hero/Thiago_Silva_DAZ_5496",
     birthDate: "September 22, 1984",
     birthPlace: "Brazil",
+    likes: [],
     stats: {
       appearances: 19,
       minutesPlayed: 1553,
@@ -162,6 +168,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,h_560,q_auto,w_1170,z_1.0/v1/editorial/people/first-team/2021-22/hero/Kante_GettyImages-1234159353",
     birthDate: "March 29, 1991",
     birthPlace: "France",
+    likes: [],
     stats: {
       appearances: 14,
       minutesPlayed: 943,
@@ -187,6 +194,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,h_560,q_auto,w_1170,z_1.0/v1/editorial/people/first-team/2021-22/hero/Kovacic_GettyImages-1234386075",
     birthDate: "May 6, 1994",
     birthPlace: "Austria",
+    likes: [],
     stats: {
       appearances: 15,
       minutesPlayed: 1037,
@@ -212,6 +220,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_north_west,h_560,q_auto,w_1170,z_1.0/v1/editorial/news/2021/08/18/Lukaku_fans_DTW_0676",
     birthDate: "May 13, 1993",
     birthPlace: "Belgium",
+    likes: [],
     stats: {
       appearances: 15,
       minutesPlayed: 998,
@@ -239,6 +248,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,h_560,q_auto,w_1170,z_1.0/v1/editorial/people/first-team/2021-22/hero/Pulisic_GettyImages-1234385345",
     birthDate: "September 18, 1998",
     birthPlace: "United States",
+    likes: [],
     stats: {
       appearances: 12,
       minutesPlayed: 754,
@@ -264,6 +274,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,h_560,q_auto,w_1170,z_1.0/v1/editorial/people/first-team/2021-22/hero/Werner_GettyImages-1331791190",
     birthDate: "March 6, 1996",
     birthPlace: "Germany",
+    likes: [],
     stats: {
       appearances: 11,
       minutesPlayed: 576,
@@ -291,6 +302,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,h_560,q_auto,w_1170,z_1.0/v1/editorial/people/first-team/2021-22/hero/Loftus-Cheek_GettyImages-1331806687",
     birthDate: "January 23, 1996",
     birthPlace: "England",
+    likes: [],
     stats: {
       appearances: 12,
       minutesPlayed: 694,
@@ -316,6 +328,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,h_560,q_auto,w_1170,z_1.0/v1/editorial/people/first-team/2021-22/hero/Bettinelli_GettyImages-1234297653",
     birthDate: "May 24, 1992",
     birthPlace: "England",
+    likes: [],
     stats: {
       appearances: 1,
       minutesPlayed: 90,
@@ -341,6 +354,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_auto,h_560,q_auto,w_1170,z_1.0/v1/editorial/match-reports/2021-22/villarreal-super-cup/Chalobah_GettyImages-1234624597",
     birthDate: "July 5, 1999",
     birthPlace: "England",
+    likes: [],
     stats: {
       appearances: 14,
       minutesPlayed: 909,
@@ -366,6 +380,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,h_560,q_auto,w_1170,z_1.0/v1/editorial/news/2021/07/29/Mendy_DAZ_4716-2403373_2021072790601445",
     birthDate: "March 1, 1992",
     birthPlace: "France",
+    likes: [],
     stats: {
       appearances: 20,
       minutesPlayed: 1800,
@@ -391,6 +406,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_auto,h_560,q_auto,w_1170,z_1.0/v1/editorial/news/2021/09/01/saul-arrival-1",
     birthDate: "November 21, 1994",
     birthPlace: "Spain",
+    likes: [],
     stats: {
       appearances: 5,
       minutesPlayed: 162,
@@ -416,6 +432,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,h_560,q_auto,w_1170,z_1.0/v1/editorial/news/2021/07/29/Barkley_DTW_9757_20210717112457709",
     birthDate: "December 5, 1993",
     birthPlace: "England",
+    likes: [],
     stats: {
       appearances: 5,
       minutesPlayed: 151,
@@ -441,6 +458,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,h_560,q_auto,w_1170,z_1.0/v1/editorial/people/first-team/2021-22/hero/Mount_DAZ_5506",
     birthDate: "January 10, 1999",
     birthPlace: "England",
+    likes: [],
     stats: {
       appearances: 20,
       minutesPlayed: 1345,
@@ -477,6 +495,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,h_560,q_auto,w_1170,z_1.0/v1/editorial/people/first-team/2021-22/hero/Hudson-Odoi_DAZ_2077",
     birthDate: "November 7, 2000",
     birthPlace: "England",
+    likes: [],
     stats: {
       appearances: 14,
       minutesPlayed: 879,
@@ -504,6 +523,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,h_560,q_auto,w_1170,z_1.0/v1/editorial/people/first-team/2021-22/hero/Chilwell_DAZ_5618",
     birthDate: "December 21, 1996",
     birthPlace: "England",
+    likes: [],
     stats: {
       appearances: 6,
       minutesPlayed: 540,
@@ -529,6 +549,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,h_560,q_auto,w_1170,z_1.0/v1/editorial/people/first-team/2021-22/hero/Ziyech_GettyImages-1330964065",
     birthDate: "March 19, 1993",
     birthPlace: "Netherlands",
+    likes: [],
     stats: {
       appearances: 12,
       minutesPlayed: 698,
@@ -554,6 +575,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,h_560,q_auto,w_1170,z_1.0/v1/editorial/people/first-team/2021-22/hero/James_DTW_5767",
     birthDate: "December 8, 1999",
     birthPlace: "England",
+    likes: [],
     stats: {
       appearances: 16,
       minutesPlayed: 1115,
@@ -579,6 +601,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,h_560,q_auto,w_1170,z_1.0/v1/editorial/people/first-team/2021-22/hero/Azpilicueta_DAZ_5248",
     birthDate: "August 29, 1989",
     birthPlace: "Spain",
+    likes: [],
     stats: {
       appearances: 16,
       minutesPlayed: 1304,
@@ -604,6 +627,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,h_560,q_auto,w_1170,z_1.0/v1/editorial/people/first-team/2021-22/hero/Havertz_GettyImages-1234385546",
     birthDate: "June 11, 1999",
     birthPlace: "Germany",
+    likes: [],
     stats: {
       appearances: 16,
       minutesPlayed: 946,
@@ -629,6 +653,7 @@ export const players: PlayerProfile[] = [
       "https://res.cloudinary.com/chelsea-production/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_auto,h_560,q_auto,w_1170,z_1.0/v1/chelsea-app/Sarr-DAZ_2142",
     birthDate: "January 23, 1999",
     birthPlace: "France",
+    likes: [],
     stats: {
       appearances: 2,
       minutesPlayed: 180,

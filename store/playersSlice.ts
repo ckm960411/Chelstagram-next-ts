@@ -4,7 +4,15 @@ import { PlayerProfile } from "types/playerTypes"
 import { RootState } from "store/configureStore"
 import axios from "axios"
 import { DeleteCommentType, EditCommentType } from "components/playerInfo/comments/Comment"
+import { LikeUnlikePlayerType } from "components/playerInfo/PlayerCard"
 
+export const likeOrUnlikePlayer = createAsyncThunk(
+  "POST/LIKE_OR_UNLIKE_PLAYER_REQUEST",
+  async (data: LikeUnlikePlayerType) => {
+    const response = await axios.post(`http://localhost:3000/players/${data.backNumber}/like`, data)
+    return response.data
+  }
+)
 export const addPlayerComment = createAsyncThunk(
   "POST/ADD_PLAYER_COMMENT_REQUEST",
   async (data: CommentData) => {
@@ -87,6 +95,24 @@ export const playersSlice = createSlice({
       } else {
         const findedIndex = state.player!.comments.findIndex(v => v.commentId === action.payload.commentId)
         state.player?.comments.splice(findedIndex, 1)
+      }
+    },
+    [likeOrUnlikePlayer.pending.type]: (state, action) => {
+      state.loading = true
+    },
+    [likeOrUnlikePlayer.fulfilled.type]: (state, action) => {
+      state.loading = false
+      if (action.payload.errorMessage) {
+        state.error = action.payload
+      } else {
+        const { userId } = action.payload
+        const playerFinded = state.value!.find(player => player.playerId === action.payload.playerId)
+        if (playerFinded?.likes.includes(userId)) { // 이미 좋아요했다면 좋아요 취소
+          const userIdIndex = playerFinded.likes.findIndex(v => v === userId)
+          playerFinded.likes.splice(userIdIndex, 1)
+        } else { // 좋아요 추가
+          playerFinded!.likes.push(userId)
+        }
       }
     },
   }
