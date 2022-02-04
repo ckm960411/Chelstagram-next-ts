@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Box, CssBaseline } from "@mui/material";
+import { Box, Container, CssBaseline } from "@mui/material";
 import AppBar from "components/layout/AppBar"
 import SideTabList from "components/layout/SideTabList";
 import SideDrawer, { DrawerHeader } from "components/layout/SideDrawer";
@@ -20,7 +20,7 @@ const AppLayout: FC = ({ children }) => {
       </SideDrawer>
       <Box component="main" sx={{ flexGrow: 1, p: 2 }}>
         <DrawerHeader />
-        <div style={{ maxWidth: "1280px", margin: "auto" }}>{children}</div>
+        <Container fixed disableGutters>{children}</Container>
       </Box>
     </Box>
   );

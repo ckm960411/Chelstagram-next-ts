@@ -78,7 +78,7 @@ const LeftBottomStatCard: FC<{player: PlayerProfile}> = ({ player }) => {
   const matches = useMediaQuery(theme.breakpoints.up("md"));
 
   return (
-    <Card sx={{ borderBottom: "3px solid #001487" }}>
+    <Card sx={{ borderBottom: "3px solid #001487" }} raised>
       <CardActionArea>
         <CardHeader
           subheader={
