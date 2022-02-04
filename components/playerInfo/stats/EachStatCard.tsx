@@ -27,7 +27,7 @@ const EachStatCard: FC<PropTypes> = ({ name, img, stats }) => {
   const matches = useMediaQuery(theme.breakpoints.up("md"));
 
   return (
-    <Card sx={{ minWidth: '145px', maxWidth: '500px', borderBottom: '3px solid #001487', margin: '0 auto 14px'}}>
+    <Card sx={{ minWidth: '145px', maxWidth: '500px', borderBottom: '3px solid #001487', margin: '0 auto 14px'}} raised>
       <CardActionArea>
         <CardContent sx={{ textAlign: "center" }}>
           <div style={matches ? { height: "80px" } : { height: '50px' }}>

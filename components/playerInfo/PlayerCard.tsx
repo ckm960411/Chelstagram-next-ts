@@ -56,6 +56,7 @@ const PlayerCard: FC<{player: PlayerProfile}> = ({ player }) => {
         borderRadius: "8px",
         margin: "0 auto",
       }}
+      raised
     >
       <CardMedia sx={{ padding: "4px" }}>
         <Image

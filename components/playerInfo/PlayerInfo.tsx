@@ -57,7 +57,7 @@ const PlayerInfo: FC = () => {
         downSm ? { display: 'none' } : 
         downLg ? { boxShadow: 'none' } : 
         { border: '2px solid #001487', marginTop: '12px' }
-      }>
+      } raised>
         <CardContent>
           <Grid container spacing={1} sx={{ textAlign: 'center' }}>
             <Grid item xs={3} sm={3}>
