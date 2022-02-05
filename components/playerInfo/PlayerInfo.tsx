@@ -47,8 +47,7 @@ const PlayerInfo: FC = () => {
           '.css-fae2zt-MuiCardContent-root:last-child': {
             paddingBottom: '0px !important'
           }
-        }}
-        />
+        }}/>
         <CardContent sx={{ padding: '0 16px 12px' }}>
           <Typography sx={{ color: '#001487', fontSize: '24px', fontWeight: 600 }}>{playerName}</Typography>
         </CardContent>

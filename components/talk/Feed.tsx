@@ -29,7 +29,7 @@ const Feed: FC<{post : PostTypes}> = ({ post }) =>  {
   };
 
   return (
-    <Card raised sx={{ marginBottom: '20px' }}>
+    <Card raised>
       <FeedContent
         author={author}
         content={content}

@@ -3,6 +3,7 @@ import { Box, Container, CssBaseline } from "@mui/material";
 import AppBar from "components/layout/AppBar"
 import SideTabList from "components/layout/SideTabList";
 import SideDrawer, { DrawerHeader } from "components/layout/SideDrawer";
+import { GlobalStyles } from "@mui/styled-engine"
 
 export const drawerWidth = 240;
 
@@ -19,6 +20,11 @@ const AppLayout: FC = ({ children }) => {
         <SideTabList />
       </SideDrawer>
       <Box component="main" sx={{ flexGrow: 1, p: 2 }}>
+        <GlobalStyles styles={{
+          '.css-13xmxm1-MuiContainer-root': {
+            width: 'calc(100vw - 88px) !important'
+          }
+        }}/>
         <DrawerHeader />
         <Container fixed disableGutters>{children}</Container>
       </Box>

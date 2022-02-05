@@ -1,11 +1,12 @@
 import Head from "next/head"
-import { useMediaQuery } from "@mui/material"
+import { Stack, useMediaQuery } from "@mui/material"
 import { Grid, useTheme } from "@mui/material"
 import axios from "axios"
 import Feed from "components/talk/Feed"
 import Sidebar from "components/talk/Sidebar"
 import { GetServerSideProps, NextPage } from "next"
 import { PostTypes } from "types/postTypes"
+import FeedForm from "components/talk/FeedForm"
 
 const Talk: NextPage<{ postsData: PostTypes[] }> = ({ postsData }) => {
   const theme = useTheme()
@@ -17,8 +18,11 @@ const Talk: NextPage<{ postsData: PostTypes[] }> = ({ postsData }) => {
         <title>Talk with other Blues | Chelstagram</title>
       </Head>
       <Grid container>
-        <Grid item md={8} xs={12}>
-          {postsData.map((post, i) => <Feed key={i} post={post} />)}
+        <Grid item md={8} sm={12} xs={12}>
+          <Stack spacing={4}>
+            <FeedForm />
+            {postsData.map((post, i) => <Feed key={i} post={post} />)}
+          </Stack>
         </Grid>
         <Grid item md={4} sx={downMd ? { display: 'none' } : { paddingLeft: 2 }}>
           <Sidebar />
