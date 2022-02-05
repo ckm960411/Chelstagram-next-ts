@@ -9,7 +9,7 @@ export interface PlayerProfile {
   birthPlace: string
   stats: Stats
   likes: string[],
-  comments: IComment[]
+  comments: PlayerComment[]
 }
 
 export interface Stats {
@@ -45,7 +45,7 @@ export interface Stats {
   savesPerGame?: number
 }
 
-export interface IComment {
+export interface PlayerComment {
   playerId: string
   commentId: string
   userId: string

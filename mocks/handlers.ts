@@ -6,6 +6,7 @@ import { LoginFormValue } from "components/login/LoginForm";
 import { CommentData } from "components/playerInfo/comments/CommentForm";
 import { DeleteCommentType, EditCommentType } from "components/playerInfo/comments/Comment";
 import { LikeUnlikePlayerType } from "components/playerInfo/PlayerCard";
+import { posts } from "dummyData/posts";
 
 interface PostLoginReqBody extends LoginFormValue {}
 interface PostSignUpReqBody extends SignUpFormValue {}
@@ -184,6 +185,14 @@ export const handlers = [
     return res(
       ctx.json({
         commentId
+      })
+    )
+  }),
+  rest.get('http://localhost:3000/posts', async (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        posts
       })
     )
   }),

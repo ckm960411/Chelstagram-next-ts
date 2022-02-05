@@ -1,5 +1,5 @@
 import React, { FC, useState, useRef, useEffect, useCallback } from "react";
-import { IComment } from "types/playerTypes";
+import { PlayerComment } from "types/playerTypes";
 import { Avatar, Divider, Grid, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { format, formatDistanceToNowStrict } from "date-fns";
@@ -17,7 +17,7 @@ export type DeleteCommentType = {
   playerNum: number
 }
 
-const Comment: FC<{ comment: IComment, playerNum: number }> = ({ comment, playerNum }) => {
+const Comment: FC<{ comment: PlayerComment, playerNum: number }> = ({ comment, playerNum }) => {
   const myInfo = useAppSelector(state => state.users.myInfo)
   const dispatch = useAppDispatch()
   const editCommentRef = useRef<HTMLInputElement>(null)
