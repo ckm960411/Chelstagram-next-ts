@@ -1,14 +1,20 @@
 export interface PlayerProfile {
-  playerId: string
+  playerId: string // id
   backNumber: number
-  playerName: string
+  playerName: string // name
   position: 'GoalKeeper' | 'Defender' | 'Midfielder' | 'Forward'
+  // detailPosition: 'ST' | 'CF' | 'CB'  //  
+  /** position : {
+   *    highGroup: 'asdf' | 'asfd' 
+   *    midGroup: 'asdf' | 'asdf'
+   *    (lowGroup)
+   * } */
   profileImg: string
   backgroundImg: string
   birthDate: string
   birthPlace: string
   stats: Stats
-  likes: string[],
+  likes: string[] // number
   comments: PlayerComment[]
 }
 
@@ -47,11 +53,14 @@ export interface Stats {
 
 export interface PlayerComment {
   playerId: string
-  commentId: string
+  commentId: string // id
   userId: string
-  userName: string
+  userName: string // x
   nickname: string
   profileImg: string | null
   text: string
-  date: number
+  date: number // x
+  // createdAt: string
+  // modifiedAt: string ( 초기값은 createdAt )
+  // 2022-02-22 17:00 5분 전 (수정됨)
 }

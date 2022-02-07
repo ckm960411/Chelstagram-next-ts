@@ -27,7 +27,7 @@ const FeedContent: FC<PropTypes> = ({ author, content, likes }) => {
       />
       <CardMedia
         component="img"
-        image={postImg!}
+        image={postImg[0]!}
       />
       <CardContent>
         <Typography variant="body2">

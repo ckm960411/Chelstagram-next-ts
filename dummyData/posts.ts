@@ -13,7 +13,7 @@ export const posts: PostTypes[] = [
     content: {
       postText: "우리 드디어 우승했다. 내 어시스트가 지렸음",
       date: 1644027072082,
-      postImg: "https://ichef.bbci.co.uk/onesport/cps/624/cpsprodpb/62BD/production/_122077252_chelsea-main.jpg",
+      postImg: ["https://ichef.bbci.co.uk/onesport/cps/624/cpsprodpb/62BD/production/_122077252_chelsea-main.jpg"],
     },
     likes: ['cead7ff6-bcbf-4f1a-87ad-42756c40932d'],
     comments: [
@@ -41,7 +41,7 @@ export const posts: PostTypes[] = [
     content: {
       postText: "우리 드디어 우승했다. 내 어시스트가 지렸음",
       date: 1644027072082,
-      postImg: "https://ichef.bbci.co.uk/onesport/cps/624/cpsprodpb/62BD/production/_122077252_chelsea-main.jpg",
+      postImg: ["https://ichef.bbci.co.uk/onesport/cps/624/cpsprodpb/62BD/production/_122077252_chelsea-main.jpg"],
     },
     likes: ['cead7ff6-bcbf-4f1a-87ad-42756c40932d'],
     comments: [
@@ -69,7 +69,7 @@ export const posts: PostTypes[] = [
     content: {
       postText: "우리 드디어 우승했다. 내 어시스트가 지렸음",
       date: 1644027072082,
-      postImg: "https://ichef.bbci.co.uk/onesport/cps/624/cpsprodpb/62BD/production/_122077252_chelsea-main.jpg",
+      postImg: ["https://ichef.bbci.co.uk/onesport/cps/624/cpsprodpb/62BD/production/_122077252_chelsea-main.jpg"],
     },
     likes: ['cead7ff6-bcbf-4f1a-87ad-42756c40932d'],
     comments: [

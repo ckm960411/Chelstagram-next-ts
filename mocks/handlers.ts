@@ -1,4 +1,5 @@
 import { rest } from "msw";
+import { v4 as uuidv4 } from "uuid"
 import { players } from "dummyData/players"
 import { users } from "dummyData/users";
 import { SignUpFormValue } from "components/login/SignUpForm";
@@ -7,12 +8,14 @@ import { CommentData } from "components/playerInfo/comments/CommentForm";
 import { DeleteCommentType, EditCommentType } from "components/playerInfo/comments/Comment";
 import { LikeUnlikePlayerType } from "components/playerInfo/PlayerCard";
 import { posts } from "dummyData/posts";
+import { PostSubmitType } from "components/talk/FeedForm";
 
 interface PostLoginReqBody extends LoginFormValue {}
 interface PostSignUpReqBody extends SignUpFormValue {}
 interface PostLikeReqBody extends LikeUnlikePlayerType {}
 interface PostCommentReqBody extends CommentData {}
 interface PatchCommentReqBody extends EditCommentType {}
+interface PostPostReqBody extends PostSubmitType {}
 
 export const handlers = [
   // GET / Home
@@ -188,11 +191,45 @@ export const handlers = [
       })
     )
   }),
+  // GET / 게시글들 불러오기
   rest.get('http://localhost:3000/posts', async (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
         posts
+      })
+    )
+  }),
+  // POST / 게시글 작성
+  rest.post<PostPostReqBody>('http://localhost:3000/post', async (req, res, ctx) => {
+    const { userId, postText, date, postImg } = req.body
+    const finded = users.find(user => user.userId === userId)
+
+    if (!finded) {
+      return res(
+        ctx.json({
+          errorMessage: "The user was not found."
+        })
+      )
+    }
+    return res(
+      ctx.status(201),
+      ctx.json({
+        postId: uuidv4(),
+        author: {
+          userId: finded.userId,
+          userName: finded.userName,
+          nickname: finded.nickname,
+          profileImg: finded.profileImg,
+          email: finded.email
+        },
+        content: {
+          postText,
+          date,
+          postImg,
+        },
+        likes: [],
+        comments: [],
       })
     )
   }),
