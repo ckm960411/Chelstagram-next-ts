@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { Divider, Card, CardContent, CardActions, Collapse } from '@mui/material';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
@@ -8,7 +8,6 @@ import LikeIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FeedCommentForm from 'components/talk/FeedCommentForm';
 import FeedComment from 'components/talk/FeedComment';
 import FeedContent from 'components/talk/FeedContent';
-import { FC } from 'react';
 import { PostTypes } from 'types/postTypes';
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -21,8 +20,8 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 })(() => ({ marginLeft: 'auto' }));
 
 const Feed: FC<{post : PostTypes}> = ({ post }) =>  {
-  const [expanded, setExpanded] = React.useState(false);
-  const { author, content, likes, comments } = post
+  const [expanded, setExpanded] = useState(false);
+  const { id, author, createdAt, modifiedAt, content, likes, comments } = post
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -34,6 +33,8 @@ const Feed: FC<{post : PostTypes}> = ({ post }) =>  {
         author={author}
         content={content}
         likes={likes}
+        createdAt={createdAt}
+        modifiedAt={modifiedAt}
       />
       <CardActions disableSpacing>
         <IconButton aria-label="like">
@@ -55,7 +56,7 @@ const Feed: FC<{post : PostTypes}> = ({ post }) =>  {
         <Divider />
         <CardContent>
           <FeedCommentForm />
-          {comments.map(comment => <FeedComment key={comment.commentId} comment={comment} />)}
+          {comments.map(comment => <FeedComment key={comment.id} comment={comment} />)}
         </CardContent>
       </Collapse>
     </Card>

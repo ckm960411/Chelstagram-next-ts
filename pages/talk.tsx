@@ -7,7 +7,7 @@ import axios from "axios"
 import Feed from "components/talk/Feed"
 import Sidebar from "components/talk/Sidebar"
 import { PostTypes } from "types/postTypes"
-import { useAppDispatch } from "store/hooks"
+import { useAppDispatch, useAppSelector } from "store/hooks"
 import { addPostsData } from "store/postsSlice"
 import FeedForm from "components/talk/FeedForm"
 
@@ -20,6 +20,8 @@ const Talk: NextPage<{ postsData: PostTypes[] }> = ({ postsData }) => {
     dispatch(addPostsData(postsData))
   }, [dispatch, postsData])
 
+  const posts = useAppSelector(state => state.posts.value)
+
   return (
     <>
       <Head>
@@ -29,7 +31,7 @@ const Talk: NextPage<{ postsData: PostTypes[] }> = ({ postsData }) => {
         <Grid item md={8} sm={12} xs={12}>
           <Stack spacing={4}>
             <FeedForm />
-            {postsData.map((post, i) => <Feed key={i} post={post} />)}
+            {posts.map((post, i) => <Feed key={i} post={post} />)}
           </Stack>
         </Grid>
         <Grid item md={4} sx={downMd ? { display: 'none' } : { paddingLeft: 2 }}>

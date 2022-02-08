@@ -1,5 +1,4 @@
 import { rest } from "msw";
-import { v4 as uuidv4 } from "uuid"
 import { players } from "dummyData/players"
 import { users } from "dummyData/users";
 import { SignUpFormValue } from "components/login/SignUpForm";
@@ -52,7 +51,7 @@ export const handlers = [
       ctx.status(201),
       ctx.delay(2000),
       ctx.json({
-        userId: finded.userId,
+        id: finded.id,
         email: finded.email,
         userName: finded.userName,
         nickname: finded.nickname,
@@ -128,13 +127,21 @@ export const handlers = [
   // POST / 댓글 달기
   rest.post<PostCommentReqBody>('http://localhost:3000/players/:playerId/comment', async(req, res, ctx) => {
     const { playerId } = req.params
-    const { userId, nickname, text, profileImg } = req.body
-    const finded = players.find(player => player.id.toString() === playerId)
+    const { userId, text } = req.body
+    const Playerfinded = players.find(player => player.id.toString() === playerId)
+    const userFinded = users.find(user => user.id === userId)
     
-    if (!finded) {
+    if (!Playerfinded) {
       return res(
         ctx.json({
           errorMessage: "There is no player who is trying to comment right now."
+        })
+      )
+    }
+    if (!userFinded) {
+      return res(
+        ctx.json({
+          errorMessage: "This user does not exist."
         })
       )
     }
@@ -142,12 +149,14 @@ export const handlers = [
     return res(
       ctx.status(201),
       ctx.json({
-        playerId: +playerId, 
-        id: getRandomID(), 
-        userId, nickname, text, 
+        playerId: Playerfinded.id,
+        id: getRandomID(),
+        userId: userFinded.id,
+        nickname: userFinded.nickname,
+        profileImg: userFinded.profileImg ? userFinded.profileImg : null,
+        text,
         createdAt: format(Date.now(), 'yyyy-MM-dd kk:mm:ss'),
         modifiedAt: format(Date.now(), 'yyyy-MM-dd kk:mm:ss'), 
-        profileImg: profileImg ? profileImg : null
       })
     )
   }),
@@ -209,8 +218,8 @@ export const handlers = [
   }),
   // POST / 게시글 작성
   rest.post<PostPostReqBody>('http://localhost:3000/post', async (req, res, ctx) => {
-    const { userId, postText, date, postImg } = req.body
-    const finded = users.find(user => user.userId === userId)
+    const { userId, postText, postImg } = req.body
+    const finded = users.find(user => user.id === userId)
 
     if (!finded) {
       return res(
@@ -222,17 +231,16 @@ export const handlers = [
     return res(
       ctx.status(201),
       ctx.json({
-        postId: uuidv4(),
+        postId: getRandomID(),
         author: {
-          userId: finded.userId,
-          userName: finded.userName,
+          userId: finded.id,
           nickname: finded.nickname,
           profileImg: finded.profileImg,
-          email: finded.email
         },
+        createdAt: format(Date.now(), 'yyyy-MM-dd kk:mm:ss'),
+        modifiedAt: format(Date.now(), 'yyyy-MM-dd kk:mm:ss'),
         content: {
           postText,
-          date,
           postImg,
         },
         likes: [],

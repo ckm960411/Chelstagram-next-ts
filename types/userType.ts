@@ -1,6 +1,6 @@
 export interface UserType {
-  userId: string // id
-  // role: 'USER' | 'ADMIN'
+  id: number
+  role: 'USER' | 'ADMIN'
   userName: string // name
   nickname: string
   profileImg: string | null

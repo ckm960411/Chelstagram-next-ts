@@ -54,7 +54,7 @@ export interface Stats {
 export interface PlayerComment {
   playerId: number
   id: number
-  userId: string
+  userId: number
   nickname: string
   profileImg: string | null
   text: string

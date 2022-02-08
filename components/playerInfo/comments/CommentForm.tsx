@@ -3,15 +3,10 @@ import { Box, Button, TextField } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { addPlayerComment } from "store/playersSlice";
 import { PlayerProfile } from "types/playerTypes";
-import { getRandomID } from "lib/utils/getRandomID";
-import { format } from "date-fns";
 
 export type CommentData = {
-  backNumber: number
   playerId: number
-  userId: string
-  nickname: string
-  profileImg: string | null
+  userId: number
   text: string
 }
 
@@ -33,11 +28,8 @@ const CommentForm: FC = () => {
       return
     }
     const data: CommentData = {
-      backNumber: backNumber,
       playerId: id,
-      userId: myInfo.userId,
-      nickname: myInfo.nickname,
-      profileImg: myInfo.profileImg,
+      userId: myInfo.id,
       text: comment,
     }
     dispatch(addPlayerComment(data))

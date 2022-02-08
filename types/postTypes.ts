@@ -1,36 +1,32 @@
 export interface PostTypes {
-  postId: string // id
+  id: number
   author: Author
-  // date: number
+  createdAt: string
+  modifiedAt: string
   content: PostContent
-  likes: string[] // number
+  likes: number
   // liked: boolean
   comments: PostComment[]
 }
 
+export interface Author {
+  userId: number
+  nickname: string
+  profileImg: string | null
+}
+
 export interface PostContent {
   postText: string
-  date: number // x
   postImg: string[]
 }
 
 export interface PostComment {
-  postId: string
-  commentId: string // id
-  userId: string
-  userName: string // x
+  id: number
+  postId: number
+  userId: number
   nickname: string
   profileImg: string | null
   text: string
-  date: number // x
-  // createdAt: string
-  // modifiedAt: string
-}
-
-export interface Author {
-  userId: string
-  userName: string // x
-  nickname: string
-  profileImg: string | null
-  email: string // x
+  createdAt: string
+  modifiedAt: string
 }

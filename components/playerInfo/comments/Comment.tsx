@@ -55,7 +55,7 @@ const Comment: FC<{ comment: PlayerComment, playerId: number }> = ({ comment, pl
       alert('You can modify the comments after logging in.')
       return
     }
-    if (myInfo.userId !== userId) {
+    if (myInfo.id !== userId) {
       alert(`You can't modify it unless it's your comment.`)
       return
     }
@@ -77,7 +77,7 @@ const Comment: FC<{ comment: PlayerComment, playerId: number }> = ({ comment, pl
       alert('You can only delete your own comments.')
       return
     }
-    if (myInfo.userId !== userId) {
+    if (myInfo.id !== userId) {
       alert(`You can't delete it unless it's your comment.`)
       return
     }

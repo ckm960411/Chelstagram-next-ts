@@ -849,7 +849,7 @@ export const players: PlayerProfile[] = [
       {
         playerId: 1333556259636,
         id: 230299278072,
-        userId: "cead7ff6-bcbf-4f1a-87ad-42756c40932d",
+        userId: 149765870964,
         nickname: "조진호",
         profileImg: null,
         text: "댓글 작성 완료",

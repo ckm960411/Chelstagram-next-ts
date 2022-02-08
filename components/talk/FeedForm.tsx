@@ -6,9 +6,8 @@ import InputFileForm from "components/talk/InputFileForm";
 import { addPost } from "store/postsSlice";
 
 export type PostSubmitType = {
-  userId: string
+  userId: number
   postText: string
-  date: number
   postImg: string[]
 }
 
@@ -27,12 +26,13 @@ const FeedForm: FC = () => {
     if (!myInfo) return alert('Only logged-in users can write posts.')
     if (postText === '') return alert('Please fill out the post.')
     const data: PostSubmitType = {
-      userId: myInfo.userId!,
+      userId: myInfo.id!,
       postText,
-      date: Date.now(),
       postImg: images
     }
     dispatch(addPost(data))
+    setPostText('')
+    setImages([])
   }, [images, myInfo, postText, dispatch])
 
   return (

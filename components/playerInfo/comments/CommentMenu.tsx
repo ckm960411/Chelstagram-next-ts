@@ -11,7 +11,7 @@ type PropTypes = {
   onEditComment: () => void
   onDeleteComment: () => void
   myInfo: UserType | null
-  userId: string
+  userId: number
 }
 
 const CommentMenu: FC<PropTypes> = ({
@@ -33,7 +33,7 @@ const CommentMenu: FC<PropTypes> = ({
         open={open}
         onClose={handleClose}
       >
-        { myInfo && myInfo.userId === userId ? (
+        { myInfo && myInfo.id === userId ? (
           <div>
             <MenuItem onClick={onEditComment} disableRipple>
               <EditIcon />
