@@ -4,6 +4,7 @@ import { Card, CardContent, Divider, Grid, Typography, useMediaQuery, useTheme }
 import { GlobalStyles } from "@mui/styled-engine"
 import { useAppSelector } from "store/hooks";
 import { PlayerProfile } from "types/playerTypes";
+import { calculatePer } from "lib/utils/functions";
 
 type InfoPropTypes = {
   title: string
@@ -38,7 +39,7 @@ const PlayerInfo: FC = () => {
     return <div>Loading...</div>
   }
 
-  const { playerName, position, birthDate, birthPlace, backNumber, stats } = player
+  const { name, mainPosition, subPosition, birthDate, birthPlace, backNumber, stats, height, weight } = player
 
   return (
     <>
@@ -49,7 +50,7 @@ const PlayerInfo: FC = () => {
           }
         }}/>
         <CardContent sx={{ padding: '0 16px 12px' }}>
-          <Typography sx={{ color: '#001487', fontSize: '24px', fontWeight: 600 }}>{playerName}</Typography>
+          <Typography sx={{ color: '#001487', fontSize: '24px', fontWeight: 600 }}>{name}</Typography>
         </CardContent>
       </Card>
       <Card sx={
@@ -68,20 +69,20 @@ const PlayerInfo: FC = () => {
             <Grid item xs={3} sm={3}> 
             <StatBox>
               <StyledTypo large={1}>
-                {position === 'GoalKeeper' ? stats.cleanSheets : stats.goals}
+                {mainPosition === 'GoalKeeper' ? stats.cleanSheets : stats.goals}
               </StyledTypo>
               <StyledTypo>
-                {position === 'GoalKeeper' ? 'Clean Sheets' : 'Goals'}
+                {mainPosition === 'GoalKeeper' ? 'Clean Sheets' : 'Goals'}
               </StyledTypo>
               </StatBox>
             </Grid>
             <Grid item xs={3} sm={3}>
             <StatBox>
               <StyledTypo large={1}>
-                {position === 'GoalKeeper' ? stats.saves : stats.assists}
+                {mainPosition === 'GoalKeeper' ? stats.saves : stats.assists}
               </StyledTypo>
               <StyledTypo>
-                {position === 'GoalKeeper' ? 'Saves' : 'Assists'}
+                {mainPosition === 'GoalKeeper' ? 'Saves' : 'Assists'}
               </StyledTypo>
               </StatBox>
             </Grid>
@@ -89,17 +90,17 @@ const PlayerInfo: FC = () => {
             <StatBox>
               <StyledTypo large={1}>
                 {
-                  position === 'GoalKeeper' ? stats.shotsSaved :
-                  position === 'Defender' ? stats.tackleSuccess :
-                  position === 'Forward' && stats.totalShots !== undefined ? stats.shootingAcuuracy
-                  : stats.passAccuracy
+                  mainPosition === 'GoalKeeper' ? calculatePer(stats.shotsSaved) :
+                  mainPosition === 'Defender' ? calculatePer(stats.tackleSuccess) :
+                  subPosition === 'Striker' ? calculatePer(stats.shootingAccuracy)
+                  : stats.passAccuracy * 100
                 }%
               </StyledTypo>
               <StyledTypo>
                 {
-                  position === 'GoalKeeper' ? 'Shots Saved' :
-                  position === 'Defender' ? 'Tackles Success' :
-                  position === 'Forward' && stats.totalShots !== undefined ? 'Shooting Accuracy'
+                  mainPosition === 'GoalKeeper' ? 'Shots Saved' :
+                  mainPosition === 'Defender' ? 'Tackles Success' :
+                  subPosition === 'Striker' ? 'Shooting Accuracy'
                   : 'Pass Accuracy'
                 }
               </StyledTypo>
@@ -111,10 +112,12 @@ const PlayerInfo: FC = () => {
           <CardContent sx={{ padding: '0 0 16px' }}>
             <Typography sx={{ color: '#001487', fontWeight: 600 }}>Personal Information</Typography>
             <Divider sx={{ background: '#001487', height: '3px', marginTop: 2 }} />
-            <InfoBox title="Name" desc={playerName} />
+            <InfoBox title="Name" desc={name} />
             <InfoBox title="Date of birth" desc={birthDate} />
             <InfoBox title="Birthplace" desc={birthPlace} />
-            <InfoBox title="Position" desc={position} />
+            <InfoBox title="Height" desc={height} />
+            <InfoBox title="Weight" desc={weight} />
+            <InfoBox title="Position" desc={mainPosition} />
             <InfoBox title="Number" desc={backNumber} />
           </CardContent>
         </Card>

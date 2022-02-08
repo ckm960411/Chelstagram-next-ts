@@ -2,26 +2,26 @@ import React, { FC, useState, useRef, useEffect, useCallback } from "react";
 import { PlayerComment } from "types/playerTypes";
 import { Avatar, Divider, Grid, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { format, formatDistanceToNowStrict } from "date-fns";
+import { formatDistanceToNowStrict } from "date-fns";
 import { deletePlayerComment, editPlayerComment } from "store/playersSlice";
 import EditCommentForm from "components/playerInfo/comments/EditCommentForm";
 import CommentMenu from "components/playerInfo/comments/CommentMenu";
 
 export type EditCommentType = {
-  commentId: string
-  playerNum: number
+  commentId: number
+  playerId: number
   text: string
 }
 export type DeleteCommentType = {
-  commentId: string
-  playerNum: number
+  commentId: number
+  playerId: number
 }
 
-const Comment: FC<{ comment: PlayerComment, playerNum: number }> = ({ comment, playerNum }) => {
+const Comment: FC<{ comment: PlayerComment, playerId: number }> = ({ comment, playerId }) => {
   const myInfo = useAppSelector(state => state.users.myInfo)
   const dispatch = useAppDispatch()
   const editCommentRef = useRef<HTMLInputElement>(null)
-  const { commentId, userId, userName, nickname, profileImg, text, date } = comment
+  const { id, userId, nickname, profileImg, text, createdAt, modifiedAt } = comment
 
   const [timeAgo, setTimeAgo] = useState<string>('0')
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
@@ -34,11 +34,14 @@ const Comment: FC<{ comment: PlayerComment, playerNum: number }> = ({ comment, p
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   useEffect(() => {
-    setTimeAgo(formatDistanceToNowStrict(date))
-  }, [date])
-
+    if (createdAt === modifiedAt) {
+      setTimeAgo(formatDistanceToNowStrict(Date.parse(createdAt)))
+    } else {
+      setTimeAgo(formatDistanceToNowStrict(Date.parse(modifiedAt)))
+    }
+  }, [createdAt, modifiedAt, setTimeAgo])
+    
   const onEditComment = useCallback(() => {
     handleClose()
     setEditing(true)
@@ -60,13 +63,14 @@ const Comment: FC<{ comment: PlayerComment, playerNum: number }> = ({ comment, p
       return setEditing(false)
     }
     const data: EditCommentType = {
-      commentId,
-      playerNum,
+      commentId: id,
+      playerId,
       text: editCommentRef.current!.value.trim(),
     }
     dispatch(editPlayerComment(data))
+    setCommentError('')
     setEditing(false)
-  }, [myInfo, commentId, userId, playerNum, text, dispatch])
+  }, [myInfo, id, userId, playerId, text, dispatch])
 
   const onDeleteComment = useCallback(() => {
     if (!myInfo) {
@@ -79,16 +83,16 @@ const Comment: FC<{ comment: PlayerComment, playerNum: number }> = ({ comment, p
     }
     const ok = window.confirm('Do you really want to delete the comments?')
     if (!ok) return handleClose()
-    const data: DeleteCommentType = { commentId, playerNum }
+    const data: DeleteCommentType = { commentId: id, playerId }
     dispatch(deletePlayerComment(data))
     handleClose()
-  }, [myInfo, commentId, userId, playerNum, dispatch])
+  }, [myInfo, id, userId, playerId, dispatch])
 
   return (
     <>
       <Grid container wrap="nowrap" spacing={2}>
         <Grid item>
-          <Avatar sx={{ background: "#001487" }}>{userName[0]}</Avatar>
+          <Avatar sx={{ background: "#001487" }}>{nickname[0]}</Avatar>
         </Grid>
         <Grid item justifyContent="left" xs zeroMinWidth>
           <h4 style={{ margin: "10px 0" }}>{nickname}</h4>
@@ -104,8 +108,11 @@ const Comment: FC<{ comment: PlayerComment, playerNum: number }> = ({ comment, p
           ) : (
             <>
               <p>{text}</p>
-              <Typography variant="button">
-                {format(date, "yyyy.MM.dd kk:mm")} ({timeAgo} ago)
+              <Typography variant="body2">
+                { createdAt !== modifiedAt 
+                  ? `${modifiedAt.slice(0, -3)} (modified ${timeAgo} ago)` 
+                  : `${createdAt.slice(0, -3)} (${timeAgo} ago)`
+                }
               </Typography>
             </>
           )}

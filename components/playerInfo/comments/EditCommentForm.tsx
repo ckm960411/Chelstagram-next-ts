@@ -33,11 +33,14 @@ const EditCommentForm: FC<PropTypes> = ({
       <Button
         variant="outlined" 
         sx={{ float: 'right', marginTop: 1, marginRight: 1 }}
-        onClick={() => setEditing(false)}
+        onClick={() => {
+          setEditing(false)
+          setCommentError('')
+        }}
       >
         Cancel
       </Button>
-      { commentError && (
+      { commentError !== '' && (
         <Alert
           severity="warning" 
           onClose={() => setCommentError('')}

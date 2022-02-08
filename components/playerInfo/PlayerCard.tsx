@@ -18,14 +18,14 @@ import Image from "next/image";
 import { likeOrUnlikePlayer } from "store/playersSlice";
 
 export type LikeUnlikePlayerType = {
-  backNumber: number
+  id: number
   userId: string
 }
 
 const PlayerCard: FC<{player: PlayerProfile}> = ({ player }) => {
   const dispatch = useAppDispatch()
   const myInfo = useAppSelector(state => state.users.myInfo)
-  const { backNumber, playerName, position, profileImg, birthDate, birthPlace, likes } = player;
+  const { id, backNumber, name, mainPosition, profileImg, birthDate, birthPlace, likes } = player;
   const [like, setLike] = useState<boolean>(false);
   const router = useRouter();
 
@@ -39,14 +39,14 @@ const PlayerCard: FC<{player: PlayerProfile}> = ({ player }) => {
 
   const onLike = useCallback(() => {
     if (!myInfo) return
-    const data: LikeUnlikePlayerType = { backNumber, userId: myInfo.userId }
+    const data: LikeUnlikePlayerType = { id, userId: myInfo.userId }
     dispatch(likeOrUnlikePlayer(data))
     setLike(prev => !prev)
-  }, [dispatch, myInfo, backNumber]);
+  }, [dispatch, myInfo, id]);
 
   const onLoadPlayerDetail = useCallback(() => {
-    router.push(`/players/${backNumber}`);
-  }, [backNumber, router]);
+    router.push(`/players/${id}`);
+  }, [id, router]);
 
   return (
     <Card
@@ -61,7 +61,7 @@ const PlayerCard: FC<{player: PlayerProfile}> = ({ player }) => {
       <CardMedia sx={{ padding: "4px" }}>
         <Image
           src={profileImg}
-          alt={playerName}
+          alt={name}
           width="100%"
           height="100%"
           layout="responsive"
@@ -69,10 +69,10 @@ const PlayerCard: FC<{player: PlayerProfile}> = ({ player }) => {
       </CardMedia>
       <CardContent>
         <Typography variant="h6" component="div" sx={{ color: "#001487" }}>
-          {playerName}
+          {name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {backNumber}, {position}
+          {backNumber}, {mainPosition}
           <br />
           {birthDate} | {birthPlace}
         </Typography>

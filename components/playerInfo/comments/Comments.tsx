@@ -9,14 +9,14 @@ const Comments: FC = () => {
   if (player === null) {
     return <div>Loading...</div>
   }
-  const { comments, backNumber } = player
+  const { comments, id } = player
 
   return (
     <>
       <CommentForm />
       <div>
         {comments.map((comment) => (
-          <Comment key={comment.commentId} comment={comment} playerNum={backNumber} />
+          <Comment key={comment.id} comment={comment} playerId={id} />
         ))}
       </div>
     </>

@@ -11,7 +11,7 @@ type PropTypes = {
 }
 
 const FeedContent: FC<PropTypes> = ({ author, content, likes }) => {
-  const { userName, nickname, profileImg } = author
+  const { nickname, profileImg } = author
   const { postText, date, postImg } = content
   return (
     <>
@@ -22,7 +22,7 @@ const FeedContent: FC<PropTypes> = ({ author, content, likes }) => {
             <MoreVertIcon />
           </IconButton>
         }
-        title={nickname ? nickname : userName}
+        title={nickname}
         subheader={format(date, "yyyy.MM.dd kk:mm")}
       />
       <CardMedia

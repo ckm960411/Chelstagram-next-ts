@@ -1,66 +1,112 @@
 export interface PlayerProfile {
-  playerId: string // id
+  id: number
   backNumber: number
-  playerName: string // name
-  position: 'GoalKeeper' | 'Defender' | 'Midfielder' | 'Forward'
-  // detailPosition: 'ST' | 'CF' | 'CB'  //  
-  /** position : {
-   *    highGroup: 'asdf' | 'asfd' 
-   *    midGroup: 'asdf' | 'asdf'
-   *    (lowGroup)
-   * } */
+  name: string
+  height: string
+  weight: string
+  mainPosition: mainPosition
+  subPosition: subPosition
+  detailPosition: detailPosition[]
   profileImg: string
   backgroundImg: string
   birthDate: string
   birthPlace: string
   stats: Stats
   likes: string[] // number
+  // liked: boolean
   comments: PlayerComment[]
 }
 
+type mainPosition = 'GoalKeeper' | 'Defender' | 'Midfielder' | 'Forward'
+type subPosition = 'GoalKeeper' | 'CenterBack' | 'SideBack' | 'Defensive Midfielder' | 'Attacking Midfielder' | 'WingForward' | 'Striker'
+type detailPosition = 'GK' | 'CB' | 'SW' | 'LB' | 'LWB' | 'RB' | 'RWB' | 'CDM' | 'CM' | 'CAM' | 'LM' | 'RM' | 'LW' | 'RW' | 'CF' | 'ST'
+
 export interface Stats {
   appearances: number
-  minutesPlayed: number
+  assists: number
+  chancesCreated: number
+  cleanSheets: number
+  conversionRate: number
+  crosses: number
   gamesStarted: number
   goals: number
-  assists?: number
-  crosses?: number
-  chancesCreated?: number
-  // Forward
-  goalsFromInsideBox?: number
-  goalsFromOutsideBox?: number
-  goalsFromSetPieces?: number
-  conversionRate?: number
-  totalShots?: number
-  shotsOnTarget?: number
-  shootingAcuuracy?: number
-  // Midfielder
-  passAccuracy?: number
-  totalPasses?: number
-  passesCompleted?: number
-  // Defender
-  tackleSuccess?: number
-  totalTackles?: number
-  tacklesWon?: number
-  // Goalkeeper
-  goalsConceded?: number
-  cleanSheets?: number
-  minsPerGoalConceded?: number
-  shotsSaved?: number
-  saves?: number
-  savesPerGame?: number
+  goalsConceded: number
+  goalsFromInsideBox: number
+  goalsFromOutsideBox: number
+  goalsFromSetPieces: number
+  goalsScored: number
+  minutesPerGoalConceded: number
+  minutesPlayed: number
+  passAccuracy: number
+  passesCompleted: number
+  passesTotal: number
+  saves: number
+  savesPerGame: number
+  shootingAccuracy: number
+  shotsOnTarget: number
+  shotsSaved: number
+  shotsTotal: number
+  tackleSuccess: number
+  tacklesTotal: number
+  tacklesWon: number
 }
 
 export interface PlayerComment {
-  playerId: string
-  commentId: string // id
+  playerId: number
+  id: number
   userId: string
-  userName: string // x
   nickname: string
   profileImg: string | null
   text: string
-  date: number // x
-  // createdAt: string
-  // modifiedAt: string ( 초기값은 createdAt )
-  // 2022-02-22 17:00 5분 전 (수정됨)
+  createdAt: string
+  modifiedAt: string
+}
+
+export class PlayerClass {
+  stats: Stats = {
+    appearances: 0,
+    assists: 0,
+    chancesCreated: 0,
+    cleanSheets: 0,
+    conversionRate: 0,
+    crosses: 0,
+    gamesStarted: 0,
+    goals: 0,
+    goalsConceded: 0,
+    goalsFromInsideBox: 0,
+    goalsFromOutsideBox: 0,
+    goalsFromSetPieces: 0,
+    goalsScored: 0,
+    minutesPerGoalConceded: 0,
+    minutesPlayed: 0,
+    passAccuracy: 0,
+    passesCompleted: 0,
+    passesTotal: 0,
+    saves: 0,
+    savesPerGame: 0,
+    shootingAccuracy: 0,
+    shotsOnTarget: 0,
+    shotsSaved: 0,
+    shotsTotal: 0,
+    tackleSuccess: 0,
+    tacklesTotal: 0,
+    tacklesWon: 0,
+  }
+  constructor(
+    public id: number,
+    public backNumber: number,
+    public name: string,
+    public mainPosition: mainPosition,
+    public subPosition: subPosition,
+    public detailPosition: detailPosition[],
+    public height: string,
+    public weight: string,
+    public profileImg: string,
+    public backgroundImg: string,
+    public birthDate: string,
+    public birthPlace: string,
+    public likes: number,
+    public liked: boolean,
+    public comments: PlayerComment[],
+  ) {}
 }

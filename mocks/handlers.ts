@@ -9,6 +9,8 @@ import { DeleteCommentType, EditCommentType } from "components/playerInfo/commen
 import { LikeUnlikePlayerType } from "components/playerInfo/PlayerCard";
 import { posts } from "dummyData/posts";
 import { PostSubmitType } from "components/talk/FeedForm";
+import { getRandomID } from "lib/utils/getRandomID";
+import { format } from "date-fns";
 
 interface PostLoginReqBody extends LoginFormValue {}
 interface PostSignUpReqBody extends SignUpFormValue {}
@@ -93,7 +95,7 @@ export const handlers = [
   // GET / player
   rest.get('http://localhost:3000/players/:playerId', async(req, res, ctx) => {
     const { playerId } = req.params
-    const finded = players.find(v => v.backNumber.toString() === playerId)
+    const finded = players.find(player => player.id.toString() === playerId)
     return res(
       ctx.status(200),
       ctx.json({
@@ -101,11 +103,11 @@ export const handlers = [
       })
     )
   }),
-  // Post / 선수 좋아요
-  rest.post<PostLikeReqBody>('http://localhost:3000/players/:playerNum/like', async (req, res, ctx) => {
-    const { playerNum } = req.params
+  // POST / 선수 좋아요
+  rest.post<PostLikeReqBody>('http://localhost:3000/players/:playerId/like', async (req, res, ctx) => {
+    const { playerId } = req.params
     const { userId } = req.body
-    const finded = players.find(v => v.backNumber.toString() === playerNum)
+    const finded = players.find(v => v.id.toString() === playerId)
 
     if (!finded) {
       return res(
@@ -118,17 +120,17 @@ export const handlers = [
     return res(
       ctx.status(200),
       ctx.json({
-        playerId: finded.playerId,
+        id: finded.id,
         userId,
       })
     )
   }),
   // POST / 댓글 달기
-  rest.post<PostCommentReqBody>('http://localhost:3000/players/:playerNum/comment', async(req, res, ctx) => {
-    const { playerNum } = req.params
-    const { playerId, userId, userName, nickname, commentId, text, date, profileImg } = req.body
-    const finded = players.find(player => player.backNumber === Number(playerNum))
-
+  rest.post<PostCommentReqBody>('http://localhost:3000/players/:playerId/comment', async(req, res, ctx) => {
+    const { playerId } = req.params
+    const { userId, nickname, text, profileImg } = req.body
+    const finded = players.find(player => player.id.toString() === playerId)
+    
     if (!finded) {
       return res(
         ctx.json({
@@ -140,16 +142,20 @@ export const handlers = [
     return res(
       ctx.status(201),
       ctx.json({
-        playerId, commentId, userId, userName, nickname, text, date, 
+        playerId: +playerId, 
+        id: getRandomID(), 
+        userId, nickname, text, 
+        createdAt: format(Date.now(), 'yyyy-MM-dd kk:mm:ss'),
+        modifiedAt: format(Date.now(), 'yyyy-MM-dd kk:mm:ss'), 
         profileImg: profileImg ? profileImg : null
       })
     )
   }),
   // PATCH / 댓글 수정
-  rest.patch<PatchCommentReqBody>('http://localhost:3000/players/:playerNum/comment', async (req, res, ctx) => {
-    const { playerNum } = req.params
-    const { commentId, text } = req.body
-    const playerFinded = players.find(player => player.backNumber === Number(playerNum))
+  rest.patch<PatchCommentReqBody>('http://localhost:3000/players/:playerId/comment/:commentId', async (req, res, ctx) => {
+    const { playerId, commentId } = req.params
+    const { text } = req.body
+    const playerFinded = players.find(player => player.id.toString() === playerId)
     // const comments = playerFinded!.comments
     // const commentFinded = comments.find(comment => comment.commentId === commentId)
 
@@ -164,15 +170,16 @@ export const handlers = [
     return res(
       ctx.status(200),
       ctx.json({
-        commentId,
-        text
+        commentId: +commentId,
+        text,
+        modifiedAt: format(Date.now(), 'yyyy-MM-dd kk:mm:ss')
       })
     )
   }),
   // DELETE / 댓글 삭제
-  rest.delete<DeleteCommentType>('http://localhost:3000/players/:playerNum/comment/:commentId', async (req, res, ctx) => {
-    const { playerNum, commentId } = req.params
-    const playerFinded = players.find(player => player.backNumber === Number(playerNum))
+  rest.delete<DeleteCommentType>('http://localhost:3000/players/:playerId/comment/:commentId', async (req, res, ctx) => {
+    const { playerId, commentId } = req.params
+    const playerFinded = players.find(player => player.id.toString() === playerId)
     // const comments = playerFinded?.comments
     // const commentFinded = comments?.find(comment => comment.commentId === commentId)
 
@@ -187,7 +194,7 @@ export const handlers = [
 
     return res(
       ctx.json({
-        commentId
+        commentId: +commentId,
       })
     )
   }),

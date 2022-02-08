@@ -6,7 +6,7 @@ import { PostComment } from "types/postTypes"
 
 const FeedComment: FC<{comment: PostComment }> = ({ comment }) => {
   const [timeAgo, setTimeAgo] = useState<string>('0')
-  const { userName, nickname, profileImg, text, date } = comment
+  const { nickname, profileImg, text, date } = comment
 
   useEffect(() => {
     setTimeAgo(formatDistanceToNowStrict(date))
@@ -17,11 +17,11 @@ const FeedComment: FC<{comment: PostComment }> = ({ comment }) => {
       <Grid container wrap="nowrap" spacing={1}>
         <Grid item>
           <Avatar sx={{ bgcolor: "#001487", width: "28px", height: "28px", fontSize: "16px" }}>
-            {nickname ? nickname[0] : userName[0]}
+            {nickname[0]}
           </Avatar>
         </Grid>
         <Grid item justifyContent="left" xs zeroMinWidth>
-          <h4 style={{ margin: "5px 0" }}>{nickname ? nickname : userName}</h4>
+          <h4 style={{ margin: "5px 0" }}>{nickname}</h4>
           <Typography variant="subtitle2" sx={{ margin: 0 }}>
             {text}
           </Typography>

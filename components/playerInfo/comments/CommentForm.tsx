@@ -2,19 +2,17 @@ import { FC, useState } from "react";
 import { Box, Button, TextField } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { addPlayerComment } from "store/playersSlice";
-import { v4 as uuidv4 } from "uuid"
 import { PlayerProfile } from "types/playerTypes";
+import { getRandomID } from "lib/utils/getRandomID";
+import { format } from "date-fns";
 
 export type CommentData = {
   backNumber: number
-  commentId: string
-  playerId: string
+  playerId: number
   userId: string
-  userName: string
   nickname: string
   profileImg: string | null
   text: string
-  date: number
 }
 
 const CommentForm: FC = () => {
@@ -22,7 +20,7 @@ const CommentForm: FC = () => {
   const [comment, setComment] = useState('')
   const player: PlayerProfile | null = useAppSelector(state => state.players.player)
   const myInfo = useAppSelector(state => state.users.myInfo)
-  const { playerId, backNumber } = player!
+  const { id, backNumber } = player!
   
   const onChangeComment = (e: React.ChangeEvent<HTMLInputElement>) => {
     setComment(e.target.value)
@@ -36,14 +34,11 @@ const CommentForm: FC = () => {
     }
     const data: CommentData = {
       backNumber: backNumber,
-      playerId: playerId, 
+      playerId: id,
       userId: myInfo.userId,
-      userName: myInfo.userName, 
       nickname: myInfo.nickname,
-      commentId: uuidv4(), 
       profileImg: myInfo.profileImg,
       text: comment,
-      date: Date.now()
     }
     dispatch(addPlayerComment(data))
     setComment('')

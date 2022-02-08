@@ -1,10 +1,10 @@
-import axios from 'axios'
-import { GetStaticProps, NextPage } from 'next'
+import { getHomeData } from 'lib/players/get-home-data'
+import { GetServerSideProps, GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const res = await axios.get('http://localhost:3000/').then(res => res.data)
-  const result = res.message
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const response = await getHomeData()
+  const result = response.message
   return {
     props: { result }
   }
@@ -12,6 +12,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 const Home: NextPage<{ result: string }> = ({ result }) => {
   if (!result) return (<div>loading...</div>)
+
   return (
     <div>
       <Head>

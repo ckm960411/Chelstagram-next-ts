@@ -16,7 +16,7 @@ type PathParams = {
 
 const PlayerDetail: FC<{player: PlayerProfile}> = ({ player }) => {
   const dispatch = useAppDispatch()
-  const { playerName } = player
+  const { name } = player
   
   useEffect(() => {
     dispatch(addPlayerData(player))
@@ -25,7 +25,7 @@ const PlayerDetail: FC<{player: PlayerProfile}> = ({ player }) => {
   return (
     <>
       <Head>
-        <title>{playerName} | Chelstagram</title>
+        <title>{name} | Chelstagram</title>
       </Head>
       <Grid container spacing={2}>
         <GlobalStyles styles={{
@@ -56,7 +56,7 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({ params }: { params: PathParams }) => {
-  const player = await getPlayerData(params.id)
+  const player: PlayerProfile = await getPlayerData(params.id)
   return {
     props: {
       player

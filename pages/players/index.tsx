@@ -22,7 +22,7 @@ const Players: NextPage<{ playersData: Array<PlayerProfile>}> = ({ playersData }
       </Head>
       <Grid container spacing={2}>
         {playersData.map(player => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={`${player.playerName}-${player.playerId}`} >
+          <Grid item xs={12} sm={6} md={4} lg={3} key={player.id} >
             <PlayerCard player={player} />
           </Grid>
         ))}
