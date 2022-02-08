@@ -7,10 +7,7 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import {
-  FavoriteBorder as LikeIcon,
-  Favorite as LikedIcon,
-} from "@mui/icons-material";
+import { FavoriteBorder as LikeIcon, Favorite as LikedIcon } from "@mui/icons-material";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { PlayerProfile } from "types/playerTypes";
@@ -19,7 +16,7 @@ import { likeOrUnlikePlayer } from "store/playersSlice";
 
 export type LikeUnlikePlayerType = {
   id: number
-  userId: string
+  userId: number
 }
 
 const PlayerCard: FC<{player: PlayerProfile}> = ({ player }) => {
@@ -31,7 +28,7 @@ const PlayerCard: FC<{player: PlayerProfile}> = ({ player }) => {
 
   useEffect(() => {
     if (!myInfo) return
-    const result = likes.includes(myInfo.userId)
+    const result = likes.includes(myInfo.id)
     if (result) {
       setLike(true)
     }
@@ -39,7 +36,7 @@ const PlayerCard: FC<{player: PlayerProfile}> = ({ player }) => {
 
   const onLike = useCallback(() => {
     if (!myInfo) return
-    const data: LikeUnlikePlayerType = { id, userId: myInfo.userId }
+    const data: LikeUnlikePlayerType = { id, userId: myInfo.id }
     dispatch(likeOrUnlikePlayer(data))
     setLike(prev => !prev)
   }, [dispatch, myInfo, id]);

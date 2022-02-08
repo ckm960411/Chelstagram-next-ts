@@ -51,7 +51,6 @@ const PreviewImage: FC<PropTypes> = ({ image, setImages, order }) => {
     <ImageWrapper>
       <Image
         src={image} alt="image" 
-        // width={200} height={200}
         layout="fill"
         objectFit="contain"
       />

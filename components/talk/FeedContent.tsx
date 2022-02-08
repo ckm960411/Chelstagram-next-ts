@@ -2,8 +2,10 @@ import { FC, useState, useEffect } from "react";
 import { Avatar, CardContent, CardHeader, CardMedia, IconButton, Typography } from "@mui/material";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Author, PostContent } from "types/postTypes";
-import { format } from "date-fns";
-import formatDistanceToNowStrict from "date-fns/formatDistanceToNowStrict";
+import { formatDistanceToNowStrict } from "date-fns";
+import styled from "styled-components";
+import Image from "next/image";
+import FeedCarousel from "components/talk/FeedCarousel";
 
 type PropTypes = {
   author: Author
@@ -12,6 +14,20 @@ type PropTypes = {
   createdAt: string
   modifiedAt: string
 }
+
+const ImageWrapper = styled.div`
+  max-height: 500px;
+  min-height: 400px;
+  height: 100%;
+  width: 100%;
+  background-color: #e9e9e9;
+  position: relative;
+  & span {
+    height: inherit !important;
+    /* width: inherit !important; */
+    /* position: relative !important; */
+  }
+`
 
 const FeedContent: FC<PropTypes> = ({ author, content, likes, createdAt, modifiedAt }) => {
   const { nickname, profileImg } = author
@@ -41,10 +57,19 @@ const FeedContent: FC<PropTypes> = ({ author, content, likes, createdAt, modifie
           : `${createdAt.slice(0, -3)} (${timeAgo} ago)`
         }
       />
-      <CardMedia
-        component="img"
-        image={postImg[0]!}
-      />
+      <CardMedia>
+        <FeedCarousel>
+          {postImg.map((img, i) => (
+            <ImageWrapper key={i}>
+              <Image 
+                src={img} alt="image" 
+                layout="fill"
+                objectFit="contain"
+              />
+            </ImageWrapper>
+          ))}
+        </FeedCarousel>
+      </CardMedia>
       <CardContent>
         <Typography variant="body2">
           {postText}
