@@ -10,13 +10,15 @@ import { posts } from "dummyData/posts";
 import { PostSubmitType } from "components/talk/FeedForm";
 import { getRandomID } from "lib/utils/getRandomID";
 import { format } from "date-fns";
+import { PostCommentType } from "components/talk/FeedCommentForm";
 
 interface PostLoginReqBody extends LoginFormValue {}
 interface PostSignUpReqBody extends SignUpFormValue {}
-interface PostLikeReqBody extends LikeUnlikePlayerType {}
-interface PostCommentReqBody extends CommentData {}
+interface PostPlayerLikeReqBody extends LikeUnlikePlayerType {}
+interface PostPlayerCommentReqBody extends CommentData {}
 interface PatchCommentReqBody extends EditCommentType {}
 interface PostPostReqBody extends PostSubmitType {}
+interface PostPostCommentReqBody extends PostCommentType {}
 
 export const handlers = [
   // GET / Home
@@ -103,7 +105,7 @@ export const handlers = [
     )
   }),
   // POST / 선수 좋아요
-  rest.post<PostLikeReqBody>('http://localhost:3000/players/:playerId/like', async (req, res, ctx) => {
+  rest.post<PostPlayerLikeReqBody>('http://localhost:3000/players/:playerId/like', async (req, res, ctx) => {
     const { playerId } = req.params
     const { userId } = req.body
     const finded = players.find(v => v.id.toString() === playerId)
@@ -124,8 +126,8 @@ export const handlers = [
       })
     )
   }),
-  // POST / 댓글 달기
-  rest.post<PostCommentReqBody>('http://localhost:3000/players/:playerId/comment', async(req, res, ctx) => {
+  // POST / 선수 댓글 달기
+  rest.post<PostPlayerCommentReqBody>('http://localhost:3000/players/:playerId/comment', async(req, res, ctx) => {
     const { playerId } = req.params
     const { userId, text } = req.body
     const Playerfinded = players.find(player => player.id.toString() === playerId)
@@ -160,7 +162,7 @@ export const handlers = [
       })
     )
   }),
-  // PATCH / 댓글 수정
+  // PATCH / 선수 댓글 수정
   rest.patch<PatchCommentReqBody>('http://localhost:3000/players/:playerId/comment/:commentId', async (req, res, ctx) => {
     const { playerId, commentId } = req.params
     const { text } = req.body
@@ -185,7 +187,7 @@ export const handlers = [
       })
     )
   }),
-  // DELETE / 댓글 삭제
+  // DELETE / 선수 댓글 삭제
   rest.delete<DeleteCommentType>('http://localhost:3000/players/:playerId/comment/:commentId', async (req, res, ctx) => {
     const { playerId, commentId } = req.params
     const playerFinded = players.find(player => player.id.toString() === playerId)
@@ -245,6 +247,35 @@ export const handlers = [
         },
         likes: [],
         comments: [],
+      })
+    )
+  }),
+  // POST / 게시글 댓글 작성
+  rest.post<PostPostCommentReqBody>('http://localhost:3000/api/comment/:postId', async (req, res, ctx) => {
+    const { postId } = req.params
+    const { userId, text } = req.body
+    const userFinded = users.find(user => user.id === userId)
+    // const postFinded = posts.find(post => post.id === +postId)
+    
+    if (!userFinded) {
+      return res(
+        ctx.json({
+          errorMessage: "The user was not found."
+        })
+      )
+    }
+
+    return res(
+      ctx.status(200),
+      ctx.json({
+        id: getRandomID(),
+        postId: +postId,
+        userId,
+        nickname: userFinded.nickname,
+        profileImg: userFinded.profileImg,
+        text,
+        createdAt: format(Date.now(), 'yyyy-MM-dd kk:mm:ss'),
+        modifiedAt: format(Date.now(), 'yyyy-MM-dd kk:mm:ss'),
       })
     )
   }),

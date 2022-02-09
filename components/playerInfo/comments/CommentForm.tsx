@@ -21,7 +21,7 @@ const CommentForm: FC = () => {
     setComment(e.target.value)
   }
   const onSubmitComment = () => {
-    if (comment === '') return
+    if (comment.trim() === '') return
     if (!myInfo) {
       alert('로그인한 뒤에 댓글을 달 수 있습니다.')
       setComment('')

@@ -22,24 +22,24 @@ export type LikeUnlikePlayerType = {
 const PlayerCard: FC<{player: PlayerProfile}> = ({ player }) => {
   const dispatch = useAppDispatch()
   const myInfo = useAppSelector(state => state.users.myInfo)
-  const { id, backNumber, name, mainPosition, profileImg, birthDate, birthPlace, likes } = player;
-  const [like, setLike] = useState<boolean>(false);
+  const { id, backNumber, name, mainPosition, profileImg, birthDate, birthPlace, likes, liked } = player;
+  // const [like, setLike] = useState<boolean>(false);
   const router = useRouter();
 
-  useEffect(() => {
-    if (!myInfo) return
-    const result = likes.includes(myInfo.id)
-    if (result) {
-      setLike(true)
-    }
-  }, [likes, myInfo])
+  // useEffect(() => {
+  //   if (!myInfo) return
+  //   const result = likes.includes(myInfo.id)
+  //   if (result) {
+  //     setLike(true)
+  //   }
+  // }, [likes, myInfo])
 
-  const onLike = useCallback(() => {
-    if (!myInfo) return
-    const data: LikeUnlikePlayerType = { id, userId: myInfo.id }
-    dispatch(likeOrUnlikePlayer(data))
-    setLike(prev => !prev)
-  }, [dispatch, myInfo, id]);
+  // const onLike = useCallback(() => {
+  //   if (!myInfo) return
+  //   const data: LikeUnlikePlayerType = { id, userId: myInfo.id }
+  //   dispatch(likeOrUnlikePlayer(data))
+  //   setLike(prev => !prev)
+  // }, [dispatch, myInfo, id]);
 
   const onLoadPlayerDetail = useCallback(() => {
     router.push(`/players/${id}`);
@@ -77,8 +77,8 @@ const PlayerCard: FC<{player: PlayerProfile}> = ({ player }) => {
       <CardActions>
         <Button
           sx={{ color: "#001487" }}
-          startIcon={like ? <LikedIcon /> : <LikeIcon />}
-          onClick={onLike}
+          startIcon={liked ? <LikedIcon /> : <LikeIcon />}
+          // onClick={onLike}
         >
           Like
         </Button>

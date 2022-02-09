@@ -5,7 +5,7 @@ export interface PostTypes {
   modifiedAt: string
   content: PostContent
   likes: number
-  // liked: boolean
+  liked: boolean
   comments: PostComment[]
 }
 

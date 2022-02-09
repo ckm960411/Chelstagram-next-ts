@@ -57,19 +57,21 @@ const FeedContent: FC<PropTypes> = ({ author, content, likes, createdAt, modifie
           : `${createdAt.slice(0, -3)} (${timeAgo} ago)`
         }
       />
-      <CardMedia>
-        <FeedCarousel>
-          {postImg.map((img, i) => (
-            <ImageWrapper key={i}>
-              <Image 
-                src={img} alt="image" 
-                layout="fill"
-                objectFit="contain"
-              />
-            </ImageWrapper>
-          ))}
-        </FeedCarousel>
-      </CardMedia>
+      {postImg[0] && (
+        <CardMedia>
+          <FeedCarousel>
+            {postImg.map((img, i) => (
+              <ImageWrapper key={i}>
+                <Image 
+                  src={img} alt="image" 
+                  layout="fill"
+                  objectFit="contain"
+                />
+              </ImageWrapper>
+            ))}
+          </FeedCarousel>
+        </CardMedia>
+      )}
       <CardContent>
         <Typography variant="body2">
           {postText}

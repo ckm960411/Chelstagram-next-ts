@@ -1,6 +1,6 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { styled } from '@mui/material/styles';
-import { Divider, Card, CardContent, CardActions, Collapse } from '@mui/material';
+import { Divider, Card, CardContent, CardActions, Collapse, Button, Typography } from '@mui/material';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import CommentIcon from '@mui/icons-material/CommentOutlined';
 import BookmarkIcon from '@mui/icons-material/BookmarkBorderOutlined';
@@ -9,6 +9,7 @@ import FeedCommentForm from 'components/talk/FeedCommentForm';
 import FeedComment from 'components/talk/FeedComment';
 import FeedContent from 'components/talk/FeedContent';
 import { PostTypes } from 'types/postTypes';
+import { useAppDispatch } from 'store/hooks';
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -40,7 +41,10 @@ const Feed: FC<{post : PostTypes}> = ({ post }) =>  {
         <IconButton aria-label="like">
           <LikeIcon />
         </IconButton>
-        <IconButton aria-label="bookmark">
+        <Typography variant="subtitle2">
+          {likes > 0 ? `${likes.toLocaleString('ko-KR')} likes` : 'like this post' }
+        </Typography>
+        <IconButton aria-label="bookmark" sx={{ ml: 'auto' }}>
           <BookmarkIcon />
         </IconButton>
         <ExpandMore
@@ -48,6 +52,7 @@ const Feed: FC<{post : PostTypes}> = ({ post }) =>  {
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show comments"
+          sx={{ ml : 0 }}
         >
           <CommentIcon />
         </ExpandMore>
@@ -55,7 +60,7 @@ const Feed: FC<{post : PostTypes}> = ({ post }) =>  {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <Divider />
         <CardContent>
-          <FeedCommentForm />
+          <FeedCommentForm postId={post.id} />
           {comments.map(comment => <FeedComment key={comment.id} comment={comment} />)}
         </CardContent>
       </Collapse>

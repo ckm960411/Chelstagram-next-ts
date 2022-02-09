@@ -3,11 +3,19 @@ import { PostTypes } from "types/postTypes";
 import { RootState } from "store/configureStore";
 import axios from "axios";
 import { PostSubmitType } from "components/talk/FeedForm";
+import { PostCommentType } from "components/talk/FeedCommentForm";
 
 export const addPost = createAsyncThunk(
   "POST/ADD_POST_REQUEST",
   async (data: PostSubmitType) => {
     const response = await axios.post('http://localhost:3000/post', data)
+    return response.data
+  }
+)
+export const addPostComment = createAsyncThunk(
+  "POST/ADD_POST_COMMENT_REQUEST",
+  async (data: PostCommentType) => {
+    const response = await axios.post(`http://localhost:3000/api/comment/${data.postId}`, data)
     return response.data
   }
 )
@@ -31,6 +39,9 @@ export const postsSlice = createSlice({
   reducers: {
     addPostsData: (state, action) => {
       state.value = action.payload
+    },
+    addPostData: (state, action) => {
+      state.post = action.payload
     }
   },
   extraReducers: {
@@ -45,10 +56,23 @@ export const postsSlice = createSlice({
         state.value?.unshift(action.payload)
       }
     },
+    [addPostComment.pending.type]: (state, action) => {
+      state.loading = true
+    },
+    [addPostComment.fulfilled.type]: (state, action) => {
+      state.loading = false
+      if (action.payload.errorMessage) {
+        state.error = action.payload
+      } else {
+        console.log(action.payload)
+        const postFinded = state.value.find(post => post.id === action.payload.postId)
+        postFinded?.comments.unshift(action.payload)
+      }
+    },
   }
 })
 
-export const { addPostsData } = postsSlice.actions
+export const { addPostsData, addPostData } = postsSlice.actions
 
 export const selectPlayers = (state: RootState) => state.players.value
 

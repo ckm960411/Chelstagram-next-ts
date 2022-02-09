@@ -12,8 +12,8 @@ export interface PlayerProfile {
   birthDate: string
   birthPlace: string
   stats: Stats
-  likes: number[] // number
-  // liked: boolean
+  likes: number
+  liked: boolean
   comments: PlayerComment[]
 }
 
