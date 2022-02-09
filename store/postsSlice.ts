@@ -3,7 +3,7 @@ import { PostTypes } from "types/postTypes";
 import { RootState } from "store/configureStore";
 import axios from "axios";
 import { PostSubmitType } from "components/talk/FeedForm";
-import { PostCommentType } from "components/talk/FeedCommentForm";
+import { PostCommentType } from "components/talk/feedComments/FeedCommentForm";
 
 export const addPost = createAsyncThunk(
   "POST/ADD_POST_REQUEST",
@@ -64,7 +64,6 @@ export const postsSlice = createSlice({
       if (action.payload.errorMessage) {
         state.error = action.payload
       } else {
-        console.log(action.payload)
         const postFinded = state.value.find(post => post.id === action.payload.postId)
         postFinded?.comments.unshift(action.payload)
       }

@@ -5,11 +5,10 @@ import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import CommentIcon from '@mui/icons-material/CommentOutlined';
 import BookmarkIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import LikeIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import FeedCommentForm from 'components/talk/FeedCommentForm';
-import FeedComment from 'components/talk/FeedComment';
+import FeedCommentForm from 'components/talk/feedComments/FeedCommentForm';
+import FeedComment from 'components/talk/feedComments/FeedComment';
 import FeedContent from 'components/talk/FeedContent';
 import { PostTypes } from 'types/postTypes';
-import { useAppDispatch } from 'store/hooks';
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -23,7 +22,6 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 const Feed: FC<{post : PostTypes}> = ({ post }) =>  {
   const [expanded, setExpanded] = useState(false);
   const { id, author, createdAt, modifiedAt, content, likes, comments } = post
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };

@@ -10,7 +10,7 @@ import { posts } from "dummyData/posts";
 import { PostSubmitType } from "components/talk/FeedForm";
 import { getRandomID } from "lib/utils/getRandomID";
 import { format } from "date-fns";
-import { PostCommentType } from "components/talk/FeedCommentForm";
+import { PostCommentType } from "components/talk/feedComments/FeedCommentForm";
 
 interface PostLoginReqBody extends LoginFormValue {}
 interface PostSignUpReqBody extends SignUpFormValue {}
@@ -233,7 +233,7 @@ export const handlers = [
     return res(
       ctx.status(201),
       ctx.json({
-        postId: getRandomID(),
+        id: getRandomID(),
         author: {
           userId: finded.id,
           nickname: finded.nickname,
@@ -256,6 +256,7 @@ export const handlers = [
     const { userId, text } = req.body
     const userFinded = users.find(user => user.id === userId)
     // const postFinded = posts.find(post => post.id === +postId)
+    console.log('postId:  ', postId)
     
     if (!userFinded) {
       return res(

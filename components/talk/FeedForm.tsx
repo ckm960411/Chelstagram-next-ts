@@ -1,9 +1,11 @@
 import React, { FC, useState, useCallback } from "react";
-import { Box, Button, TextField } from "@mui/material";
+import { Box } from "@mui/material";
 import PreviewImagesTab from "components/talk/PreviewImagesTab";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import InputFileForm from "components/talk/InputFileForm";
 import { addPost } from "store/postsSlice";
+import TextInput from "components/atoms/TextInput";
+import MainButton from "components/atoms/MainButton";
 
 export type PostSubmitType = {
   userId: number
@@ -37,24 +39,15 @@ const FeedForm: FC = () => {
 
   return (
     <Box>
-      <TextField
+      <TextInput 
         label="How do you feel today?"
-        multiline
         rows={3}
-        fullWidth
-        variant="outlined"
         value={postText}
         onChange={onChangeText}
       />
       <div>
         <InputFileForm images={images} setImages={setImages} />
-        <Button
-          variant="contained"
-          sx={{ float: 'right', marginTop: 1 }}
-          onClick={onSubmitPost}
-          >
-          Add Post
-        </Button>
+        <MainButton onClick={onSubmitPost}>Add Post</MainButton>
       </div>
       {images[0] && <PreviewImagesTab images={images} setImages={setImages} />}
     </Box>

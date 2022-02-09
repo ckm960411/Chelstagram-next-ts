@@ -1,5 +1,7 @@
 import { FC } from "react";
-import { Alert, Button, TextField } from "@mui/material";
+import { Alert } from "@mui/material";
+import TextInput from "components/atoms/TextInput";
+import MainButton from "components/atoms/MainButton";
 
 type PropTypes = {
   text: string
@@ -15,31 +17,21 @@ const EditCommentForm: FC<PropTypes> = ({
 }) => {
   return (
     <>
-      <TextField
+      <TextInput 
         defaultValue={text}
-        multiline
-        rows={2}
-        fullWidth
-        variant="outlined"
         inputRef={editCommentRef}
       />
-      <Button
-        variant="contained" 
-        sx={{ float: 'right', marginTop: 1 }}
-        onClick={onSubmit}
-      >
-        Edit Comment
-      </Button>
-      <Button
+      <MainButton onClick={onSubmit}>Edit Comment</MainButton>
+      <MainButton
         variant="outlined" 
-        sx={{ float: 'right', marginTop: 1, marginRight: 1 }}
+        sx={{ float: 'right', mt: 1, mr: 1 }}
         onClick={() => {
           setEditing(false)
           setCommentError('')
         }}
       >
         Cancel
-      </Button>
+      </MainButton>
       { commentError !== '' && (
         <Alert
           severity="warning" 

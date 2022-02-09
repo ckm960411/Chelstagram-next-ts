@@ -3,6 +3,8 @@ import { Box, Button, TextField } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { addPlayerComment } from "store/playersSlice";
 import { PlayerProfile } from "types/playerTypes";
+import TextInput from "components/atoms/TextInput";
+import MainButton from "components/atoms/MainButton";
 
 export type CommentData = {
   playerId: number
@@ -38,23 +40,15 @@ const CommentForm: FC = () => {
 
   return (
     <Box>
-      <TextField
+      <TextInput
         label={myInfo ? "Add your comment!" : "Only logged-in users can comment."}
-        multiline
-        rows={2}
-        fullWidth
-        variant="outlined"
         disabled={!Boolean(myInfo)}
         value={comment}
         onChange={onChangeComment}
       />
-      <Button 
-        variant="contained" 
-        sx={{ float: 'right', marginTop: 1 }}
-        onClick={onSubmitComment}
-      >
+      <MainButton onClick={onSubmitComment} >
         Add Comment
-      </Button>
+      </MainButton>
     </Box>
   );
 };

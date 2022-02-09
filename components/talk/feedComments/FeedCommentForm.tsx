@@ -1,8 +1,10 @@
-import React, { FC, useMemo, useState } from "react";
-import { Box, Button, TextField } from "@mui/material";
+import React, { FC, useState } from "react";
+import { Box } from "@mui/material";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { addPostComment } from "store/postsSlice";
+import TextInput from "components/atoms/TextInput";
+import MainButton from "components/atoms/MainButton";
 
 export type PostCommentType = {
   postId: number
@@ -38,24 +40,17 @@ const FeedCommentForm: FC<{postId: number}> = ({ postId }) => {
   return (
     <Box sx={{ display: "flex", alignItems: "flex-end", marginBottom: 3 }}>
       <AccountCircle sx={{ color: "#001487", mr: 1, my: 0.5 }} />
-      <TextField
-        fullWidth
-        multiline
-        rows={1}
-        id="input-with-sx"
+      <TextInput 
         label={myInfo ? "Add your comment!" : "Only logged-in users can comment."}
+        rows={1}
         variant="standard"
         disabled={!Boolean(myInfo)}
         value={comment}
         onChange={onChangeComment}
       />
-      <Button
-        variant="contained"
-        sx={{ marginLeft: 2 }}
-        onClick={onSubmitComment}
-      >
+      <MainButton sx={{ ml: 2 }} onClick={onSubmitComment}>
         submit
-      </Button>
+      </MainButton>
     </Box>
   );
 };
