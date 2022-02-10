@@ -1,24 +1,11 @@
-import React, { Dispatch, FC, SetStateAction, useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Alert, CardContent, Dialog } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "store/hooks";
+import { editPost } from "store/postsSlice";
 import TextInput from "components/atoms/TextInput";
 import MainButton from "components/atoms/MainButton";
-import InputFileForm from "./InputFileForm";
-import { PostTypes } from "types/postTypes";
-import PreviewImagesTab from "./PreviewImagesTab";
-import { editPost } from "store/postsSlice";
-
-type EditFeedModalProps = {
-  editing: boolean
-  setEditing: Dispatch<SetStateAction<boolean>>
-  post: PostTypes
-}
-
-export type EditFeedType = {
-  postId: number
-  postText: string
-  postImg: string[]
-}
+import InputFileForm from "components/talk/feedforms/InputFileForm";
+import PreviewImagesTab from "components/talk/feedforms/PreviewImagesTab";
 
 const EditFeedModal: FC<EditFeedModalProps> = ({ post, editing, setEditing }) => {
   const dispatch = useAppDispatch()
@@ -38,9 +25,7 @@ const EditFeedModal: FC<EditFeedModalProps> = ({ post, editing, setEditing }) =>
     setImages(postImg)
   }
 
-  const onChangeEditText = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEditText(e.target.value)
-  }
+  const onChangeEditText = (e: React.ChangeEvent<HTMLInputElement>) => setEditText(e.target.value)
 
   const onSubmit = () => {
     if (editText.trim() === '') {

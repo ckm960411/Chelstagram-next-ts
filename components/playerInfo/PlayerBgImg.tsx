@@ -2,7 +2,6 @@ import { FC, useEffect } from "react";
 import Image from "next/image";
 import styled from "styled-components";
 import { useAppSelector } from "store/hooks";
-import { PlayerProfile } from "types/playerTypes";
 
 const ImageWrapper = styled.div`
   & span {

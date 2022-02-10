@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback } from "react";
 import {
   Button,
   Card,
@@ -9,10 +9,7 @@ import {
 } from "@mui/material";
 import { FavoriteBorder as LikeIcon, Favorite as LikedIcon } from "@mui/icons-material";
 import { useRouter } from "next/router";
-import { useAppDispatch, useAppSelector } from "store/hooks";
-import { PlayerProfile } from "types/playerTypes";
 import Image from "next/image";
-import { likeOrUnlikePlayer } from "store/playersSlice";
 
 export type LikeUnlikePlayerType = {
   id: number
@@ -20,26 +17,8 @@ export type LikeUnlikePlayerType = {
 }
 
 const PlayerCard: FC<{player: PlayerProfile}> = ({ player }) => {
-  const dispatch = useAppDispatch()
-  const myInfo = useAppSelector(state => state.users.myInfo)
   const { id, backNumber, name, mainPosition, profileImg, birthDate, birthPlace, likes, liked } = player;
-  // const [like, setLike] = useState<boolean>(false);
   const router = useRouter();
-
-  // useEffect(() => {
-  //   if (!myInfo) return
-  //   const result = likes.includes(myInfo.id)
-  //   if (result) {
-  //     setLike(true)
-  //   }
-  // }, [likes, myInfo])
-
-  // const onLike = useCallback(() => {
-  //   if (!myInfo) return
-  //   const data: LikeUnlikePlayerType = { id, userId: myInfo.id }
-  //   dispatch(likeOrUnlikePlayer(data))
-  //   setLike(prev => !prev)
-  // }, [dispatch, myInfo, id]);
 
   const onLoadPlayerDetail = useCallback(() => {
     router.push(`/players/${id}`);
@@ -78,7 +57,6 @@ const PlayerCard: FC<{player: PlayerProfile}> = ({ player }) => {
         <Button
           sx={{ color: "#001487" }}
           startIcon={liked ? <LikedIcon /> : <LikeIcon />}
-          // onClick={onLike}
         >
           Like
         </Button>

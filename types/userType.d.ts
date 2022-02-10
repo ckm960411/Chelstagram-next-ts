@@ -1,4 +1,4 @@
-export interface UserType {
+declare interface UserType {
   id: number
   role: 'USER' | 'ADMIN'
   userName: string // name

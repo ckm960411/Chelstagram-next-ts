@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { useAppSelector } from "store/hooks";
-import { PlayerProfile } from "types/playerTypes";
 import CommentForm from "components/playerInfo/comments/CommentForm";
 import Comment from "./Comment";
 

@@ -2,7 +2,6 @@ import { FC, useEffect } from "react";
 import Head from "next/head";
 import { getAllPlayersId } from "lib/players/get-all-players-id";
 import { getPlayerData } from "lib/players/get-player-data";
-import { PlayerProfile } from "types/playerTypes";
 import { useAppDispatch } from "store/hooks";
 import { addPlayerData } from "store/playersSlice";
 import DetailTabs from "components/playerInfo/DetailTabs";

@@ -1,26 +1,18 @@
 import { rest } from "msw";
 import { players } from "dummyData/players"
 import { users } from "dummyData/users";
-import { SignUpFormValue } from "components/login/SignUpForm";
-import { LoginFormValue } from "components/login/LoginForm";
-import { CommentData } from "components/playerInfo/comments/CommentForm";
-import { DeleteCommentType, EditCommentType } from "components/playerInfo/comments/Comment";
-import { LikeUnlikePlayerType } from "components/playerInfo/PlayerCard";
 import { posts } from "dummyData/posts";
-import { PostSubmitType } from "components/talk/FeedForm";
 import { getRandomID } from "lib/utils/getRandomID";
 import { format } from "date-fns";
-import { PostCommentType } from "components/talk/feedComments/FeedCommentForm";
-import { EditFeedType } from "components/talk/EditFeedModal";
 
 interface PostLoginReqBody extends LoginFormValue {}
 interface PostSignUpReqBody extends SignUpFormValue {}
-interface PostPlayerLikeReqBody extends LikeUnlikePlayerType {}
-interface PostPlayerCommentReqBody extends CommentData {}
-interface PatchCommentReqBody extends EditCommentType {}
-interface PostPostReqBody extends PostSubmitType {}
+interface PostPlayerCommentReqBody extends PostPlayerCommentType {}
+interface PatchPlayerCommentReqBody extends EditPlayerCommentType {}
+interface DeletePlayerCommentReqBody extends DeletePlayerCommentType {}
+interface PostPostReqBody extends PostFeedType {}
 interface PatchPostReqBody extends EditFeedType {}
-interface PostPostCommentReqBody extends PostCommentType {}
+interface PostPostCommentReqBody extends PostFeedCommentType {}
 
 export const handlers = [
   // GET / Home
@@ -85,7 +77,7 @@ export const handlers = [
     return res(
       ctx.delay(2000),
       ctx.json({
-        name, nickname, email
+        id: getRandomID(), name, nickname, email
       })
     )
   }),
@@ -103,28 +95,6 @@ export const handlers = [
       ctx.status(200),
       ctx.json({
         ...finded
-      })
-    )
-  }),
-  // POST / 선수 좋아요
-  rest.post<PostPlayerLikeReqBody>('http://localhost:3000/players/:playerId/like', async (req, res, ctx) => {
-    const { playerId } = req.params
-    const { userId } = req.body
-    const finded = players.find(v => v.id.toString() === playerId)
-
-    if (!finded) {
-      return res(
-        ctx.json({
-          errorMessage: `You can't like a player who doesn't exist.`
-        })
-      )
-    }
-
-    return res(
-      ctx.status(200),
-      ctx.json({
-        id: finded.id,
-        userId,
       })
     )
   }),
@@ -165,7 +135,7 @@ export const handlers = [
     )
   }),
   // PATCH / 선수 댓글 수정
-  rest.patch<PatchCommentReqBody>('http://localhost:3000/players/:playerId/comment/:commentId', async (req, res, ctx) => {
+  rest.patch<PatchPlayerCommentReqBody>('http://localhost:3000/players/:playerId/comment/:commentId', async (req, res, ctx) => {
     const { playerId, commentId } = req.params
     const { text } = req.body
     const playerFinded = players.find(player => player.id.toString() === playerId)
@@ -190,7 +160,7 @@ export const handlers = [
     )
   }),
   // DELETE / 선수 댓글 삭제
-  rest.delete<DeleteCommentType>('http://localhost:3000/players/:playerId/comment/:commentId', async (req, res, ctx) => {
+  rest.delete<DeletePlayerCommentReqBody>('http://localhost:3000/players/:playerId/comment/:commentId', async (req, res, ctx) => {
     const { playerId, commentId } = req.params
     const playerFinded = players.find(player => player.id.toString() === playerId)
     // const comments = playerFinded?.comments

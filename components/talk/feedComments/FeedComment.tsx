@@ -1,8 +1,7 @@
 import { FC, useState, useEffect } from "react";
 import { Avatar, Box, Grid, IconButton, Typography } from "@mui/material";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { format, formatDistanceToNowStrict } from "date-fns";
-import { PostComment } from "types/postTypes"
+import { formatDistanceToNowStrict } from "date-fns";
 
 const FeedComment: FC<{comment: PostComment }> = ({ comment }) => {
   const [timeAgo, setTimeAgo] = useState<string>('0')

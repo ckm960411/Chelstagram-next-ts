@@ -2,14 +2,9 @@ import { FC, useCallback } from "react";
 import { Box } from "@mui/system";
 import { Card, CardContent, CardHeader, IconButton, Stack, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import PreviewImage from "components/talk/PreviewImage";
+import PreviewImage from "components/talk/feedforms/PreviewImage";
 
-type PropTypes = {
-  images: string[]
-  setImages: React.Dispatch<React.SetStateAction<string[]>>
-}
-
-const PreviewImagesTab: FC<PropTypes> = ({ images, setImages }) => {
+const PreviewImagesTab: FC<PreviewImagesTabProps> = ({ images, setImages }) => {
 
   const clearAttachments = useCallback(() => {
     const ok = window.confirm('Do you really want to cancel the attachment of the images?')

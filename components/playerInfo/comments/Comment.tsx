@@ -1,21 +1,10 @@
 import React, { FC, useState, useRef, useEffect, useCallback } from "react";
-import { PlayerComment } from "types/playerTypes";
 import { Avatar, Divider, Grid, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { formatDistanceToNowStrict } from "date-fns";
 import { deletePlayerComment, editPlayerComment } from "store/playersSlice";
 import EditCommentForm from "components/playerInfo/comments/EditCommentForm";
 import EditMenu from "components/atoms/EditMenu";
-
-export type EditCommentType = {
-  commentId: number
-  playerId: number
-  text: string
-}
-export type DeleteCommentType = {
-  commentId: number
-  playerId: number
-}
 
 const Comment: FC<{ comment: PlayerComment, playerId: number }> = ({ comment, playerId }) => {
   const myInfo = useAppSelector(state => state.users.myInfo)
@@ -60,7 +49,7 @@ const Comment: FC<{ comment: PlayerComment, playerId: number }> = ({ comment, pl
     if (text === editCommentRef.current!.value.trim()) {
       return setEditing(false)
     }
-    const data: EditCommentType = {
+    const data: EditPlayerCommentType = {
       commentId: id,
       playerId,
       text: editCommentRef.current!.value.trim(),
@@ -79,7 +68,7 @@ const Comment: FC<{ comment: PlayerComment, playerId: number }> = ({ comment, pl
     }
     const ok = window.confirm('Do you really want to delete the comments?')
     if (!ok) return handleClose()
-    const data: DeleteCommentType = { commentId: id, playerId }
+    const data: DeletePlayerCommentType = { commentId: id, playerId }
     dispatch(deletePlayerComment(data))
     handleClose()
   }, [myInfo, id, userId, playerId, dispatch])

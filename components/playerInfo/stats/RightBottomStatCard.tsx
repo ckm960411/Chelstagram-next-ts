@@ -8,7 +8,6 @@ import {
   useTheme,
 } from "@mui/material";
 import styled from "styled-components";
-import { PlayerProfile } from "types/playerTypes";
 import { calculatePer } from "lib/utils/functions";
 import { RightStatLabel, RightStatNumber } from "components/playerInfo/stats/statFunction";
 

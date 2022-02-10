@@ -1,5 +1,3 @@
-import { PlayerProfile } from "types/playerTypes";
-
 export const players: PlayerProfile[] = [
   {
     id: 885461944995,

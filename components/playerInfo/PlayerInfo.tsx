@@ -3,13 +3,9 @@ import styled from "styled-components"
 import { Card, CardContent, Divider, Grid, Typography, useMediaQuery, useTheme } from "@mui/material"
 import { GlobalStyles } from "@mui/styled-engine"
 import { useAppSelector } from "store/hooks";
-import { PlayerProfile } from "types/playerTypes";
 import { calculatePer } from "lib/utils/functions";
+import InfoBox from "components/playerInfo/stats/InfoBox"
 
-type InfoPropTypes = {
-  title: string
-  desc: string | number
-}
 const StatBox = styled.div`
   background: #F1F3F6;
   min-height: 110px;
@@ -19,15 +15,6 @@ const StyledTypo = styled(Typography)<{large?: number}>`
   color: #001487;
   font-size: ${props => props.large === 1 ? '28px' : '12px'};
 `
-const InfoBox = ({ title, desc }: InfoPropTypes) => (
-  <>
-    <Typography sx={{ display: 'flex', justifyContent: 'space-between', padding: '14px 0' }}>
-      <span>{title}</span>
-      <span>{desc}</span>
-    </Typography>
-    <Divider />
-  </>
-)
 
 const PlayerInfo: FC = () => {
   const theme = useTheme()

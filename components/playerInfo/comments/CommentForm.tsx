@@ -1,23 +1,16 @@
 import { FC, useState } from "react";
-import { Box, Button, TextField } from "@mui/material";
+import { Box } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { addPlayerComment } from "store/playersSlice";
-import { PlayerProfile } from "types/playerTypes";
 import TextInput from "components/atoms/TextInput";
 import MainButton from "components/atoms/MainButton";
-
-export type CommentData = {
-  playerId: number
-  userId: number
-  text: string
-}
 
 const CommentForm: FC = () => {
   const dispatch = useAppDispatch()
   const [comment, setComment] = useState('')
   const player: PlayerProfile | null = useAppSelector(state => state.players.player)
   const myInfo = useAppSelector(state => state.users.myInfo)
-  const { id, backNumber } = player!
+  const { id } = player!
   
   const onChangeComment = (e: React.ChangeEvent<HTMLInputElement>) => {
     setComment(e.target.value)
@@ -29,7 +22,7 @@ const CommentForm: FC = () => {
       setComment('')
       return
     }
-    const data: CommentData = {
+    const data: PostPlayerCommentType = {
       playerId: id,
       userId: myInfo.id,
       text: comment,

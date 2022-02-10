@@ -1,4 +1,4 @@
-export interface PostTypes {
+declare interface PostTypes {
   id: number
   author: Author
   createdAt: string
@@ -9,18 +9,18 @@ export interface PostTypes {
   comments: PostComment[]
 }
 
-export interface Author {
+declare interface Author {
   userId: number
   nickname: string
   profileImg: string | null
 }
 
-export interface PostContent {
+declare interface PostContent {
   postText: string
   postImg: string[]
 }
 
-export interface PostComment {
+declare interface PostComment {
   id: number
   postId: number
   userId: number

@@ -1,38 +1,5 @@
 import { Typography } from "@mui/material";
 
-type RightStatNumFuncType = (
-  matches: boolean,
-  mainPosition: string,
-  subPosition: string,
-  stat1: number | string,
-  stat2: number | string,
-  stat3: number | string,
-  stat4: number | string
-) => React.ReactNode;
-type RightStatLabelFuncType = (
-  mainPosition: string,
-  subPosition: string,
-  label1: string,
-  label2: string,
-  label3: string,
-  label4: string
-) => React.ReactNode;
-type LeftStatNumFuncType = (
-  matches: boolean,
-  mainPosition: string,
-  subPosition: string,
-  stat1: number,
-  stat2: number,
-  stat3: number,
-) => React.ReactNode
-type LeftStatLabelFuncType = (
-  mainPosition: string,
-  subPosition: string,
-  label1: string,
-  label2: string,
-  label3: string,
-) => React.ReactNode
-
 export const RightStatNumber: RightStatNumFuncType = (
   matches, mainPosition, subPosition, stat1, stat2, stat3, stat4
 ) => (

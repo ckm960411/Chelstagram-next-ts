@@ -6,12 +6,6 @@ import { addPostComment } from "store/postsSlice";
 import TextInput from "components/atoms/TextInput";
 import MainButton from "components/atoms/MainButton";
 
-export type PostCommentType = {
-  postId: number
-  userId: number
-  text: string
-}
-
 const FeedCommentForm: FC<{postId: number}> = ({ postId }) => {
   const dispatch = useAppDispatch()
   const [comment, setComment] = useState<string>('')
@@ -28,7 +22,7 @@ const FeedCommentForm: FC<{postId: number}> = ({ postId }) => {
       setComment('')
       return
     }
-    const data: PostCommentType = {
+    const data: PostFeedCommentType = {
       postId,
       userId: myInfo.id,
       text: comment,

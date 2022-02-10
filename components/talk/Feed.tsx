@@ -1,19 +1,17 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useRef, useState } from 'react';
 import { Divider, Card, CardContent, Collapse, CardActions, Typography } from '@mui/material';
-import FeedCommentForm from 'components/talk/feedComments/FeedCommentForm';
-import FeedComment from 'components/talk/feedComments/FeedComment';
-import FeedContent from 'components/talk/FeedContent';
-import { PostTypes } from 'types/postTypes';
 import styled from "styled-components";
 import CommentIcon from "@mui/icons-material/CommentOutlined";
 import BookmarkIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import LikeIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
+import FeedContent from 'components/talk/feedcontents/FeedContent';
+import FeedComment from 'components/talk/feedComments/FeedComment';
+import FeedCommentForm from 'components/talk/feedComments/FeedCommentForm';
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
-
 const ExpandMore = styled((props: ExpandMoreProps) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;

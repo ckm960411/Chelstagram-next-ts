@@ -1,16 +1,11 @@
 import { FC, useState, useEffect, useCallback } from "react";
 import { Avatar, CardContent, CardHeader, Typography } from "@mui/material";
-import { PostTypes } from "types/postTypes";
 import { formatDistanceToNowStrict } from "date-fns";
-import FeedImages from "components/talk/FeedImages";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import EditMenu from "components/atoms/EditMenu";
-import EditFeedModal from "components/talk/EditFeedModal";
 import { deletePost } from "store/postsSlice";
-
-export type DeleteFeedType = {
-  postId: number
-}
+import FeedImages from "components/talk/feedcontents/FeedImages";
+import EditMenu from "components/atoms/EditMenu";
+import EditFeedModal from "components/talk/feedforms/EditFeedModal";
 
 const FeedContent: FC<{post: PostTypes}> = ({ post }) => {
   const dispatch = useAppDispatch()
@@ -32,12 +27,8 @@ const FeedContent: FC<{post: PostTypes}> = ({ post }) => {
     }
   }, [createdAt, modifiedAt, setTimeAgo]);
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget);
+  const handleClose = () =>  setAnchorEl(null);
 
   const onEditFeed = useCallback(() => {
     handleClose()

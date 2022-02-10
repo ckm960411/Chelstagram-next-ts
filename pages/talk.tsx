@@ -6,10 +6,9 @@ import { Grid, useTheme } from "@mui/material"
 import axios from "axios"
 import Feed from "components/talk/Feed"
 import Sidebar from "components/talk/Sidebar"
-import { PostTypes } from "types/postTypes"
 import { useAppDispatch, useAppSelector } from "store/hooks"
 import { addPostsData } from "store/postsSlice"
-import FeedForm from "components/talk/FeedForm"
+import FeedForm from "components/talk/feedforms/FeedForm"
 
 const Talk: NextPage<{ postsData: PostTypes[] }> = ({ postsData }) => {
   const dispatch = useAppDispatch()

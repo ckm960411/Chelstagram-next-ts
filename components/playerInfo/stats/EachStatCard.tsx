@@ -5,7 +5,6 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea, useMediaQuery, useTheme } from "@mui/material";
 import Image from "next/image";
 import styled from "styled-components";
-import { Stats } from "types/playerTypes";
 
 const ImageWrapper = styled.div`
   height: 100%;
@@ -16,13 +15,7 @@ const ImageWrapper = styled.div`
   }
 `
 
-type PropTypes = {
-  name: string
-  img: StaticImageData
-  stats: Stats
-}
-
-const EachStatCard: FC<PropTypes> = ({ name, img, stats }) => {
+const EachStatCard: FC<EachStatCardProps> = ({ name, img, stats }) => {
   const theme = useTheme()
   const matches = useMediaQuery(theme.breakpoints.up("md"));
 

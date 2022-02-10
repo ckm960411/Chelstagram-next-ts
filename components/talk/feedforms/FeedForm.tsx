@@ -1,17 +1,11 @@
 import React, { FC, useState, useCallback } from "react";
 import { Box } from "@mui/material";
-import PreviewImagesTab from "components/talk/PreviewImagesTab";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import InputFileForm from "components/talk/InputFileForm";
 import { addPost } from "store/postsSlice";
 import TextInput from "components/atoms/TextInput";
 import MainButton from "components/atoms/MainButton";
-
-export type PostSubmitType = {
-  userId: number
-  postText: string
-  postImg: string[]
-}
+import PreviewImagesTab from "components/talk/feedforms/PreviewImagesTab";
+import InputFileForm from "components/talk/feedforms/InputFileForm";
 
 const FeedForm: FC = () => {
   const dispatch = useAppDispatch()
@@ -27,7 +21,7 @@ const FeedForm: FC = () => {
     e.preventDefault()
     if (!myInfo) return alert('Only logged-in users can write posts.')
     if (postText === '') return alert('Please fill out the post.')
-    const data: PostSubmitType = {
+    const data: PostFeedType = {
       userId: myInfo.id!,
       postText,
       postImg: images

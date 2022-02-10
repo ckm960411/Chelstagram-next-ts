@@ -1,5 +1,5 @@
 import { getHomeData } from 'lib/players/get-home-data'
-import { GetServerSideProps, GetStaticProps, NextPage } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

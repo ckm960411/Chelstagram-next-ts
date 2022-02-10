@@ -3,12 +3,11 @@ import Head from "next/head";
 import { useEffect } from "react";
 import { useAppDispatch } from "store/hooks";
 import { addPlayersData } from "store/playersSlice";
-import { PlayerProfile } from 'types/playerTypes'
 import PlayerCard from "components/playerInfo/PlayerCard";
 import { Grid } from "@mui/material";
 import { getAllPlayersData } from "lib/players/get-all-players-data";
 
-const Players: NextPage<{ playersData: Array<PlayerProfile>}> = ({ playersData }) => {
+const Players: NextPage<{ playersData: PlayerProfile[]}> = ({ playersData }) => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {

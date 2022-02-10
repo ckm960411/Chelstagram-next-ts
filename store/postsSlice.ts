@@ -1,15 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { PostTypes } from "types/postTypes";
 import { RootState } from "store/configureStore";
 import axios from "axios";
-import { PostSubmitType } from "components/talk/FeedForm";
-import { PostCommentType } from "components/talk/feedComments/FeedCommentForm";
-import { EditFeedType } from "components/talk/EditFeedModal";
-import { DeleteFeedType } from "components/talk/FeedContent";
 
 export const addPost = createAsyncThunk(
   "POST/ADD_POST_REQUEST",
-  async (data: PostSubmitType) => {
+  async (data: PostFeedType) => {
     const response = await axios.post('http://localhost:3000/post', data)
     return response.data
   }
@@ -34,7 +29,7 @@ export const deletePost = createAsyncThunk(
 )
 export const addPostComment = createAsyncThunk(
   "POST/ADD_POST_COMMENT_REQUEST",
-  async (data: PostCommentType) => {
+  async (data: PostFeedCommentType) => {
     const response = await axios.post(`http://localhost:3000/api/comment/${data.postId}`, data)
     return response.data
   }

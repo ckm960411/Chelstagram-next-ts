@@ -3,12 +3,6 @@ import { Box, Tab, Tabs, Typography } from "@mui/material";
 import Stats from "components/playerInfo/stats/Stats"
 import Comments from "components/playerInfo/comments/Comments";
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
 export function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
 

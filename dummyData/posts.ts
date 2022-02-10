@@ -1,5 +1,3 @@
-import { PostTypes } from "types/postTypes";
-
 export const posts: PostTypes[] = [
   {
     id: 771424532442,

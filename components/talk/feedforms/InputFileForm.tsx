@@ -4,13 +4,8 @@ import { PhotoCamera } from "@mui/icons-material";
 
 const Input = styled('input')({ display: 'none' })
 
-type PropTypes = {
-  images: string[]
-  setImages: React.Dispatch<React.SetStateAction<string[]>>
-  label: string
-}
-
-const InputFileForm: FC<PropTypes> = ({ label, images, setImages }) => {
+const InputFileForm: FC<InputFileFormProps> = ({ label, images, setImages }) => {
+  
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files!
     if (!files[0]) return

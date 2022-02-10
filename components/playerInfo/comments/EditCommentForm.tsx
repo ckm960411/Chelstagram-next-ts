@@ -3,16 +3,7 @@ import { Alert } from "@mui/material";
 import TextInput from "components/atoms/TextInput";
 import MainButton from "components/atoms/MainButton";
 
-type PropTypes = {
-  text: string
-  editCommentRef: React.RefObject<HTMLInputElement>
-  onSubmit: () => void
-  setEditing: (value: React.SetStateAction<boolean>) => void
-  commentError: string
-  setCommentError: React.Dispatch<React.SetStateAction<string>>
-}
-
-const EditCommentForm: FC<PropTypes> = ({ 
+const EditCommentForm: FC<EditCommentFormProps> = ({ 
   text, editCommentRef, onSubmit, setEditing, commentError, setCommentError
 }) => {
   return (

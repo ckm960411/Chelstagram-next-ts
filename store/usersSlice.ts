@@ -1,9 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios'
-import { LoginFormValue } from 'components/login/LoginForm'
-import { SignUpFormValue } from 'components/login/SignUpForm'
 import type { RootState } from 'store/configureStore'
-import { UserType } from 'types/userType'
 
 export const loginRequest = createAsyncThunk(
   "POST/LOGIN_REQUEST",

@@ -7,7 +7,6 @@ import goalsImg from "public/imgs/goals.png"
 import EachStatCard from "components/playerInfo/stats/EachStatCard";
 import LeftBottomStatCard from "components/playerInfo/stats/LeftBottomStatCard"
 import RightBottomStatCard from "components/playerInfo/stats/RightBottomStatCard"
-import { PlayerProfile } from "types/playerTypes";
 
 const stats = [
   {

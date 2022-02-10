@@ -4,12 +4,6 @@ import styled from "styled-components";
 import CloseIcon from '@mui/icons-material/Close';
 import { IconButton } from "@mui/material";
 
-type PropTypes = {
-  image: string
-  setImages: React.Dispatch<React.SetStateAction<string[]>>
-  order: number
-}
-
 const ImageWrapper = styled.div`
   height: 200px;
   width: 200px;
@@ -39,7 +33,7 @@ const ImageWrapper = styled.div`
   }
 `
 
-const PreviewImage: FC<PropTypes> = ({ image, setImages, order }) => {
+const PreviewImage: FC<PreviewImageProps> = ({ image, setImages, order }) => {
 
   const clearImage = useCallback(() => {
     setImages(prev => {

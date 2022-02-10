@@ -1,5 +1,3 @@
-import { UserType } from "types/userType";
-
 export const users: UserType[] = [
   {
     id: 1083202038539,

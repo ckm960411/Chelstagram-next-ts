@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import goalpostImg from "public/imgs/goalpost.png";
 import styled from "styled-components";
-import { PlayerProfile } from "types/playerTypes";
 import Image from "next/image";
 import { LeftStatLabel, LeftStatNumber } from "components/playerInfo/stats/statFunction";
 
