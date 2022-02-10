@@ -4,12 +4,32 @@ import { RootState } from "store/configureStore";
 import axios from "axios";
 import { PostSubmitType } from "components/talk/FeedForm";
 import { PostCommentType } from "components/talk/feedComments/FeedCommentForm";
+import { EditFeedType } from "components/talk/EditFeedModal";
+import { DeleteFeedType } from "components/talk/FeedContent";
 
 export const addPost = createAsyncThunk(
   "POST/ADD_POST_REQUEST",
   async (data: PostSubmitType) => {
     const response = await axios.post('http://localhost:3000/post', data)
     return response.data
+  }
+)
+export const editPost = createAsyncThunk(
+  "PATCH/EDIT_POST_REQUEST",
+  async (data: EditFeedType) => {
+    const response = await axios.patch(`http://localhost:3000/api/post/edit/${data.postId}`, data)
+    return response.data
+  }
+)
+export const deletePost = createAsyncThunk(
+  "DELETE/DELETE_POST_REQUEST",
+  async (data: DeleteFeedType) => {
+    try {
+      const response = await axios.delete(`http://localhost:3000/api/post/delete/${data.postId}`)
+      return response.data
+    } catch (error) {
+      console.log(error)
+    }
   }
 )
 export const addPostComment = createAsyncThunk(
@@ -42,7 +62,7 @@ export const postsSlice = createSlice({
     },
     addPostData: (state, action) => {
       state.post = action.payload
-    }
+    },
   },
   extraReducers: {
     [addPost.pending.type]: (state, action) => {
@@ -54,6 +74,32 @@ export const postsSlice = createSlice({
         state.error = action.payload
       } else {
         state.value?.unshift(action.payload)
+      }
+    },
+    [editPost.pending.type]: (state, action) => {
+      state.loading = true
+    },
+    [editPost.fulfilled.type]: (state, action) => {
+      state.loading = false
+      if (action.payload.errorMessage) {
+        state.error = action.payload
+      } else {
+        const finded = state.value.find(v => v.id === action.payload.id)
+        finded!.content.postText = action.payload.postText
+        finded!.content.postImg = action.payload.postImg
+        finded!.modifiedAt = action.payload.modifiedAt
+      }
+    },
+    [deletePost.pending.type]: (state, action) => {
+      state.loading = true
+    },
+    [deletePost.fulfilled.type]: (state, action) => {
+      state.loading = false
+      if (action.payload.errorMessage) {
+        state.error = action.payload
+      } else {
+        const findedIndex = state.value.findIndex(post => post.id === action.payload.id)
+        state.value.splice(findedIndex, 1)
       }
     },
     [addPostComment.pending.type]: (state, action) => {

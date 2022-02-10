@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 import { formatDistanceToNowStrict } from "date-fns";
 import { deletePlayerComment, editPlayerComment } from "store/playersSlice";
 import EditCommentForm from "components/playerInfo/comments/EditCommentForm";
-import CommentMenu from "components/playerInfo/comments/CommentMenu";
+import EditMenu from "components/atoms/EditMenu";
 
 export type EditCommentType = {
   commentId: number
@@ -52,12 +52,10 @@ const Comment: FC<{ comment: PlayerComment, playerId: number }> = ({ comment, pl
       return setCommentError("There can't be empty content in the comments.")
     }
     if (!myInfo) {
-      alert('You can modify the comments after logging in.')
-      return
+      return alert('You can modify the comments after logging in.')
     }
     if (myInfo.id !== userId) {
-      alert(`You can't modify it unless it's your comment.`)
-      return
+      return alert(`You can't modify it unless it's your comment.`)
     }
     if (text === editCommentRef.current!.value.trim()) {
       return setEditing(false)
@@ -74,12 +72,10 @@ const Comment: FC<{ comment: PlayerComment, playerId: number }> = ({ comment, pl
 
   const onDeleteComment = useCallback(() => {
     if (!myInfo) {
-      alert('You can only delete your own comments.')
-      return
+      return alert('You can only delete your own comments.')
     }
     if (myInfo.id !== userId) {
-      alert(`You can't delete it unless it's your comment.`)
-      return
+      return alert(`You can't delete it unless it's your comment.`)
     }
     const ok = window.confirm('Do you really want to delete the comments?')
     if (!ok) return handleClose()
@@ -118,14 +114,13 @@ const Comment: FC<{ comment: PlayerComment, playerId: number }> = ({ comment, pl
           )}
         </Grid>
         { editing === false && (
-          <CommentMenu 
-            myInfo={myInfo}
+          <EditMenu
             userId={userId}
             anchorEl={anchorEl}
             handleClick={handleClick}
             handleClose={handleClose}
-            onEditComment={onEditComment}
-            onDeleteComment={onDeleteComment}
+            onEditContent={onEditComment}
+            onDeleteContent={onDeleteComment}
           /> 
         )}
       </Grid>

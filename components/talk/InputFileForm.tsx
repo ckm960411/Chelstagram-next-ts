@@ -7,9 +7,10 @@ const Input = styled('input')({ display: 'none' })
 type PropTypes = {
   images: string[]
   setImages: React.Dispatch<React.SetStateAction<string[]>>
+  label: string
 }
 
-const InputFileForm: FC<PropTypes> = ({ images, setImages }) => {
+const InputFileForm: FC<PropTypes> = ({ label, images, setImages }) => {
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files!
     if (!files[0]) return
@@ -26,10 +27,10 @@ const InputFileForm: FC<PropTypes> = ({ images, setImages }) => {
   }
 
   return (
-    <label htmlFor="icon-button-file">
+    <label htmlFor={label}>
       <Input
         accept="image/*"
-        id="icon-button-file"
+        id={label}
         multiple
         type="file"
         onChange={onFileChange}

@@ -46,7 +46,7 @@ const FeedForm: FC = () => {
         onChange={onChangeText}
       />
       <div>
-        <InputFileForm images={images} setImages={setImages} />
+        <InputFileForm label="input-file" images={images} setImages={setImages} />
         <MainButton onClick={onSubmitPost}>Add Post</MainButton>
       </div>
       {images[0] && <PreviewImagesTab images={images} setImages={setImages} />}

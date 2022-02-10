@@ -11,6 +11,7 @@ import { PostSubmitType } from "components/talk/FeedForm";
 import { getRandomID } from "lib/utils/getRandomID";
 import { format } from "date-fns";
 import { PostCommentType } from "components/talk/feedComments/FeedCommentForm";
+import { EditFeedType } from "components/talk/EditFeedModal";
 
 interface PostLoginReqBody extends LoginFormValue {}
 interface PostSignUpReqBody extends SignUpFormValue {}
@@ -18,6 +19,7 @@ interface PostPlayerLikeReqBody extends LikeUnlikePlayerType {}
 interface PostPlayerCommentReqBody extends CommentData {}
 interface PatchCommentReqBody extends EditCommentType {}
 interface PostPostReqBody extends PostSubmitType {}
+interface PatchPostReqBody extends EditFeedType {}
 interface PostPostCommentReqBody extends PostCommentType {}
 
 export const handlers = [
@@ -247,6 +249,43 @@ export const handlers = [
         },
         likes: [],
         comments: [],
+      })
+    )
+  }),
+  // PATCH / 게시글 수정
+  rest.patch<PatchPostReqBody>('http://localhost:3000/api/post/edit/:postId', async (req, res, ctx) => {
+    const { postId } = req.params
+    const { postText, postImg } = req.body
+    // const postFinded = posts.find(post => post.id === +postId)
+
+    return res(
+      ctx.status(200),
+      ctx.json({
+        id: +postId,
+        postText,
+        postImg,
+        modifiedAt: format(Date.now(), 'yyyy-MM-dd kk:mm:ss'),
+      })
+    )
+  }),
+  // DELETE / 게시글 삭제
+  rest.delete('http://localhost:3000/api/post/delete/:postId', async (req, res, ctx) => {
+    const { postId } = req.params
+    // const postFinded = posts.find(post => post.id === +postId)
+    console.log(postId)
+
+    if (!postId) {
+      return res(
+        ctx.json({
+          errorMessage: 'asdfasdfadsf'
+        })
+      )
+    }
+
+    return res(
+      ctx.status(200),
+      ctx.json({
+        id: +postId,
       })
     )
   }),

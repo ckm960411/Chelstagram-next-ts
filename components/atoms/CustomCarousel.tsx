@@ -1,7 +1,11 @@
 import { FC } from "react";
 import Carousel from "react-material-ui-carousel";
 
-const FeedCarousel: FC = ({ children }) => {
+type CustomCarouselProps = {
+  [key: string]: any
+}
+
+const CustomCarousel: FC<CustomCarouselProps> = ({ children, ...props }) => {
   return (
     <Carousel
       autoPlay={false}
@@ -30,10 +34,11 @@ const FeedCarousel: FC = ({ children }) => {
           color: '#001487',
         }
       }}
+      {...props}
     >
       {children}
     </Carousel>
   );
 };
 
-export default FeedCarousel;
+export default CustomCarousel;

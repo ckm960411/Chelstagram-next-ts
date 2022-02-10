@@ -2,21 +2,21 @@ import { FC } from "react";
 import { StyledMenu } from "lib/utils/styled-menu";
 import { Grid, IconButton, MenuItem } from "@mui/material";
 import { MoreVert as MoreVertIcon, Edit as EditIcon, ReportProblem as ReportProblemIcon, Delete as DeleteIcon } from '@mui/icons-material';
-import { UserType } from "types/userType";
+import { useAppSelector } from "store/hooks";
 
-type PropTypes = {
+type EditMenu = {
   anchorEl: HTMLElement | null
   handleClick: (event: React.MouseEvent<HTMLElement>) => void
   handleClose: () => void
-  onEditComment: () => void
-  onDeleteComment: () => void
-  myInfo: UserType | null
+  onEditContent: () => void
+  onDeleteContent: () => void
   userId: number
 }
 
-const CommentMenu: FC<PropTypes> = ({
-  myInfo, userId, anchorEl, handleClick, handleClose, onEditComment, onDeleteComment
+const EditMenu: FC<EditMenu> = ({ 
+  anchorEl, handleClick, handleClose, onEditContent, onDeleteContent, userId
 }) => {
+  const myInfo = useAppSelector(state => state.users.myInfo)
   const open = Boolean(anchorEl);
 
   return (
@@ -35,11 +35,11 @@ const CommentMenu: FC<PropTypes> = ({
       >
         { myInfo && myInfo.id === userId ? (
           <div>
-            <MenuItem onClick={onEditComment} disableRipple>
+            <MenuItem onClick={onEditContent} disableRipple>
               <EditIcon />
               Edit
             </MenuItem>
-            <MenuItem onClick={onDeleteComment} disableRipple>
+            <MenuItem onClick={onDeleteContent} disableRipple>
               <DeleteIcon />
               Delete
             </MenuItem>
@@ -57,4 +57,4 @@ const CommentMenu: FC<PropTypes> = ({
   )
 }
 
-export default CommentMenu
+export default EditMenu
