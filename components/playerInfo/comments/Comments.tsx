@@ -1,7 +1,8 @@
 import { FC } from "react";
+import { Box } from "@mui/material";
 import { useAppSelector } from "store/hooks";
 import CommentForm from "components/playerInfo/comments/CommentForm";
-import Comment from "./Comment";
+import CommentFrame from "components/parts/CommentFrame";
 
 const Comments: FC = () => {
   const player: PlayerProfile | null = useAppSelector(state => state.players.player)
@@ -13,11 +14,11 @@ const Comments: FC = () => {
   return (
     <>
       <CommentForm />
-      <div>
-        {comments.map((comment) => (
-          <Comment key={comment.id} comment={comment} playerId={id} />
-        ))}
-      </div>
+      {comments.map((comment) => (
+        <Box key={comment.id} sx={{ mt: 2 }}>
+          <CommentFrame comment={comment} playerId={id} />
+        </Box>
+      ))}
     </>
   );
 };

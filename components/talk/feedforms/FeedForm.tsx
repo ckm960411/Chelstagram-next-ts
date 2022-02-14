@@ -1,9 +1,9 @@
-import React, { FC, useState, useCallback } from "react";
+import { FC, useState, useCallback } from "react";
 import { Box } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { addPost } from "store/postsSlice";
-import TextInput from "components/atoms/TextInput";
-import MainButton from "components/atoms/MainButton";
+import TextInput from "components/parts/TextInput";
+import MainButton from "components/parts/MainButton";
 import PreviewImagesTab from "components/talk/feedforms/PreviewImagesTab";
 import InputFileForm from "components/talk/feedforms/InputFileForm";
 
@@ -41,7 +41,12 @@ const FeedForm: FC = () => {
       />
       <div>
         <InputFileForm label="input-file" images={images} setImages={setImages} />
-        <MainButton onClick={onSubmitPost}>Add Post</MainButton>
+        <MainButton 
+          onClick={onSubmitPost}
+          disabled={postText.trim() === ''}
+        >
+          Add Post
+        </MainButton>
       </div>
       {images[0] && <PreviewImagesTab images={images} setImages={setImages} />}
     </Box>

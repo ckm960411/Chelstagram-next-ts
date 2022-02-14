@@ -2,7 +2,7 @@ import { FC } from "react";
 import { CardMedia } from "@mui/material";
 import styled from "styled-components";
 import Image from "next/image";
-import CustomCarousel from "components/atoms/CustomCarousel";
+import CustomCarousel from "components/parts/CustomCarousel";
 
 const ImageWrapper = styled.div`
   max-height: 500px;

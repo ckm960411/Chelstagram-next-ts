@@ -4,16 +4,7 @@ import { Grid, IconButton, MenuItem } from "@mui/material";
 import { MoreVert as MoreVertIcon, Edit as EditIcon, ReportProblem as ReportProblemIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { useAppSelector } from "store/hooks";
 
-type EditMenu = {
-  anchorEl: HTMLElement | null
-  handleClick: (event: React.MouseEvent<HTMLElement>) => void
-  handleClose: () => void
-  onEditContent: () => void
-  onDeleteContent: () => void
-  userId: number
-}
-
-const EditMenu: FC<EditMenu> = ({ 
+const EditMenu: FC<EditMenuProps> = ({ 
   anchorEl, handleClick, handleClose, onEditContent, onDeleteContent, userId
 }) => {
   const myInfo = useAppSelector(state => state.users.myInfo)

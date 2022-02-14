@@ -13,6 +13,7 @@ interface DeletePlayerCommentReqBody extends DeletePlayerCommentType {}
 interface PostPostReqBody extends PostFeedType {}
 interface PatchPostReqBody extends EditFeedType {}
 interface PostPostCommentReqBody extends PostFeedCommentType {}
+interface PatchPostCommentReqBody extends EditFeedCommentType {}
 
 export const handlers = [
   // GET / Home
@@ -265,7 +266,6 @@ export const handlers = [
     const { userId, text } = req.body
     const userFinded = users.find(user => user.id === userId)
     // const postFinded = posts.find(post => post.id === +postId)
-    console.log('postId:  ', postId)
     
     if (!userFinded) {
       return res(
@@ -286,6 +286,35 @@ export const handlers = [
         text,
         createdAt: format(Date.now(), 'yyyy-MM-dd kk:mm:ss'),
         modifiedAt: format(Date.now(), 'yyyy-MM-dd kk:mm:ss'),
+      })
+    )
+  }),
+  // PATCH / 게시글 댓글 수정
+  rest.patch<PatchPostCommentReqBody>('http://localhost:3000/api/comment/:postId', async (req, res, ctx) => {
+    const { postId } = req.params
+    const { commentId, text } = req.body
+    // const postFinded = posts.find(post => post.id === +postId)
+
+    return res(
+      ctx.status(200),
+      ctx.json({
+        id: commentId,
+        postId: +postId,
+        text,
+        modifiedAt: format(Date.now(), 'yyyy-MM-dd kk:mm:ss'),
+      })
+    )
+  }),
+  // DELETE / 게시글 댓글 삭제
+  rest.delete('http://localhost:3000/api/comment/:postId/:commentId', async (req, res, ctx) => {
+    const { postId, commentId } = req.params
+    // const postFinded = posts.find(post => post.id === +postId)
+
+    return res(
+      ctx.status(200),
+      ctx.json({
+        id: +commentId,
+        postId: +postId,
       })
     )
   }),

@@ -1,12 +1,12 @@
 import { FC, useRef, useState } from 'react';
-import { Divider, Card, CardContent, Collapse, CardActions, Typography } from '@mui/material';
+import { Divider, Card, CardContent, Collapse, CardActions, Typography, Box } from '@mui/material';
 import styled from "styled-components";
 import CommentIcon from "@mui/icons-material/CommentOutlined";
 import BookmarkIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import LikeIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
+import CommentFrame from 'components/parts/CommentFrame';
 import FeedContent from 'components/talk/feedcontents/FeedContent';
-import FeedComment from 'components/talk/feedComments/FeedComment';
 import FeedCommentForm from 'components/talk/feedComments/FeedCommentForm';
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -19,7 +19,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 const Feed: FC<{post : PostTypes}> = ({ post }) =>  {
   const cardRef = useRef<HTMLDivElement>(null)
-  const { comments, likes } = post
+  const { comments, likes, id } = post
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
@@ -58,7 +58,11 @@ const Feed: FC<{post : PostTypes}> = ({ post }) =>  {
         <Divider />
         <CardContent>
           <FeedCommentForm postId={post.id} />
-          {comments.map(comment => <FeedComment key={comment.id} comment={comment} />)}
+          {comments.map(comment => (
+            <Box key={comment.id} sx={{ mt: 1 }}>
+              <CommentFrame comment={comment} postId={id} />
+            </Box>
+          ))}
         </CardContent>
       </Collapse>
     </Card>

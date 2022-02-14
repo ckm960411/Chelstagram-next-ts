@@ -4,7 +4,7 @@ import { formatDistanceToNowStrict } from "date-fns";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { deletePost } from "store/postsSlice";
 import FeedImages from "components/talk/feedcontents/FeedImages";
-import EditMenu from "components/atoms/EditMenu";
+import EditMenu from "components/parts/EditMenu";
 import EditFeedModal from "components/talk/feedforms/EditFeedModal";
 
 const FeedContent: FC<{post: PostTypes}> = ({ post }) => {

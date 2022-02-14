@@ -2,8 +2,8 @@ import { FC, useState } from "react";
 import { Box } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { addPlayerComment } from "store/playersSlice";
-import TextInput from "components/atoms/TextInput";
-import MainButton from "components/atoms/MainButton";
+import TextInput from "components/parts/TextInput";
+import MainButton from "components/parts/MainButton";
 
 const CommentForm: FC = () => {
   const dispatch = useAppDispatch()

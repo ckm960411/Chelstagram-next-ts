@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Alert } from "@mui/material";
-import TextInput from "components/atoms/TextInput";
-import MainButton from "components/atoms/MainButton";
+import TextInput from "components/parts/TextInput";
+import MainButton from "components/parts/MainButton";
 
 const EditCommentForm: FC<EditCommentFormProps> = ({ 
   text, editCommentRef, onSubmit, setEditing, commentError, setCommentError

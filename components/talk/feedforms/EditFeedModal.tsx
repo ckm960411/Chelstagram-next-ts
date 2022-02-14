@@ -2,8 +2,8 @@ import React, { FC, useEffect, useState } from "react";
 import { Alert, CardContent, Dialog } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { editPost } from "store/postsSlice";
-import TextInput from "components/atoms/TextInput";
-import MainButton from "components/atoms/MainButton";
+import TextInput from "components/parts/TextInput";
+import MainButton from "components/parts/MainButton";
 import InputFileForm from "components/talk/feedforms/InputFileForm";
 import PreviewImagesTab from "components/talk/feedforms/PreviewImagesTab";
 

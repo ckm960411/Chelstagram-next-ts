@@ -34,6 +34,20 @@ export const addPostComment = createAsyncThunk(
     return response.data
   }
 )
+export const editPostComment = createAsyncThunk(
+  "PATCH/EDIT_POST_COMMENT_REQUEST",
+  async (data: EditFeedCommentType) => {
+    const response = await axios.patch(`http://localhost:3000/api/comment/${data.postId}`, data)
+    return response.data
+  }
+)
+export const deletePostComment = createAsyncThunk(
+  "DELETE/DELETE_POST_COMMENT_REQUEST",
+  async (data: DeleteFeedCommentType) => {
+    const response = await axios.delete(`http://localhost:3000/api/comment/${data.postId}/${data.commentId}`)
+    return response.data
+  }
+)
 
 interface PostsState {
   value: PostTypes[]
@@ -107,6 +121,33 @@ export const postsSlice = createSlice({
       } else {
         const postFinded = state.value.find(post => post.id === action.payload.postId)
         postFinded?.comments.unshift(action.payload)
+      }
+    },
+    [editPostComment.pending.type]: (state, action) => {
+      state.loading = true
+    },
+    [editPostComment.fulfilled.type]: (state, action) => {
+      state.loading = false
+      if (action.payload.errorMessage) {
+        state.error = action.payload
+      } else {
+        const postFinded = state.value.find(post => post.id === action.payload.postId)
+        const commentFinded = postFinded?.comments.find(comment => comment.id === action.payload.id)
+        commentFinded!.text = action.payload.text
+        commentFinded!.modifiedAt = action.payload.modifiedAt
+      }
+    },
+    [deletePostComment.pending.type]: (state, action) => {
+      state.loading = true
+    },
+    [deletePostComment.fulfilled.type]: (state, action) => {
+      state.loading = false
+      if (action.payload.errorMessage) {
+        state.error = action.payload
+      } else {
+        const postFinded = state.value.find(post => post.id === action.payload.postId)
+        const commentIndexFinded = postFinded!.comments.findIndex(comment => comment.id === action.payload.id)
+        postFinded!.comments.splice(commentIndexFinded, 1)
       }
     },
   }

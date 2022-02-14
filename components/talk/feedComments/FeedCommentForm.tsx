@@ -3,8 +3,8 @@ import { Box } from "@mui/material";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { addPostComment } from "store/postsSlice";
-import TextInput from "components/atoms/TextInput";
-import MainButton from "components/atoms/MainButton";
+import TextInput from "components/parts/TextInput";
+import MainButton from "components/parts/MainButton";
 
 const FeedCommentForm: FC<{postId: number}> = ({ postId }) => {
   const dispatch = useAppDispatch()
@@ -42,7 +42,7 @@ const FeedCommentForm: FC<{postId: number}> = ({ postId }) => {
         value={comment}
         onChange={onChangeComment}
       />
-      <MainButton sx={{ ml: 2 }} onClick={onSubmitComment}>
+      <MainButton sx={{ ml: 2 }} onClick={onSubmitComment} disabled={comment === ''}>
         submit
       </MainButton>
     </Box>

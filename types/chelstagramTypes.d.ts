@@ -20,7 +20,18 @@ declare interface PostFeedCommentType {
   text: string
 }
 
-declare type PostPlayerCommentType = {
+declare interface EditFeedCommentType {
+  commentId: number
+  postId: number
+  text: string
+}
+
+declare interface DeleteFeedCommentType {
+  commentId: number
+  postId: number
+}
+
+declare interface PostPlayerCommentType {
   playerId: number
   userId: number
   text: string
@@ -55,6 +66,21 @@ declare type PreviewImageProps = {
   order: number
 }
 
+type CommentFrameProps = {
+  comment: PostComment | PlayerComment
+  postId?: number
+  playerId?: number
+}
+
+type EditMenuProps = {
+  anchorEl: HTMLElement | null
+  handleClick: (event: React.MouseEvent<HTMLElement>) => void
+  handleClose: () => void
+  onEditContent: () => void
+  onDeleteContent: () => void
+  userId: number
+}
+
 declare type EditFeedModalProps = {
   editing: boolean
   setEditing: Dispatch<SetStateAction<boolean>>
@@ -85,6 +111,11 @@ declare type EachStatCardProps = {
 declare type InfoPropTypes = {
   title: string
   desc: string | number
+}
+
+declare type DateParagraphProps = {
+  createdAt: string
+  modifiedAt: string
 }
 
 // etc
