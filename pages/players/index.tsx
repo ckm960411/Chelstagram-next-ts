@@ -9,11 +9,11 @@ import { getAllPlayersData } from "lib/players/get-all-players-data";
 
 const Players: NextPage<{ playersData: PlayerProfile[]}> = ({ playersData }) => {
   const dispatch = useAppDispatch()
-
+  
   useEffect(() => {
     dispatch(addPlayersData(playersData))
   }, [playersData, dispatch])
-  
+
   return (
     <>
       <Head>

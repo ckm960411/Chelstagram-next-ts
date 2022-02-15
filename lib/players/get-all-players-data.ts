@@ -1,6 +1,7 @@
-import axios from "axios"
+import { getFetcher } from "lib/utils/fetchers"
+import { URL_PLAYERS } from "lib/utils/urls"
 
 export const getAllPlayersData = async () => {
-  const playersData: PlayerProfile[] = await axios.get('http://localhost:3000/players').then(res => res.data)
+  const playersData: PlayerProfile[] = await getFetcher(URL_PLAYERS)
   return playersData
 }

@@ -20,7 +20,7 @@ const PlayerDetail: FC<{player: PlayerProfile}> = ({ player }) => {
   useEffect(() => {
     dispatch(addPlayerData(player))
   }, [player, dispatch])
-  
+
   return (
     <>
       <Head>

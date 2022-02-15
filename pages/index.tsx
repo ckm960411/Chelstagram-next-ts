@@ -1,24 +1,35 @@
+import axios from 'axios'
 import { getHomeData } from 'lib/players/get-home-data'
-import { GetServerSideProps, NextPage } from 'next'
+import { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
+import { useEffect } from 'react'
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const response = await getHomeData()
-  const result = response.message
-  return {
-    props: { result }
+// export const getStaticProps: GetStaticProps = async () => {
+//   const response = await getHomeData()
+//   const result = response.message
+//   return {
+//     props: { result }
+//   }
+// }
+
+const Home: NextPage = () => {
+
+  const print = async () => {
+    const response = await fetch(`http://localhost:8080/api/v1/players`)
+    const data = await response.json()
+    return data
   }
-}
 
-const Home: NextPage<{ result: string }> = ({ result }) => {
-  if (!result) return (<div>loading...</div>)
+  useEffect(() => {
+    console.log(print())
+  }, [])
 
   return (
     <div>
       <Head>
         <title>Chelstagram</title>
       </Head>
-      {result}
+      {/* {result} */}
     </div>
   )
 }

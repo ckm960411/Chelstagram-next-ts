@@ -17,7 +17,7 @@ interface PatchPostCommentReqBody extends EditFeedCommentType {}
 
 export const handlers = [
   // GET / Home
-  rest.get('http://localhost:3000/', async (req, res, ctx) => {
+  rest.get('http://localhost:3000', async (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
@@ -243,7 +243,6 @@ export const handlers = [
   rest.delete('http://localhost:3000/api/post/delete/:postId', async (req, res, ctx) => {
     const { postId } = req.params
     // const postFinded = posts.find(post => post.id === +postId)
-    console.log(postId)
 
     if (!postId) {
       return res(
