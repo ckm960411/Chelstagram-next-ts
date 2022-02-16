@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styled from "styled-components";
 import Image from "next/image";
-import profileImg from "public/imgs/Kepa-Arrizabalaga.png";
+import noProfileImg from "public/imgs/anonymous.png";
 
 const ImageWrapper = styled.div`
   height: 200px;
@@ -35,11 +35,12 @@ const ImageWrapper = styled.div`
   }
 `;
 
-const ProfileImage: FC = () => {
+const ProfileImage: FC<{ profileImg: string | null, nickname: string }> = ({ profileImg, nickname }) => {
   return (
     <ImageWrapper>
       <Image
-        src={profileImg} alt="profileImg"
+        src={profileImg ? profileImg : noProfileImg} 
+        alt={nickname ? nickname : 'User'}
         layout="fill"
         objectFit="contain"
       />

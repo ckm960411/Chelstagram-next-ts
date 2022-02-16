@@ -1,7 +1,7 @@
 declare interface UserType {
   id: number
   role: 'USER' | 'ADMIN'
-  name: string // name
+  name: string
   nickname: string
   profileImg: string | null
   email: string

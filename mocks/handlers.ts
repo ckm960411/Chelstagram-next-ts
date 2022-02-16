@@ -7,6 +7,7 @@ import { format } from "date-fns";
 
 interface PostLoginReqBody extends LoginFormValue {}
 interface PostSignUpReqBody extends SignUpFormValue {}
+interface PatchProfileReqBody extends EditProfileType {}
 interface PostPlayerCommentReqBody extends PostPlayerCommentType {}
 interface PatchPlayerCommentReqBody extends EditPlayerCommentType {}
 interface DeletePlayerCommentReqBody extends DeletePlayerCommentType {}
@@ -52,6 +53,7 @@ export const handlers = [
         email: finded.email,
         name: finded.name,
         nickname: finded.nickname,
+        profileImg: finded.profileImg,
       })
     )
   }),
@@ -79,6 +81,37 @@ export const handlers = [
       ctx.delay(2000),
       ctx.json({
         id: getRandomID(), name, nickname, email
+      })
+    )
+  }),
+  // PATCH / Edit Profile
+  rest.patch<PatchProfileReqBody>('http://localhost:3000/api/profile/:userId', async (req, res, ctx) => {
+    const { userId } = req.params
+    const { name, nickname, profileImg } = req.body
+    const userFinded = users.find(user => user.id === +userId)
+    const nicknameFinded = users.find(user => user.nickname === nickname)
+
+    if (!userFinded) {
+      return res(
+        ctx.json({
+          errorMessage: "Unable to modify the profile of a user who does not exist."
+        })
+      )
+    }
+
+    if (nicknameFinded) {
+      return res(
+        ctx.json({
+          errorMessage: "It's a duplicate nickname."
+        })
+      )
+    }
+
+    return res(
+      ctx.status(200),
+      ctx.json({
+        userId: userFinded.id,
+        name, nickname, profileImg
       })
     )
   }),

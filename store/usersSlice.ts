@@ -16,12 +16,19 @@ export const signUpRequest = createAsyncThunk(
     return response.data
   }
 )
+export const editProfileRequest = createAsyncThunk(
+  "PATCH/EDIT_PROFILE_REQUEST",
+  async (data: EditProfileType) => {
+    const response = await axios.patch(`http://localhost:3000/api/profile/${data.userId}`, data)
+    return response.data
+  }
+)
 
 interface UserState {
-  value: any | null //
+  value: any | null
   myInfo: UserType | null
   loading: boolean
-  error: object | null
+  error: { errorMessage: string } | null
 }
 
 const initialState: UserState = {
@@ -62,6 +69,20 @@ export const usersSlice = createSlice({
         state.error = action.payload
       } else {
         state.myInfo = action.payload
+      }
+    },
+    [editProfileRequest.pending.type]: (state, action) => {
+      state.loading = true
+      state.value = null
+    },
+    [editProfileRequest.fulfilled.type]: (state, action) => {
+      state.loading = false
+      if (action.payload.errorMessage) {
+        state.error = action.payload
+      } else {
+        state.myInfo!.name = action.payload.name
+        state.myInfo!.nickname = action.payload.nickname
+        state.myInfo!.profileImg = action.payload.profileImg
       }
     },
   }

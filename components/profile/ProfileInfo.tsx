@@ -1,7 +1,9 @@
-import { FC } from "react";
-import { Box, Button, Card, Typography } from "@mui/material";
+import { FC, useState } from "react";
+import { Box, Button, Card, IconButton, Typography } from "@mui/material";
+import SettingsIcon from '@mui/icons-material/Settings';
 import styled from "styled-components";
 import { useAppSelector } from "store/hooks";
+import EditProfileForm from "components/profile/EditProfileForm";
 
 const StyledInfo = styled(Card)`
   height: 100%;
@@ -12,27 +14,39 @@ const StyledInfo = styled(Card)`
   flex-direction: column;
   justify-content: space-between;
 `
+const FlexBox = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+`
 
-const ProfileInfo: FC = () => {
-  const myInfo = useAppSelector(state => state.users.myInfo)
+const ProfileInfo: FC<{ myInfo: UserType }> = ({ myInfo }) => {
   const myPosts = useAppSelector(state => state.posts.myPosts)
+  const [editing, setEditing] = useState(false)
 
-  if (!myInfo) return <div>No User Information</div>
+  const onEditProfile = () => {
+    setEditing(true)
+  }
 
   return (
     <>
+      {editing && <EditProfileForm editing={editing} setEditing={setEditing} myInfo={myInfo} />}
       <StyledInfo>
         <Box>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Typography sx={{ color: '#001487', fontWeight: 600 }} variant="h5" component="span">
-              {myInfo.nickname || 'Nickname'}
-            </Typography>
+          <FlexBox>
+            <FlexBox sx={{ alignItems: 'center' }}>
+              <Typography sx={{ color: '#001487', fontWeight: 600 }} variant="h5" component="span">
+                {myInfo.nickname}
+              </Typography>
+              <IconButton onClick={onEditProfile}>
+                <SettingsIcon />
+              </IconButton>
+            </FlexBox>
             <Button size="small" variant="outlined">log out</Button>
-          </Box>
-          <Typography variant="h6" gutterBottom>{myInfo.name || 'User Name'}</Typography>
-          <Typography>{myInfo.email || 'User Email'}</Typography>
+          </FlexBox>
+          <Typography variant="h6" gutterBottom>{myInfo.name}</Typography>
+          <Typography>{myInfo.email}</Typography>
         </Box>
-        <Box sx={{ textAlign: 'center', mt: 2, display: 'flex', justifyContent: 'space-between' }}>
+        <FlexBox sx={{ textAlign: 'center', mt: 2 }}>
           <Box>
             <Typography variant="overline" sx={{ fontSize: '14px' }}>Feeds</Typography>
             <Typography variant="h6">{myPosts.length}</Typography>
@@ -45,7 +59,7 @@ const ProfileInfo: FC = () => {
             <Typography variant="overline" sx={{ fontSize: '14px' }}>Following</Typography>
             <Typography variant="h6">100</Typography>
           </Box>
-        </Box>
+        </FlexBox>
       </StyledInfo>
     </>
   )

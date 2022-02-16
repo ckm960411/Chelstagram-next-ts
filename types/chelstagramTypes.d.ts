@@ -1,3 +1,10 @@
+declare interface EditProfileType {
+  userId: number
+  name: string
+  nickname: string
+  profileImg: string | null
+}
+
 declare interface PostFeedType {
   userId: number
   postText: string
@@ -85,6 +92,18 @@ declare type EditFeedModalProps = {
   editing: boolean
   setEditing: Dispatch<SetStateAction<boolean>>
   post: PostTypes
+}
+
+declare type EditProfileProps = {
+  editing: boolean
+  setEditing: Dispatch<SetStateAction<boolean>>
+  myInfo: UserType
+}
+
+declare type EditProfileImageProps = {
+  image: string | null
+  setImage: Dispatch<SetStateAction<string | null>>
+  nickname: string
 }
 
 declare type EditCommentFormProps = {
