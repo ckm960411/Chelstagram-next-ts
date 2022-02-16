@@ -1,13 +1,12 @@
 import { FC, useState } from "react"
 import { Alert, Box, CardContent, CardHeader, Dialog, Stack } from "@mui/material"
+import { useAppDispatch } from "store/hooks";
+import { closeError, editProfileRequest } from "store/usersSlice";
 import TextInput from "components/parts/TextInput"
 import MainButton from "components/parts/MainButton";
 import EditProfileImageForm from "components/profile/EditProfileImageForm";
-import { useAppDispatch, useAppSelector } from "store/hooks";
-import { closeError, editProfileRequest } from "store/usersSlice";
 
 const EditProfileForm: FC<EditProfileProps> = ({ editing, setEditing, myInfo }) => {
-  // const { id, email, name, nickname, profileImg } = myInfo
   const dispatch = useAppDispatch()
   const [name, setName] = useState<string>(myInfo.name)
   const [nickname, setNickname] = useState<string>(myInfo.nickname)
@@ -31,15 +30,17 @@ const EditProfileForm: FC<EditProfileProps> = ({ editing, setEditing, myInfo }) 
   }
 
   const onSubmitEditForm = () => {
-    if (nickname === '') return setEditProfileError('The nickname cannot be empty.')
-    if (name === '') return setEditProfileError('The name cannot be empty.')
-    if (name === myInfo.name && nickname === myInfo.nickname && image === myInfo.profileImg) {
+    if (nickname.trim() === '') return setEditProfileError('The nickname cannot be empty.')
+    if (name.trim() === '') return setEditProfileError('The name cannot be empty.')
+    if (name.trim() === myInfo.name && nickname.trim() === myInfo.nickname && image === myInfo.profileImg) {
       return onCloseModal()
     }
+    if (nickname.trim().length > 10) return setEditProfileError('You can only enter up to 10 characters for your nickname.')
+    if (name.trim().length > 20) return setEditProfileError('You can only enter up to 20 characters for your name.')
     const data: EditProfileType = {
       userId: myInfo.id,
-      name,
-      nickname,
+      name: name.trim(),
+      nickname: nickname.trim(),
       profileImg: image
     }
     dispatch(editProfileRequest(data)).then(action => {

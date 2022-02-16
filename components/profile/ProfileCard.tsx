@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Card, CardContent, Grid } from "@mui/material";
+import { useAppSelector } from "store/hooks";
 import ProfileImage from "components/profile/ProfileImage";
 import ProfileInfo from "components/profile/ProfileInfo";
-import { useAppSelector } from "store/hooks";
 
 const ProfileCard: FC = () => {
   const myInfo = useAppSelector(state => state.users.myInfo)

@@ -57,6 +57,12 @@ export const handlers = [
       })
     )
   }),
+  // POST / Logout
+  rest.post('http://localhost:3000/api/user/logout', async (req, res, ctx) => {
+    return res(
+      ctx.status(200)
+    )
+  }),
   // post / Sign Up
   rest.post<PostSignUpReqBody>('http://localhost:3000/user/signup', async(req, res, ctx) => {
     const { name, nickname, email } = req.body

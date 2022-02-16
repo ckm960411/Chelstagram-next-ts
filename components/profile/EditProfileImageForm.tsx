@@ -1,5 +1,5 @@
-import { FC, useState } from "react"
-import { Box, IconButton, styled } from "@mui/material"
+import { FC } from "react"
+import { Box, IconButton, styled, Tooltip, Zoom } from "@mui/material"
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import ClearIcon from '@mui/icons-material/Clear';
 import ProfileImage from "components/profile/ProfileImage";
@@ -32,14 +32,18 @@ const EditProfileImageForm: FC<EditProfileImageProps> = ({ image, setImage, nick
             type="file"
             onChange={onImageChange}
           />
-          <IconButton color="primary" component="span">
-            <PhotoCameraIcon />
-          </IconButton> 
+          <Tooltip title="Attatch Image" placement="bottom" TransitionComponent={Zoom}>
+            <IconButton color="primary" component="span">
+              <PhotoCameraIcon />
+            </IconButton> 
+          </Tooltip>
         </label>
         {image && (
-          <IconButton color="primary" onClick={onClearImage}>
-            <ClearIcon />
-          </IconButton>
+          <Tooltip title="Delete Image" placement="bottom-end" TransitionComponent={Zoom}>
+            <IconButton color="primary" onClick={onClearImage}>
+              <ClearIcon />
+            </IconButton>
+          </Tooltip>
         )}
       </Box>
     </Box>

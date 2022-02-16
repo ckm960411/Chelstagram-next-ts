@@ -1,9 +1,11 @@
 import { FC, useState } from "react";
-import { Box, Button, Card, IconButton, Typography } from "@mui/material";
+import { Box, Button, Card, IconButton, Tooltip, Typography, Zoom } from "@mui/material";
 import SettingsIcon from '@mui/icons-material/Settings';
 import styled from "styled-components";
-import { useAppSelector } from "store/hooks";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 import EditProfileForm from "components/profile/EditProfileForm";
+import { logoutRequest } from "store/usersSlice";
+import { useRouter } from "next/router";
 
 const StyledInfo = styled(Card)`
   height: 100%;
@@ -20,11 +22,20 @@ const FlexBox = styled(Box)`
 `
 
 const ProfileInfo: FC<{ myInfo: UserType }> = ({ myInfo }) => {
+  const dispatch = useAppDispatch()
   const myPosts = useAppSelector(state => state.posts.myPosts)
+  const router = useRouter()
   const [editing, setEditing] = useState(false)
 
   const onEditProfile = () => {
     setEditing(true)
+  }
+
+  const onLogout = () => {
+    const ok = window.confirm('Do you really want to log out?')
+    if (!ok) return
+    router.push('/')
+    dispatch(logoutRequest())
   }
 
   return (
@@ -37,11 +48,19 @@ const ProfileInfo: FC<{ myInfo: UserType }> = ({ myInfo }) => {
               <Typography sx={{ color: '#001487', fontWeight: 600 }} variant="h5" component="span">
                 {myInfo.nickname}
               </Typography>
-              <IconButton onClick={onEditProfile}>
-                <SettingsIcon />
-              </IconButton>
+              <Tooltip title="Edit Profile" placement="right" TransitionComponent={Zoom}>
+                <IconButton onClick={onEditProfile}>
+                  <SettingsIcon />
+                </IconButton>
+              </Tooltip>
             </FlexBox>
-            <Button size="small" variant="outlined">log out</Button>
+            <Button 
+              size="small" 
+              variant="outlined"
+              onClick={onLogout}
+            >
+              log out
+            </Button>
           </FlexBox>
           <Typography variant="h6" gutterBottom>{myInfo.name}</Typography>
           <Typography>{myInfo.email}</Typography>
