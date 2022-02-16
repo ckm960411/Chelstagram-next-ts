@@ -26,12 +26,7 @@ const PlayerCard: FC<{player: PlayerProfile}> = ({ player }) => {
 
   return (
     <Card
-      sx={{
-        minWidth: "230px",
-        maxWidth: "350px",
-        borderRadius: "8px",
-        margin: "0 auto",
-      }}
+      sx={{ minWidth: "230px", maxWidth: "500px", borderRadius: "8px", margin: "0 auto" }}
       raised
     >
       <CardMedia sx={{ padding: "4px" }}>

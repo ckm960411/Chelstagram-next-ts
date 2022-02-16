@@ -4,8 +4,8 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 import { editPost } from "store/postsSlice";
 import TextInput from "components/parts/TextInput";
 import MainButton from "components/parts/MainButton";
-import InputFileForm from "components/talk/feedforms/InputFileForm";
-import PreviewImagesTab from "components/talk/feedforms/PreviewImagesTab";
+import InputFileForm from "components/feeds/feedforms/InputFileForm";
+import PreviewImagesTab from "components/feeds/feedforms/PreviewImagesTab";
 
 const EditFeedModal: FC<EditFeedModalProps> = ({ post, editing, setEditing }) => {
   const dispatch = useAppDispatch()

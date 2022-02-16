@@ -4,8 +4,8 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 import { addPost } from "store/postsSlice";
 import TextInput from "components/parts/TextInput";
 import MainButton from "components/parts/MainButton";
-import PreviewImagesTab from "components/talk/feedforms/PreviewImagesTab";
-import InputFileForm from "components/talk/feedforms/InputFileForm";
+import PreviewImagesTab from "components/feeds/feedforms/PreviewImagesTab";
+import InputFileForm from "components/feeds/feedforms/InputFileForm";
 
 const FeedForm: FC = () => {
   const dispatch = useAppDispatch()

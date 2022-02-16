@@ -6,8 +6,8 @@ import BookmarkIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import LikeIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import CommentFrame from 'components/parts/CommentFrame';
-import FeedContent from 'components/talk/feedcontents/FeedContent';
-import FeedCommentForm from 'components/talk/feedComments/FeedCommentForm';
+import FeedContent from 'components/feeds/feedcontents/FeedContent';
+import FeedCommentForm from 'components/feeds/feedComments/FeedCommentForm';
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;

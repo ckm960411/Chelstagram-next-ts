@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles';
 import { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import { AppBar as MuiAppBar, Toolbar, IconButton, Typography } from "@mui/material"
+import { AppBar as MuiAppBar, Toolbar, IconButton, Typography, useTheme, useMediaQuery } from "@mui/material"
 import {
   Menu as MenuIcon,
   AccountCircle as AccountCircleIcon,
@@ -61,6 +61,8 @@ type PropTypes = {
 
 const AppBarComponent: FC<PropTypes> = ({ open, onOpen }) => {
   const myInfo = useAppSelector(state => state.users.myInfo)
+  const theme = useTheme()
+  const downSm = useMediaQuery(theme.breakpoints.down("sm"))
 
   return (
     <AppBar position="fixed" open={open}>
@@ -75,21 +77,25 @@ const AppBarComponent: FC<PropTypes> = ({ open, onOpen }) => {
           <MenuIcon />
         </IconButton>
         {open && <div></div>}
-        <MainTypo />
-        <div>
-          <IconButton color="inherit" edge="end">
-            <SearchIcon />
-          </IconButton>
-          {myInfo ? (
-            <IconButton color="inherit" edge="end" sx={{ marginLeft: 2 }}>
-              <Link href="/profile">
-                <a><AccountCircleIcon sx={{ position: "relative", top: "4px" }} /></a>
-              </Link>
-            </IconButton>
-          ) : (
-            <LoginDrawer />
-          )}
-        </div>
+        { downSm && open ? null : (
+          <>
+            <MainTypo />
+            <div>
+              <IconButton color="inherit" edge="end">
+                <SearchIcon />
+              </IconButton>
+              {myInfo ? (
+                <IconButton color="inherit" edge="end" sx={{ marginLeft: 2 }}>
+                  <Link href="/profile">
+                    <a><AccountCircleIcon sx={{ position: "relative", top: "4px" }} /></a>
+                  </Link>
+                </IconButton>
+              ) : (
+                <LoginDrawer />
+              )}
+            </div>
+          </>
+        ) }
       </Toolbar>
     </AppBar>
   )

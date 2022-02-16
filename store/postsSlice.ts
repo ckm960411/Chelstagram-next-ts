@@ -48,16 +48,25 @@ export const deletePostComment = createAsyncThunk(
     return response.data
   }
 )
+export const loadMyPosts = createAsyncThunk(
+  "GET/LOAD_MY_POSTS_REQUEST",
+  async (data: number) => {
+    const response = await axios.get(`http://localhost:3000/api/post/${data}`)
+    return response.data
+  }
+)
 
 interface PostsState {
   value: PostTypes[]
   post: PostTypes | null
+  myPosts: PostTypes[]
   loading: boolean
   error: object | null
 }
 const initialState: PostsState = {
   value: [],
   post: null,
+  myPosts: [],
   loading: false,
   error: null,
 }
@@ -148,6 +157,19 @@ export const postsSlice = createSlice({
         const postFinded = state.value.find(post => post.id === action.payload.postId)
         const commentIndexFinded = postFinded!.comments.findIndex(comment => comment.id === action.payload.id)
         postFinded!.comments.splice(commentIndexFinded, 1)
+      }
+    },
+    [loadMyPosts.pending.type]: (state, action) => {
+      state.loading = true
+    },
+    [loadMyPosts.fulfilled.type]: (state, action) => {
+      state.loading = false
+      if (action.payload.errorMessage) {
+        state.error = action.payload
+      } else {
+        const { userId }: { userId: number } = action.payload
+        const myPosts = state.value.filter(post => post.author.userId === userId)
+        state.myPosts = myPosts
       }
     },
   }

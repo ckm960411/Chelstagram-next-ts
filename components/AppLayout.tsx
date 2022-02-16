@@ -17,7 +17,7 @@ const AppLayout: FC = ({ children }) => {
       <CssBaseline />
       <AppBar open={open} onOpen={handleDrawerOpen} />
       <SideDrawer open={open} onClose={handleDrawerClose}>
-        <SideTabList />
+        <SideTabList onClose={handleDrawerClose} />
       </SideDrawer>
       <Box component="main" sx={{ flexGrow: 1, p: 2 }}>
         <GlobalStyles styles={{

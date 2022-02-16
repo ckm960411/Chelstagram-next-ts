@@ -2,7 +2,7 @@ export const users: UserType[] = [
   {
     id: 1083202038539,
     role: 'ADMIN',
-    userName: 'Mason Mount',
+    name: 'Mason Mount',
     nickname: '짱운트',
     profileImg: null,
     email: 'MasonMount19@chelsea.com',
@@ -11,7 +11,7 @@ export const users: UserType[] = [
   {
     id: 149765870964,
     role: 'USER',
-    userName: 'Jorginho',
+    name: 'Jorginho',
     nickname: '조진호',
     profileImg: null,
     email: 'Jorginho5@chelsea.com',

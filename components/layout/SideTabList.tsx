@@ -45,14 +45,14 @@ const DrawerPersonalIcons: Array<IconListItem> = [
   },
 ];
 
-const SideTabList: FC = () => {
+const SideTabList: FC<{ onClose: () => void }> = ({ onClose }) => {
   return (
     <>
       <List>
         {DrawerMainIcons.map((item) => (
           <Link href={item.route} key={item.primary}>
             <a>
-              <ListItem button>
+              <ListItem button onClick={onClose}>
                 <ListItemIcon>{item.icon()}</ListItemIcon>
                 <ListItemText primary={item.primary} />
               </ListItem>
@@ -65,7 +65,7 @@ const SideTabList: FC = () => {
         {DrawerPersonalIcons.map((item) => (
           <Link href={item.route} key={item.primary}>
             <a>
-              <ListItem button>
+              <ListItem button onClick={onClose}>
                 <ListItemIcon>{item.icon()}</ListItemIcon>
                 <ListItemText primary={item.primary} />
               </ListItem>

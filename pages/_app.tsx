@@ -14,9 +14,9 @@ const themeOptions = createTheme({
   },
 });
 
-// if (process.env.NODE_ENV === 'development') {
-//   initMockAPI();
-// }
+if (process.env.NODE_ENV === 'development') {
+  initMockAPI();
+}
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

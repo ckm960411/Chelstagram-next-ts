@@ -2,7 +2,7 @@ import { FC, useCallback } from "react";
 import { Box } from "@mui/system";
 import { Card, CardContent, CardHeader, IconButton, Stack, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import PreviewImage from "components/talk/feedforms/PreviewImage";
+import PreviewImage from "components/feeds/feedforms/PreviewImage";
 
 const PreviewImagesTab: FC<PreviewImagesTabProps> = ({ images, setImages }) => {
 

@@ -50,7 +50,7 @@ export const handlers = [
       ctx.json({
         id: finded.id,
         email: finded.email,
-        userName: finded.userName,
+        name: finded.name,
         nickname: finded.nickname,
       })
     )
@@ -130,8 +130,8 @@ export const handlers = [
         nickname: userFinded.nickname,
         profileImg: userFinded.profileImg ? userFinded.profileImg : null,
         text,
-        createdAt: format(Date.now(), 'yyyy-MM-dd kk:mm:ss'),
-        modifiedAt: format(Date.now(), 'yyyy-MM-dd kk:mm:ss'), 
+        createdAt: format(Date.now(), 'yyyy-MM-dd KK:mm:ss'),
+        modifiedAt: format(Date.now(), 'yyyy-MM-dd KK:mm:ss'), 
       })
     )
   }),
@@ -156,7 +156,7 @@ export const handlers = [
       ctx.json({
         commentId: +commentId,
         text,
-        modifiedAt: format(Date.now(), 'yyyy-MM-dd kk:mm:ss')
+        modifiedAt: format(Date.now(), 'yyyy-MM-dd KK:mm:ss')
       })
     )
   }),
@@ -212,8 +212,8 @@ export const handlers = [
           nickname: finded.nickname,
           profileImg: finded.profileImg,
         },
-        createdAt: format(Date.now(), 'yyyy-MM-dd kk:mm:ss'),
-        modifiedAt: format(Date.now(), 'yyyy-MM-dd kk:mm:ss'),
+        createdAt: format(Date.now(), 'yyyy-MM-dd KK:mm:ss'),
+        modifiedAt: format(Date.now(), 'yyyy-MM-dd KK:mm:ss'),
         content: {
           postText,
           postImg,
@@ -235,7 +235,7 @@ export const handlers = [
         id: +postId,
         postText,
         postImg,
-        modifiedAt: format(Date.now(), 'yyyy-MM-dd kk:mm:ss'),
+        modifiedAt: format(Date.now(), 'yyyy-MM-dd KK:mm:ss'),
       })
     )
   }),
@@ -283,8 +283,8 @@ export const handlers = [
         nickname: userFinded.nickname,
         profileImg: userFinded.profileImg,
         text,
-        createdAt: format(Date.now(), 'yyyy-MM-dd kk:mm:ss'),
-        modifiedAt: format(Date.now(), 'yyyy-MM-dd kk:mm:ss'),
+        createdAt: format(Date.now(), 'yyyy-MM-dd KK:mm:ss'),
+        modifiedAt: format(Date.now(), 'yyyy-MM-dd KK:mm:ss'),
       })
     )
   }),
@@ -300,7 +300,7 @@ export const handlers = [
         id: commentId,
         postId: +postId,
         text,
-        modifiedAt: format(Date.now(), 'yyyy-MM-dd kk:mm:ss'),
+        modifiedAt: format(Date.now(), 'yyyy-MM-dd KK:mm:ss'),
       })
     )
   }),
@@ -314,6 +314,18 @@ export const handlers = [
       ctx.json({
         id: +commentId,
         postId: +postId,
+      })
+    )
+  }),
+  // GET / 자기 게시글 불러오기
+  rest.get('http://localhost:3000/api/post/:userId', async (req, res, ctx) => {
+    const { userId } = req.params
+
+    return res(
+      ctx.status(200),
+      ctx.json({
+        posts,
+        userId: +userId
       })
     )
   }),
