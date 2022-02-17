@@ -36,14 +36,12 @@ const FeedContent: FC<{post: PostTypes}> = ({ post }) => {
   }, [])
 
   const onDeleteFeed = useCallback(() => {
-    if (!myInfo) {
-      return alert('You can only delete your own feeds')
-    }
-    if (myInfo.id !== userId) {
-      return alert(`You can't delete it unless it's your feed.`)
-    }
+    if (!myInfo) return alert('You can only delete your own feeds')
+    if (myInfo.id !== userId) return alert(`You can't delete it unless it's your feed.`)
+
     const ok = window.confirm('Do you really want to delete the feed?')
     if (!ok) return handleClose()
+    
     const data: DeleteFeedType = { postId: id }
     dispatch(deletePost(data))
     handleClose()
@@ -53,7 +51,17 @@ const FeedContent: FC<{post: PostTypes}> = ({ post }) => {
     <>
       {editing && <EditFeedModal post={post} editing={editing} setEditing={setEditing} />}
       <CardHeader
-        avatar={<Avatar sx={{ bgcolor: "#001487" }}>{nickname[0]}</Avatar>}
+        avatar={
+          profileImg ? (
+            <Avatar alt={nickname} src={profileImg}>
+              {profileImg}
+            </Avatar>
+          ) : (
+            <Avatar alt={nickname} sx={{ bgcolor: "#001487" }}>
+              {nickname[0]}
+            </Avatar>
+          )
+        }
         title={nickname}
         titleTypographyProps={{ fontWeight: 700, color: '#001487' }}
         subheader={

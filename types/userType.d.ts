@@ -6,4 +6,6 @@ declare interface UserType {
   profileImg: string | null
   email: string
   password: string
+  followers: number[]
+  followings: number[]
 }

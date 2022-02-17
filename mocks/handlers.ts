@@ -17,15 +17,6 @@ interface PostPostCommentReqBody extends PostFeedCommentType {}
 interface PatchPostCommentReqBody extends EditFeedCommentType {}
 
 export const handlers = [
-  // GET / Home
-  rest.get('http://localhost:3000', async (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
-        message: "Welcome to Chelstagram!"
-      })
-    )
-  }),
   // post / Login
   rest.post<PostLoginReqBody>('http://localhost:3000/user/login', async (req,res, ctx) => {
     const { email, password } = req.body
@@ -54,6 +45,8 @@ export const handlers = [
         name: finded.name,
         nickname: finded.nickname,
         profileImg: finded.profileImg,
+        followers: finded.followers,
+        followings: finded.followings,
       })
     )
   }),
@@ -105,7 +98,7 @@ export const handlers = [
       )
     }
 
-    if (nicknameFinded) {
+    if (nicknameFinded && nicknameFinded.id !== userFinded.id) {
       return res(
         ctx.json({
           errorMessage: "It's a duplicate nickname."
@@ -120,6 +113,61 @@ export const handlers = [
         name, nickname, profileImg
       })
     )
+  }),
+  // GET / Load Followers or Followings
+  rest.get('http://localhost:3000/api/:reqType/:userId', async (req, res, ctx) => {
+    const { userId, reqType } = req.params
+    const userFinded = users.find(user => user.id === +userId)
+    
+    if (!userFinded) {
+      return res(
+        ctx.json({
+          errorMessage: "This user does not exist."
+        })
+      )
+    }
+
+    if (reqType === 'followers') {
+      const followersInfoArray = userFinded.followers.reduce((prevArray, userId) => {
+        const user = users.find(user => user.id === userId)
+        if (!user) return prevArray
+        const userInfo: FollowInfoType = {
+          nickname: user.nickname,
+          name: user.name,
+          email: user.email,
+          profileImg: user.profileImg,
+        }
+        return [...prevArray, userInfo]
+      }, [] as FollowInfoType[])
+
+      return res(
+        ctx.status(200),
+        ctx.json({
+          followers: followersInfoArray
+        })
+      )
+    }
+
+    if (reqType === 'followings') {
+      const followingsInfoArray = userFinded.followings.reduce((prevArray, userId) => {
+        const user = users.find(user => user.id === userId)
+        if (!user) return prevArray
+        const userInfo: FollowInfoType = {
+          nickname: user.nickname,
+          name: user.name,
+          email: user.email,
+          profileImg: user.profileImg,
+        }
+        return [...prevArray, userInfo]
+      }, [] as FollowInfoType[])
+
+      return res(
+        ctx.status(200),
+        ctx.json({
+          followings: followingsInfoArray
+        })
+      )
+    }
   }),
   // GET / players
   rest.get('http://localhost:3000/players', async(req, res, ctx) => {

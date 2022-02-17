@@ -5,6 +5,13 @@ declare interface EditProfileType {
   profileImg: string | null
 }
 
+declare interface FollowInfoType {
+  nickname: string
+  name: string
+  email: string
+  profileImg: string | null
+}
+
 declare interface PostFeedType {
   userId: number
   postText: string
@@ -104,6 +111,14 @@ declare type EditProfileImageProps = {
   image: string | null
   setImage: Dispatch<SetStateAction<string | null>>
   nickname: string
+}
+
+declare type FollowListProps = { 
+  userId: number
+  open: boolean
+  setOpen: Dispatch<SetStateAction<boolean>>
+  followers?: number[]
+  followings?: number[]
 }
 
 declare type EditCommentFormProps = {

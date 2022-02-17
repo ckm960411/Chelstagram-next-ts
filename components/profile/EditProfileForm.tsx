@@ -1,5 +1,5 @@
 import { FC, useState } from "react"
-import { Alert, Box, CardContent, CardHeader, Dialog, Stack } from "@mui/material"
+import { Alert, CardContent, CardHeader, Dialog, Stack } from "@mui/material"
 import { useAppDispatch } from "store/hooks";
 import { closeError, editProfileRequest } from "store/usersSlice";
 import TextInput from "components/parts/TextInput"
@@ -47,7 +47,6 @@ const EditProfileForm: FC<EditProfileProps> = ({ editing, setEditing, myInfo }) 
       if (action.payload.errorMessage) return setEditProfileError(action.payload.errorMessage)
       onCloseModal()
     })
-
   }
 
   return (

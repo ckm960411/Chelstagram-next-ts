@@ -3,8 +3,8 @@ export const posts: PostTypes[] = [
     id: 771424532442,
     author: {
       userId: 1083202038539,
-      nickname: '짱운트',
-      profileImg: null,
+      nickname: '킹운트',
+      profileImg: "https://resources.premierleague.com/premierleague/photos/players/250x250/p184341.png",
     },
     createdAt: '2022-02-08 12:00:00',
     modifiedAt: '2022-02-09 08:00:00',

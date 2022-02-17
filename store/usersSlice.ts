@@ -1,5 +1,6 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
+import { FollowReqType } from 'components/profile/FollowLIst'
 import type { RootState } from 'store/configureStore'
 
 export const loginRequest = createAsyncThunk(
@@ -30,10 +31,26 @@ export const editProfileRequest = createAsyncThunk(
     return response.data
   }
 )
+export const loadFollowers = createAsyncThunk(
+  "GET/LOAD_FOLLOWERS_REQUEST",
+  async (data: FollowReqType) => {
+    const response = await axios.get(`http://localhost:3000/api/${data.reqType}/${data.userId}`)
+    return response.data
+  }
+)
+export const loadFollowings = createAsyncThunk(
+  "GET/LOAD_FOLLOWINGS_REQUEST",
+  async (data: FollowReqType) => {
+    const response = await axios.get(`http://localhost:3000/api/${data.reqType}/${data.userId}`)
+    return response.data
+  }
+)
 
 interface UserState {
   value: any | null
   myInfo: UserType | null
+  myFollowers: FollowInfoType[]
+  myFollowings: FollowInfoType[]
   loading: boolean
   error: { errorMessage: string } | null
 }
@@ -41,6 +58,8 @@ interface UserState {
 const initialState: UserState = {
   value: null,
   myInfo: null,
+  myFollowers: [],
+  myFollowings: [],
   loading: false,
   error: null
 }
@@ -51,6 +70,10 @@ export const usersSlice = createSlice({
   reducers: {
     closeError: state => {
       state.error = null
+    },
+    clearFollowList: state => {
+      state.myFollowers = []
+      state.myFollowings = []
     }
   },
   extraReducers: {
@@ -104,10 +127,34 @@ export const usersSlice = createSlice({
         state.myInfo = null
       }
     },
+    [loadFollowers.pending.type]: (state, action) => {
+      state.loading = true
+      state.value = null
+    },
+    [loadFollowers.fulfilled.type]: (state, action) => {
+      state.loading = false
+      if (action.payload.errorMessage) {
+        state.error = action.payload
+      } else {
+        state.myFollowers = action.payload.followers
+      }
+    },
+    [loadFollowings.pending.type]: (state, action) => {
+      state.loading = true
+      state.value = null
+    },
+    [loadFollowings.fulfilled.type]: (state, action) => {
+      state.loading = false
+      if (action.payload.errorMessage) {
+        state.error = action.payload
+      } else {
+        state.myFollowings = action.payload.followings
+      }
+    },
   }
 })
 
-export const { closeError } = usersSlice.actions
+export const { closeError, clearFollowList } = usersSlice.actions
 
 export const selectUser = (state: RootState) => state.users.value
 
