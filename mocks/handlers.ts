@@ -137,6 +137,7 @@ export const handlers = [
         const user = users.find(user => user.id === userId)
         if (!user) return prevArray
         const userInfo: FollowInfoType = {
+          id: user.id,
           nickname: user.nickname,
           name: user.name,
           email: user.email,
@@ -158,6 +159,7 @@ export const handlers = [
         const user = users.find(user => user.id === userId)
         if (!user) return prevArray
         const userInfo: FollowInfoType = {
+          id: user.id,
           nickname: user.nickname,
           name: user.name,
           email: user.email,
@@ -215,6 +217,28 @@ export const handlers = [
       ctx.json({
         followingId: +followingId,
         followedId: +followedId,
+      })
+    )
+  }),
+  // POST / Remove Follower
+  rest.post('http://localhost:3000/api/removefollower/:followedId/:followingId', async (req, res, ctx) => {
+    const { followedId, followingId } = req.params
+    const findedFollowedId = users.find(user => user.id === +followedId)
+    const findedFollowingId = users.find(user => user.id === +followingId)
+
+    if (!findedFollowedId || !findedFollowingId) {
+      return res(
+        ctx.json({
+          errorMessage: 'This user does not exist.'
+        })
+      )
+    }
+
+    return res(
+      ctx.status(200),
+      ctx.json({
+        followedId: +followedId,
+        followingId: +followingId,
       })
     )
   }),

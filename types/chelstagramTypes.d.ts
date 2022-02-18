@@ -13,6 +13,7 @@ declare type FollowReqType = {
 }
 
 declare interface FollowInfoType {
+  id: number
   nickname: string
   name: string
   email: string

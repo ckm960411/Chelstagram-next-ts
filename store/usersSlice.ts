@@ -58,6 +58,13 @@ export const unfollowUser = createAsyncThunk(
     return response.data
   }
 )
+export const removeFollower = createAsyncThunk(
+  "POST/REMOVE_FOLLOWER_REQUEST",
+  async (data: { followedId: number, followingId: number }) => {
+    const response = await axios.post(`http://localhost:3000/api/removefollower/${data.followedId}/${data.followingId}`)
+    return response.data
+  }
+)
 
 interface UserState {
   value: any | null
@@ -189,6 +196,20 @@ export const usersSlice = createSlice({
         if (!state.myInfo?.followings.includes(action.payload.followedId)) return 
         const filtered = state.myInfo!.followings.filter(userId => userId !== action.payload.followedId)
         state.myInfo.followings = filtered
+      }
+    },
+    [removeFollower.pending.type]: (state, action) => {
+      state.loading = true
+      state.value = null
+    },
+    [removeFollower.fulfilled.type]: (state, action) => {
+      state.loading = false
+      if (action.payload.errorMessage) {
+        state.error = action.payload
+      } else {
+        if (!state.myInfo?.followers.includes(action.payload.followingId)) return
+        const filtered = state.myInfo?.followers.filter(userId => userId !== action.payload.followingId)
+        state.myInfo.followers = filtered
       }
     },
   }

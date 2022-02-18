@@ -18,7 +18,7 @@ const FollowList: FC<FollowListProps> = ({ userId, open, setOpen, followers, fol
       const data: FollowReqType = { userId, followings, reqType: 'followings' }
       dispatch(loadFollowings(data))
     }
-  }, [])
+  }, [followers, followings])
 
   useEffect(() => {
     if (followers) return setFollowList(myFollowers)

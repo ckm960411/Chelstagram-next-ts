@@ -1,5 +1,7 @@
 import { Avatar, Box, Button, Card, Typography } from "@mui/material";
 import { FC } from "react";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { removeFollower, unfollowUser } from "store/usersSlice";
 import styled from "styled-components";
 
 const StyledCard = styled(Card)`
@@ -10,8 +12,8 @@ const StyledCard = styled(Card)`
   align-items: center;
   justify-content: space-between;
 `
-const StyledAvatar = styled(Avatar)<{bgColor?: boolean}>`
-  background-color: ${props => props.bgColor === true ? '#001487' : null };
+const StyledAvatar = styled(Avatar)<{bgcolor?: boolean}>`
+  background-color: ${props => props.bgcolor === true ? '#001487' : null };
   margin-right: 8px;
 `
 const StyledParagraph = styled(Typography)`
@@ -25,6 +27,9 @@ type FollowListItemProps = {
 }
 
 const FollowListItem: FC<FollowListItemProps> = ({ followList, followers, followings }) => {
+  const dispatch = useAppDispatch()
+  const myInfo = useAppSelector(state => state.users.myInfo)
+
   return (
     <>
       {followList.map(user => (
@@ -32,11 +37,14 @@ const FollowListItem: FC<FollowListItemProps> = ({ followList, followers, follow
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             {user.profileImg
               ? <StyledAvatar src={user.profileImg} alt={user.nickname} /> 
-              : <StyledAvatar bgColor>{user.nickname[0]}</StyledAvatar>
+              : <StyledAvatar bgcolor>{user.nickname[0]}</StyledAvatar>
             }
             <StyledParagraph>{user.nickname} ({user.name})</StyledParagraph>
           </Box>
-          <Button>
+          <Button onClick={() => {
+            if (followings) return dispatch(unfollowUser({ followingId: myInfo!.id, followedId: user.id }))
+            if (followers) return dispatch(removeFollower({ followedId: myInfo!.id, followingId: user.id }))
+          }}>
             {followers ? 'remove' : followings && 'unfollow' }
           </Button>
         </StyledCard>
