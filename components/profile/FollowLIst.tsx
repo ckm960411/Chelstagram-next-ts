@@ -4,11 +4,6 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 import { loadFollowers, loadFollowings, clearFollowList } from "store/usersSlice";
 import FollowListItem from "components/profile/FollowListItem";
 
-export type FollowReqType = {
-  userId: number
-  reqType: 'followers' | 'followings'
-}
-
 const FollowList: FC<FollowListProps> = ({ userId, open, setOpen, followers, followings }) => {
   const dispatch = useAppDispatch()
   const myFollowers = useAppSelector(state => state.users.myFollowers)
@@ -17,10 +12,10 @@ const FollowList: FC<FollowListProps> = ({ userId, open, setOpen, followers, fol
 
   useEffect(() => {
     if (followers) {
-      const data: FollowReqType = { userId, reqType: 'followers' }
+      const data: FollowReqType = { userId, followers, reqType: 'followers' }
       dispatch(loadFollowers(data))
     } else if (followings) {
-      const data: FollowReqType = { userId, reqType: 'followings' }
+      const data: FollowReqType = { userId, followings, reqType: 'followings' }
       dispatch(loadFollowings(data))
     }
   }, [])
@@ -43,7 +38,7 @@ const FollowList: FC<FollowListProps> = ({ userId, open, setOpen, followers, fol
       sx={{ maxHeight: '600px', margin: 'auto' }}
     >
       <DialogTitle>
-        {followers ? 'Followers List' : followings ? 'Followings List' : null}
+        {followers ? 'Followers List' : followings && 'Followings List' }
       </DialogTitle>
       <DialogContent>
         <FollowListItem 

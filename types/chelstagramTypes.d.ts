@@ -5,6 +5,13 @@ declare interface EditProfileType {
   profileImg: string | null
 }
 
+declare type FollowReqType = {
+  userId: number
+  followers?: number[]
+  followings?: number[]
+  reqType: 'followers' | 'followings'
+}
+
 declare interface FollowInfoType {
   nickname: string
   name: string
@@ -153,6 +160,11 @@ declare type DateParagraphProps = {
 }
 
 // etc
+declare type FollowDataType = {
+  followingId: number
+  followedId: number
+}
+
 declare type LoginFormValue = {
   email?: string
   password?: string

@@ -7,6 +7,7 @@ import { format } from "date-fns";
 
 interface PostLoginReqBody extends LoginFormValue {}
 interface PostSignUpReqBody extends SignUpFormValue {}
+interface PostFollowReqBody extends FollowReqType {}
 interface PatchProfileReqBody extends EditProfileType {}
 interface PostPlayerCommentReqBody extends PostPlayerCommentType {}
 interface PatchPlayerCommentReqBody extends EditPlayerCommentType {}
@@ -79,7 +80,10 @@ export const handlers = [
     return res(
       ctx.delay(2000),
       ctx.json({
-        id: getRandomID(), name, nickname, email
+        id: getRandomID(),
+        followers: [],
+        followings: [],
+        name, nickname, email
       })
     )
   }),
@@ -114,9 +118,10 @@ export const handlers = [
       })
     )
   }),
-  // GET / Load Followers or Followings
-  rest.get('http://localhost:3000/api/:reqType/:userId', async (req, res, ctx) => {
+  // POST / Load Followers or Followings
+  rest.post<PostFollowReqBody>('http://localhost:3000/api/:reqType/:userId', async (req, res, ctx) => {
     const { userId, reqType } = req.params
+    const { followers, followings } = req.body
     const userFinded = users.find(user => user.id === +userId)
     
     if (!userFinded) {
@@ -128,7 +133,7 @@ export const handlers = [
     }
 
     if (reqType === 'followers') {
-      const followersInfoArray = userFinded.followers.reduce((prevArray, userId) => {
+      const followersInfoArray = followers!.reduce((prevArray, userId) => {
         const user = users.find(user => user.id === userId)
         if (!user) return prevArray
         const userInfo: FollowInfoType = {
@@ -149,7 +154,7 @@ export const handlers = [
     }
 
     if (reqType === 'followings') {
-      const followingsInfoArray = userFinded.followings.reduce((prevArray, userId) => {
+      const followingsInfoArray = followings!.reduce((prevArray, userId) => {
         const user = users.find(user => user.id === userId)
         if (!user) return prevArray
         const userInfo: FollowInfoType = {
@@ -168,6 +173,50 @@ export const handlers = [
         })
       )
     }
+  }),
+  // POST / Follow User
+  rest.post('http://localhost:3000/api/follow/:followingId/:followedId', async (req, res, ctx) => {
+    const { followingId, followedId } = req.params
+    const findedFollowingId = users.find(user => user.id === +followingId)
+    const findedFollowedId = users.find(user => user.id === +followedId)
+
+    if (!findedFollowedId || !findedFollowingId) {
+      return res(
+        ctx.json({
+          errorMessage: 'This user does not exist.'
+        })
+      )
+    }
+
+    return res(
+      ctx.status(200),
+      ctx.json({
+        followingId: +followingId,
+        followedId: +followedId,
+      })
+    )
+  }),
+  // POST / Unfollow User
+  rest.post('http://localhost:3000/api/unfollow/:followingId/:followedId', async (req, res, ctx) => {
+    const { followingId, followedId } = req.params
+    const findedFollowingId = users.find(user => user.id === +followingId)
+    const findedFollowedId = users.find(user => user.id === +followedId)
+
+    if (!findedFollowedId || !findedFollowingId) {
+      return res(
+        ctx.json({
+          errorMessage: 'This user does not exist.'
+        })
+      )
+    }
+
+    return res(
+      ctx.status(200),
+      ctx.json({
+        followingId: +followingId,
+        followedId: +followedId,
+      })
+    )
   }),
   // GET / players
   rest.get('http://localhost:3000/players', async(req, res, ctx) => {

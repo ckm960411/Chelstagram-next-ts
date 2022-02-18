@@ -7,7 +7,7 @@ export const users: UserType[] = [
     profileImg: "https://resources.premierleague.com/premierleague/photos/players/250x250/p184341.png",
     email: 'MasonMount19@chelsea.com',
     password: '123456',
-    followers: [149765870964, 1092934065023, 623826003605, 1197731005356, 10858362957, 1137534854799, 580825140100],
+    followers: [149765870964, 1092934065023, 623826003605, 1197731005356, 1137534854799, 580825140100],
     followings: [149765870964, 1092934065023, 623826003605, 1197731005356, 10858362957, 1137534854799, 580825140100],
   },
   {
@@ -63,7 +63,7 @@ export const users: UserType[] = [
     email: 'KaiHavertz29@chelsea.com',
     password: '123456',
     followers: [1083202038539],
-    followings: [1083202038539],
+    followings: [],
   },
   {
     id: 1137534854799,

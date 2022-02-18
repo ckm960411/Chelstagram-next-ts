@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
-import { FollowReqType } from 'components/profile/FollowLIst'
 import type { RootState } from 'store/configureStore'
 
 export const loginRequest = createAsyncThunk(
@@ -34,14 +33,28 @@ export const editProfileRequest = createAsyncThunk(
 export const loadFollowers = createAsyncThunk(
   "GET/LOAD_FOLLOWERS_REQUEST",
   async (data: FollowReqType) => {
-    const response = await axios.get(`http://localhost:3000/api/${data.reqType}/${data.userId}`)
+    const response = await axios.post(`http://localhost:3000/api/${data.reqType}/${data.userId}`, data)
     return response.data
   }
 )
 export const loadFollowings = createAsyncThunk(
   "GET/LOAD_FOLLOWINGS_REQUEST",
   async (data: FollowReqType) => {
-    const response = await axios.get(`http://localhost:3000/api/${data.reqType}/${data.userId}`)
+    const response = await axios.post(`http://localhost:3000/api/${data.reqType}/${data.userId}`, data)
+    return response.data
+  }
+)
+export const followUser = createAsyncThunk(
+  "POST/FOLLOW_USER_REQUEST",
+  async (data: FollowDataType) => {
+    const response = await axios.post(`http://localhost:3000/api/follow/${data.followingId}/${data.followedId}`)
+    return response.data
+  }
+)
+export const unfollowUser = createAsyncThunk(
+  "POST/UNFOLLOW_USER_REQUEST",
+  async (data: FollowDataType) => {
+    const response = await axios.post(`http://localhost:3000/api/unfollow/${data.followingId}/${data.followedId}`)
     return response.data
   }
 )
@@ -149,6 +162,33 @@ export const usersSlice = createSlice({
         state.error = action.payload
       } else {
         state.myFollowings = action.payload.followings
+      }
+    },
+    [followUser.pending.type]: (state, action) => {
+      state.loading = true
+      state.value = null
+    },
+    [followUser.fulfilled.type]: (state, action) => {
+      state.loading = false
+      if (action.payload.errorMessage) {
+        state.error = action.payload
+      } else {
+        if (state.myInfo?.followings.includes(action.payload.followedId)) return 
+        state.myInfo!.followings.push(action.payload.followedId)
+      }
+    },
+    [unfollowUser.pending.type]: (state, action) => {
+      state.loading = true
+      state.value = null
+    },
+    [unfollowUser.fulfilled.type]: (state, action) => {
+      state.loading = false
+      if (action.payload.errorMessage) {
+        state.error = action.payload
+      } else {
+        if (!state.myInfo?.followings.includes(action.payload.followedId)) return 
+        const filtered = state.myInfo!.followings.filter(userId => userId !== action.payload.followedId)
+        state.myInfo.followings = filtered
       }
     },
   }

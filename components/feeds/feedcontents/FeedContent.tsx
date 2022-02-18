@@ -1,11 +1,12 @@
 import { FC, useState, useEffect, useCallback } from "react";
-import { Avatar, CardContent, CardHeader, Typography } from "@mui/material";
+import { Avatar, Box, Button, CardContent, CardHeader, Typography } from "@mui/material";
 import { formatDistanceToNowStrict } from "date-fns";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { deletePost } from "store/postsSlice";
 import FeedImages from "components/feeds/feedcontents/FeedImages";
 import EditMenu from "components/parts/EditMenu";
 import EditFeedModal from "components/feeds/feedforms/EditFeedModal";
+import FollowButton from "components/feeds/feedcontents/FollowButton"
 
 const FeedContent: FC<{post: PostTypes}> = ({ post }) => {
   const dispatch = useAppDispatch()
@@ -62,8 +63,12 @@ const FeedContent: FC<{post: PostTypes}> = ({ post }) => {
             </Avatar>
           )
         }
-        title={nickname}
-        titleTypographyProps={{ fontWeight: 700, color: '#001487' }}
+        title={(
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <Typography sx={{ fontWeight: 700, color: '#001487' }}>{nickname}</Typography>
+            {userId !== myInfo?.id && <FollowButton followedId={userId} />}
+          </Box>
+        )}
         subheader={
           createdAt !== modifiedAt
             ? `${modifiedAt.slice(0, -3)} (modified ${timeAgo} ago)`
