@@ -15,7 +15,7 @@ const RHFform: FC<RHFformTypes> = ({ type, errors, attribute, children, label })
           error={errors[`${type}`] && true}
           sx={downSm ? { width: "100%" } : { width: "558px" }}
           {...attribute}
-        ></TextField>
+        />
         <FormHelperText sx={{ ml: 0 }}>
           {children}
         </FormHelperText>

@@ -31,9 +31,7 @@ const LoginForm: FC = () => {
         errors={errors}
         attribute={register("email", { required: true, pattern: /^\S+@\S+$/i })}
       >
-        {errors.email && (
-          <ErrorParagraph>This email field is required.</ErrorParagraph>
-        )}
+        {errors.email && (<ErrorParagraph>This email field is required.</ErrorParagraph>)}
       </RHFform>
       <RHFform
         type="password"

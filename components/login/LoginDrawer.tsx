@@ -2,15 +2,8 @@ import React, { useState } from "react";
 import SignUpForm from "components/login/SignUpForm";
 import LoginForm from "components/login/LoginForm";
 import Image from "next/image";
-import {
-  Button,
-  Drawer,
-  IconButton,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
-import { Close as CloseIcon } from "@mui/icons-material";
+import { Button, Drawer, IconButton, Typography, useMediaQuery, useTheme } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import { Box } from "@mui/system";
 import styled from "styled-components";
 import logoImg from "public/imgs/chellogo.png";
@@ -28,17 +21,12 @@ const LoginDrawer: React.FC = () => {
   const downLg = useMediaQuery(theme.breakpoints.down("lg"));
   const downMd = useMediaQuery(theme.breakpoints.down("md"));
 
-  const toggleDrawer =
-    (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-      if (
-        event.type === "keydown" &&
-        ((event as React.KeyboardEvent).key === "Tab" ||
-          (event as React.KeyboardEvent).key === "Shift")
-      ) {
-        return;
-      }
-      setLoginOpen(open);
-    };
+  const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+    if ( event.type === "keydown" && ((event as React.KeyboardEvent).key === "Tab" || (event as React.KeyboardEvent).key === "Shift") ) {
+      return;
+    }
+    setLoginOpen(open);
+  };
 
   return (
     <>
@@ -64,16 +52,14 @@ const LoginDrawer: React.FC = () => {
           <div style={{ textAlign: 'center' }}>
             <Image src={logoImg} alt="chelsea" />
             { loginState ? (
-                <>
-                  {/** LOG IN */}
-                    <CustomTypo variant="h4">Log In With Email</CustomTypo>
-                    <LoginForm />
+                <> {/** LOG IN */}
+                  <CustomTypo variant="h4">Log In With Email</CustomTypo>
+                  <LoginForm />
                 </>
               ) : (
-                <>
-                  {/** JOIN */}
-                    <CustomTypo variant="h4">Sign Up With Email</CustomTypo>
-                    <SignUpForm />
+                <> {/** JOIN */}
+                  <CustomTypo variant="h4">Sign Up With Email</CustomTypo>
+                  <SignUpForm />
                 </>
               )
             }

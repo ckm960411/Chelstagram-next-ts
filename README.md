@@ -1,34 +1,79 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🔵 Chelstagram (첼스타그램)
 
-## Getting Started
+![첼스타그램썸네일](./public/imgs/%EC%B2%BC%EC%8A%A4%ED%83%80%EA%B7%B8%EB%9E%A8%EC%8D%B8%EB%84%A4%EC%9D%BC.png)
 
-First, run the development server:
+# 📑 프로젝트 개요
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+첼시 선수 정보를 조회하고 댓글 및 피드를 남기는 첼시팬 종합 커뮤니티 (미완)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# 🛠 기술 스택
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- Next.js, TypeScript
+- 상태 관리: redux-toolkit, react-redux
+- 데이터 모킹: mock-service-worker
+- UI 및 스타일링: Material UI, styled-components
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+# 🔵 주요 기능
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+#### 1. 회원가입 및 로그인
 
-## Learn More
+![첼스타그램-로그인](./public/imgs/%EC%B2%BC%EC%8A%A4%ED%83%80%EA%B7%B8%EB%9E%A8-%EB%A1%9C%EA%B7%B8%EC%9D%B8.gif)
 
-To learn more about Next.js, take a look at the following resources:
+#### 2. 피드 CRUD 및 사진 첨부/수정/삭제
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![첼스타그램-피드작성](./public/imgs/%EC%B2%BC%EC%8A%A4%ED%83%80%EA%B7%B8%EB%9E%A8-%EA%B2%8C%EC%8B%9C%EA%B8%80%EC%9E%91%EC%84%B1.gif)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+피드 작성
 
-## Deploy on Vercel
+![첼스타그램-피드수정](./public/imgs/%EC%B2%BC%EC%8A%A4%ED%83%80%EA%B7%B8%EB%9E%A8-%EA%B2%8C%EC%8B%9C%EA%B8%80%EC%88%98%EC%A0%95.gif)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+피드 수정
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![첼스타그램-피드삭제](./public/imgs/%EC%B2%BC%EC%8A%A4%ED%83%80%EA%B7%B8%EB%9E%A8-%EA%B2%8C%EC%8B%9C%EA%B8%80%EC%82%AD%EC%A0%9C.gif)
+
+피드 삭제
+
+#### 3. 선수단 전체 조회 및 상세 스탯 조회
+
+![첼스타그램-선수단조회](./public/imgs/%EC%B2%BC%EC%8A%A4%ED%83%80%EA%B7%B8%EB%9E%A8-%EC%84%A0%EC%88%98%EB%8B%A8%EC%A1%B0%ED%9A%8C.gif)
+
+#### 4. 선수별 댓글 CRUD
+
+![첼스타그램-댓글작성](./public/imgs/%EC%B2%BC%EC%8A%A4%ED%83%80%EA%B7%B8%EB%9E%A8-%EB%8C%93%EA%B8%80%EC%9E%91%EC%84%B1.gif)
+
+댓글 작성
+
+![첼스타그램-댓글수정](./public/imgs/%EC%B2%BC%EC%8A%A4%ED%83%80%EA%B7%B8%EB%9E%A8-%EB%8C%93%EA%B8%80%EC%88%98%EC%A0%95.gif)
+
+댓글 수정
+
+![첼스타그램-댓글삭제](./public/imgs/%EC%B2%BC%EC%8A%A4%ED%83%80%EA%B7%B8%EB%9E%A8-%EB%8C%93%EA%B8%80%EC%82%AD%EC%A0%9C.gif)
+
+댓글 삭제
+
+#### 5. 다른 사용자 팔로우/언팔로우
+
+![첼스타그램-팔로우](./public/imgs/%EC%B2%BC%EC%8A%A4%ED%83%80%EA%B7%B8%EB%9E%A8-%ED%8C%94%EB%A1%9C%EC%9A%B0.gif)
+
+다른 사용자 팔로우/언팔로우 및 팔로잉/팔로워 제거
+
+#### 6. 사용자 프로필 조회 및 피드 조회
+
+![첼스타그램-프로필](./public/imgs/%EC%B2%BC%EC%8A%A4%ED%83%80%EA%B7%B8%EB%9E%A8-%ED%94%84%EB%A1%9C%ED%95%84.gif)
+
+# ⚠️ 프로젝트 중단 이유와 느낀점
+
+<p>
+  (구)모드락을 작업하다가 리액트를 더 공부할 필요성을 느껴서 중단했었다. 그리고 리액트를 공부하다가 Next.js 를 공부하게 됐다. Next.js 를 아예 몰랐다면 몰라도 알게 된 이상 넥스트로 프로젝트를 진행하지 않을 이유가 없었다. 이전까지 첼시 선수들을 조회하는 프로젝트를 진행했고 모드락으로 피드로 소통하는 컨셉을 잡았기 때문에 그걸 흡수해서 첼시 선수들도 조회하면서 팬들끼리 의견도 나눌 수 있는 종합적인 커뮤니티를 만들어보고자 이 첼스타그램을 시작하게 됐다.
+</p>
+<p>
+  이번 첼스타그램 프로젝트는 그동안 백을 구현할 때 쓰던 파이어베이스를 사용하지 않았다. mock-service-worker 라는 라이브러리를 접하면서 이걸 활용해 '데이터 모킹'이지만 REST API 방식으로 작업을 해보고 싶었다. 그러나 프로젝트를 진행할수록 데이터 모킹은 모킹일 뿐 실제 백이 없이 개발을 하는 건 다소 어려웠다. msw 라이브러리는 api 가 있다는 가정 하에 내가 의도한 응답을 받아서 응답을 처리했지만, 새로고침하면 데이터가 날라가고, 준비한 목데이터와 데이터모킹을 동시에 진행하다보니 실제로 목데이터는 변경이 안됨에도 화면에는 변경사항을 반영해야 했기에 불필요하게 전역 상태를 수정하는 일이 빈번했다.
+</p>
+<p>
+  이러한 점들 때문에 다시 파이어베이스로 백을 구축해서 프로젝트를 진행해보고자 했다. 그렇기에 기존의 첼스타그램은 코드를 수정해야할 부분이 많았다. 또 다른 이유는, 모드락을 다시 만들어보고 싶었다. 첼시팬들의 커뮤니티를 만드는 것도 좋지만 프로젝트 시작 전 기획을 하는 부분이 부족했다. 또한 실제로 배포까지 간다고 했을 때 아주 충분히 메리트있는 소재는 아니라고 생각했기 때문에 첼스타그램은 다시 한번 미래에 더 기획까지 튼튼하게 다시 만들어보기로 계획하고 모드락을 다시 시작하게 되었다.
+</p>
+<p>
+  <span style="text-decoration: underline;">이 프로젝트만 바라본다면 역시 미완성으로 남게된 '실패'한 프로젝트라고 볼 수 있다.</span> 하지만 이 프로젝트를 통해서 Next.js 의 많은 부분을 익힐 수 있었다. 또한 타입스크립트를 접목함으로써 타입스크립트에 익숙해지고 자신감을 가질 수 있었다. 뿐만 아니라 mock-service-worker 를 접목해봄으로써 백엔드가 없을 때 프론트가 주체적으로 어떻게 개발을 진행할 수 있을지에 대해 생각해보고 적용해볼 수 있었다.
+  <br />
+  때문에 나는 이 첼스타그램 또한 실패하지 않았다고 본다. 이 프로젝트를 통해 익힌 넥스트와 타입스크립트와 피드CRUD 를 구현했던 경험과 스킬이 2022년 4월12일 현재 완성된 Modrak(모드락)에 녹아들 수 있었다. 언젠가 이 첼스타그램도 다시 개발을 완성시키고 싶다.
+</p>

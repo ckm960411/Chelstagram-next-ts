@@ -24,11 +24,7 @@ const SubmitFormButton: FC<{breakPoint: boolean}> = ({ breakPoint, children }) =
         </span>
       }
       endIcon={<SendIcon />}
-      sx={
-        breakPoint
-          ? { width: "100%", margin: "20px 0" }
-          : { width: "558px", margin: "20px 0" }
-      }
+      sx={ breakPoint ? { width: "100%", margin: "20px 0" } : { width: "558px", margin: "20px 0" } }
     >
       { children }
     </LoadingButton>

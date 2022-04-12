@@ -12,7 +12,10 @@ const EditProfileImageForm: FC<EditProfileImageProps> = ({ image, setImage, nick
     const file = e.target.files![0]
     if (!file) return
     const reader = new FileReader()
-    reader.onload = () => setImage(reader.result as string)
+    reader.onload = () => {
+      console.log(reader.result)
+      setImage(reader.result as string)
+    }
     reader.readAsDataURL(file)
   }
 

@@ -5,7 +5,7 @@ import type { RootState } from 'store/configureStore'
 export const loginRequest = createAsyncThunk(
   "POST/LOGIN_REQUEST",
   async (data: LoginFormValue) => {
-    const response = await axios.post('http://localhost:3000/user/login', data)
+    const response = await axios.post('http://localhost:3000/api/user/login', data)
     return response.data
   }
 )
@@ -19,7 +19,7 @@ export const logoutRequest = createAsyncThunk(
 export const signUpRequest = createAsyncThunk(
   "POST/SIGNUP_REQUEST",
   async (data: SignUpFormValue) => {
-    const response = await axios.post('http://localhost:3000/user/signup', data)
+    const response = await axios.post('http://localhost:3000/api/user/signup', data)
     return response.data
   }
 )

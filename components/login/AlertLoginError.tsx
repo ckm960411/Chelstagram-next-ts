@@ -11,11 +11,7 @@ const AlertLoginError: FC<{breakPoint: boolean}> = ({ breakPoint }) => {
     <Alert
       severity="error"
       onClose={() => dispatch(closeError())}
-      sx={
-        breakPoint
-          ? { width: "100%", margin: "20px auto" }
-          : { width: "558px", margin: "20px auto" }
-      }
+      sx={ breakPoint ? { width: "100%", margin: "20px auto" } : { width: "558px", margin: "20px auto" } }
     >
       {(error as {errorMessage: string}).errorMessage}
     </Alert>

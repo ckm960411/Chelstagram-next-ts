@@ -88,14 +88,12 @@ const SignUpForm: FC = () => {
           validate: (value) => value === passwordRef.current,
         })}
       >
-        {errors.confirm_password &&
-          errors.confirm_password.type === "required" && (
-            <ErrorParagraph>This field is required</ErrorParagraph>
-          )}
-        {errors.confirm_password &&
-          errors.confirm_password.type === "validate" && (
-            <ErrorParagraph>The password do not match.</ErrorParagraph>
-          )}
+        {errors.confirm_password && errors.confirm_password.type === "required" && (
+          <ErrorParagraph>This field is required</ErrorParagraph>
+        )}
+        {errors.confirm_password && errors.confirm_password.type === "validate" && (
+          <ErrorParagraph>The password do not match.</ErrorParagraph>
+        )}
       </RHFform>
       <SubmitFormButton breakPoint={downSm}>JOIN US</SubmitFormButton>
       {error &&  <AlertLoginError breakPoint={downSm} /> }
